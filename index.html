@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 10.10.2026 23:21 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 10.10.2026 23:38 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -302,7 +302,23 @@ kbd {
 .galerie { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0; padding: 0; }
 .galerie figure { margin: 0; min-width: 0; }
 .galerie img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); }
-.galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+.galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; display: flex; align-items: flex-start; gap: 4px 10px; }
+
+/* „Gefällt mir" unter den Bildern – erscheint erst, wenn der Zähler-Dienst antwortet */
+.daumen {
+  margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid var(--line); color: var(--muted); cursor: pointer;
+  font-family: var(--f-mono); font-size: .72rem; line-height: 1; padding: 4px 7px; font-variant-numeric: tabular-nums;
+  transition: color .15s, border-color .15s;
+}
+.daumen svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.daumen:hover { color: var(--text); border-color: var(--faint); }
+.daumen[aria-pressed="true"] { color: var(--ember-hot); border-color: var(--ember); }
+.daumen[aria-pressed="true"] svg { fill: currentColor; fill-opacity: .3; }
+.daumen-schlecht svg { transform: rotate(180deg); }
+.daumen .zahl:empty { display: none; }
+.shot .daumen { margin-left: 12px; vertical-align: middle; }
+.nur-vorlesen { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Offene Fragen */
 .fragen { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -885,8 +901,10 @@ dialog.gross button.zu {
   </div>
   <div>
     <h2><span class="de">Datenschutz</span><span class="en">Privacy</span></h2>
-    <p class="de">Keine Cookies, kein Tracking, keine Schriften oder Skripte von fremden Servern. Die Sprachwahl merkt sich nur dein Browser. Die Seite liegt bei GitHub Pages (GitHub Inc., USA); beim Aufruf verarbeitet GitHub technisch nötige Daten wie die IP-Adresse, siehe die Datenschutzerklärung von GitHub.</p>
-    <p class="en">No cookies, no tracking, no fonts or scripts from third-party servers. Only your browser remembers the language you picked. The page is hosted on GitHub Pages (GitHub Inc., USA); when you visit, GitHub processes technically necessary data such as your IP address, see GitHub's privacy statement.</p>
+    <p class="de">Keine Cookies, kein Tracking, keine Schriften oder Skripte von fremden Servern. Die Sprachwahl und deine „Gefällt mir“ merkt sich nur dein Browser. Die Seite liegt bei GitHub Pages (GitHub Inc., USA); beim Aufruf verarbeitet GitHub technisch nötige Daten wie die IP-Adresse, siehe die Datenschutzerklärung von GitHub.</p>
+    <p class="en">No cookies, no tracking, no fonts or scripts from third-party servers. Only your browser remembers the language you picked and the pictures you liked. The page is hosted on GitHub Pages (GitHub Inc., USA); when you visit, GitHub processes technically necessary data such as your IP address, see GitHub's privacy statement.</p>
+    <p class="de">Die Zähler unter den Bildern kommen von einem kleinen Dienst bei Cloudflare (Cloudflare Inc., USA); beim Laden und beim Klicken sieht Cloudflare technisch bedingt deine IP-Adresse. Gespeichert wird nur die Zahl je Bild. Damit niemand mehrfach zählt, merkt sich der Dienst bis zum nächsten Tag einen nicht umkehrbaren Streuwert aus IP-Adresse und Browserkennung, nie die IP-Adresse selbst (berechtigtes Interesse, Art. 6 Abs. 1 lit. f DSGVO).</p>
+    <p class="en">The counters below the pictures come from a small service at Cloudflare (Cloudflare Inc., USA); when loading and clicking, Cloudflare necessarily sees your IP address. Only the number per picture is stored. To stop anyone counting twice, the service keeps a one-way hash of IP address and browser identifier until the next day, never the IP address itself (legitimate interest, Art. 6(1)(f) GDPR).</p>
   </div>
 </section>
 
@@ -1025,6 +1043,69 @@ dialog.gross button.zu {
   }
   document.getElementById('gross-zu').addEventListener('click', function () { dialog.close(); });
   dialog.addEventListener('click', function (ev) { if (ev.target === dialog) dialog.close(); });
+})();
+
+/* Gefällt mir: Zähler vom Worker ashfront-likes (Cloudflare, tools/uebersicht/bewertung) – antwortet er nicht, bleiben die Knöpfe weg */
+(function () {
+  var DIENST = 'https://ashfront-likes.bewertung.workers.dev';
+  var ARTEN = ['gut'];   // mit 'schlecht' dazu gibt es auch Daumen runter
+  if (!window.fetch || DIENST.indexOf('https://') !== 0) return;
+  var SPEICHER = 'ashfront-stimmen';
+  var TEXT = { gut: ['Gefällt mir', 'Like'], schlecht: ['Gefällt mir nicht', 'Dislike'] };
+  var DAUMEN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v11H3V10h4zm0 0 4-7c1.7 0 2.6 1.2 2.2 2.8L12.5 9H19a2 2 0 0 1 2 2.3l-1.2 7.4A2 2 0 0 1 17.8 21H7"/></svg>';
+  var meine = {};
+  try { meine = JSON.parse(localStorage.getItem(SPEICHER) || '{}') || {}; } catch (e) { meine = {}; }
+  function merken() { try { localStorage.setItem(SPEICHER, JSON.stringify(meine)); } catch (e) {} }
+  function zeigen(k, n) { k.setAttribute('data-n', n); k.querySelector('.zahl').textContent = n > 0 ? String(n) : ''; }
+  function bild_von(fig) {
+    var img = fig.querySelector('img');
+    var m = img ? (img.getAttribute('src') || '').match(/img\/([a-z0-9_]+)\.jpg$/) : null;
+    return m ? m[1] : null;
+  }
+  function klick(ev) {
+    var k = ev.currentTarget;
+    if (k.getAttribute('data-laeuft')) return;
+    var bild = k.getAttribute('data-bild'), art = k.getAttribute('data-art');
+    var an = k.getAttribute('aria-pressed') !== 'true';
+    var vorher = +k.getAttribute('data-n') || 0;
+    k.setAttribute('data-laeuft', '1');
+    k.setAttribute('aria-pressed', an ? 'true' : 'false');
+    zeigen(k, Math.max(0, vorher + (an ? 1 : -1)));
+    fetch(DIENST + '/stimme', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ bild: bild, art: art, an: an }) })
+      .then(function (r) { if (!r.ok) throw new Error('stimme ' + r.status); return r.json(); })
+      .then(function (s) {
+        zeigen(k, s[art] || 0);
+        if (an) meine[bild + ':' + art] = 1; else delete meine[bild + ':' + art];
+        merken();
+      })
+      .catch(function () { k.setAttribute('aria-pressed', an ? 'false' : 'true'); zeigen(k, vorher); })
+      .then(function () { k.removeAttribute('data-laeuft'); });
+  }
+  fetch(DIENST + '/stimmen')
+    .then(function (r) { if (!r.ok) throw new Error('stimmen ' + r.status); return r.json(); })
+    .then(function (stand) {
+      var figuren = document.querySelectorAll('.galerie figure, figure.shot');
+      for (var i = 0; i < figuren.length; i++) {
+        var bild = bild_von(figuren[i]);
+        var unterschrift = figuren[i].querySelector('figcaption');
+        if (!bild || !unterschrift) continue;
+        var ziel = figuren[i].classList.contains('shot') ? unterschrift.lastElementChild : unterschrift;
+        for (var a = 0; a < ARTEN.length; a++) {
+          var art = ARTEN[a];
+          var k = document.createElement('button');
+          k.type = 'button';
+          k.className = 'daumen daumen-' + art;
+          k.setAttribute('data-bild', bild);
+          k.setAttribute('data-art', art);
+          k.setAttribute('aria-pressed', meine[bild + ':' + art] ? 'true' : 'false');
+          k.innerHTML = DAUMEN + '<span class="zahl"></span><span class="nur-vorlesen"><span class="de">' + TEXT[art][0] + '</span><span class="en">' + TEXT[art][1] + '</span></span>';
+          zeigen(k, (stand[bild] || {})[art] || 0);
+          k.addEventListener('click', klick);
+          ziel.appendChild(k);
+        }
+      }
+    })
+    .catch(function () {});
 })();
 </script>
 </body>
