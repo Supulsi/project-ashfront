@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 10.10.2026 22:22 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 10.10.2026 23:21 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -441,14 +441,12 @@ dialog.gross button.zu {
       <div>
         <h3><span class="de">Gerade in Arbeit</span><span class="en">In progress</span></h3>
         <ul>
-          <li><span class="de">Zwischenschritt: Wolkenschatten, die mit dem Wind über die Landschaft ziehen</span><span class="en">In between: cloud shadows drifting across the landscape with the wind</span></li>
-          <li><span class="de">Flammen an brennenden Fahrzeugen überarbeiten</span><span class="en">Reworking the flames on burning vehicles</span></li>
+          <li><span class="de">Pionier: baut gesprengte Brücken wieder auf und legt Behelfsbrücken</span><span class="en">Pioneer vehicle: rebuilds destroyed bridges and lays temporary bridges</span></li>
         </ul>
       </div>
       <div class="naechstes">
         <h3><span class="de">Als Nächstes</span><span class="en">Up next</span></h3>
         <ul>
-          <li><span class="de">Pionier: baut gesprengte Brücken wieder auf und legt Behelfsbrücken</span><span class="en">Pioneer vehicle: rebuilds destroyed bridges and lays temporary bridges</span></li>
           <li><span class="de">Kampf Stufe 2: Höhenvorteil im Hügelland, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
           <li><span class="de">Steine und Felsen mit Moos und Farn, halb im Boden statt obendrauf</span><span class="en">Rocks with moss and ferns, half sunk into the ground instead of sitting on top</span></li>
           <li><span class="de">Höfe mit Blumenfeld, Windmühle und Wasserrad</span><span class="en">Farms with flower fields, a windmill and a water wheel</span></li>
@@ -456,6 +454,19 @@ dialog.gross button.zu {
       </div>
     </div>
     <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-10-10"><span class="de">10.10.2026</span><span class="en">Oct 10, 2026</span></time>
+        <div>
+          <h3><span class="de">Wolkenschatten, Morgennebel und Feuer, das ausgeht</span><span class="en">Cloud shadows, morning fog and fires that burn out</span></h3>
+          <p class="de">Wolkenschatten ziehen mit dem Wind über das Land, auch über Flüsse und Seen, in denen sich die Wolken spiegeln. Das Wetter wechselt von selbst: mal fast wolkenlos, mal locker, mal stärker bewölkt mit größeren Wolken, und der Übergang ist weich. Feuer brennt jetzt aus vielen einzelnen Flammen statt aus flachen Flächen; ein fahrender, brennender Panzer zieht Glutfunken hinter sich her, und sein Motorbrand erlischt nach einer Weile, bis nur noch Rauch aufsteigt.</p>
+          <p class="en">Cloud shadows drift across the land with the wind, over rivers and lakes too, where the clouds are reflected. The weather changes on its own: sometimes almost clear, sometimes lightly or more heavily overcast with bigger clouds, always with a soft transition. Fire is now made of many separate flames instead of flat sheets; a burning tank on the move trails glowing sparks, and its engine fire dies down after a while until only smoke rises.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/morgennebel.jpg" alt="Morgennebel im Hügelland: Nebelbänder liegen im rosa Morgenlicht zwischen Fichten und Laubbäumen, ein Panzer fährt durch die Wiese." data-alt-de="Morgennebel im Hügelland: Nebelbänder liegen im rosa Morgenlicht zwischen Fichten und Laubbäumen, ein Panzer fährt durch die Wiese." data-alt-en="Morning fog in the hills: bands of mist lie in the pink morning light between spruces and broadleaf trees, a tank drives across the meadow." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Morgennebel im Hügelland</span><span class="en">Morning fog in the hills</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/wolkenschatten.jpg" alt="Hügelland von oben mit Fluss und Holzsteg, ein Wolkenschatten liegt weich über der Wiese." data-alt-de="Hügelland von oben mit Fluss und Holzsteg, ein Wolkenschatten liegt weich über der Wiese." data-alt-en="The hills from above with the river and the wooden footbridge, a soft cloud shadow lies across the meadow." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Ein Wolkenschatten zieht übers Land</span><span class="en">A cloud shadow drifting across the land</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/brand_panzer.jpg" alt="Beschädigter Panther-Panzer, auf dem Motordeck schlagen Flammen hoch, schwarzer Rauch steigt auf." data-alt-de="Beschädigter Panther-Panzer, auf dem Motordeck schlagen Flammen hoch, schwarzer Rauch steigt auf." data-alt-en="A damaged Panther tank, flames leaping from the engine deck, black smoke rising." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Motorbrand am Panther</span><span class="en">Engine fire on a Panther</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
       <li class="eintrag">
         <time datetime="2026-10-10"><span class="de">10.10.2026</span><span class="en">Oct 10, 2026</span></time>
         <div>
@@ -593,7 +604,7 @@ dialog.gross button.zu {
       <div class="tile"><h3><span class="de">Kampf, erste Stufe</span><span class="en">Combat, stage one</span></h3><p class="de">Waffen mit Streuung, Schadensstufen mit abfallenden Teilen, Wracks, Brandflecken und Ruinen. Angriffsbefehl und Zwangsfeuer mit <kbd>Alt</kbd> + Rechtsklick.</p><p class="en">Weapons with scatter, damage stages with parts breaking off, wrecks, scorch marks and ruins. Attack orders and force fire with <kbd>Alt</kbd> + right-click.</p></div>
       <div class="tile"><h3><span class="de">Karten und Gelände</span><span class="en">Maps and terrain</span></h3><p class="de">Hügelland mit Plateau, Wasserfall, See, eingeschnittenem Fluss mit Furten, Wäldern und 3D-Gras im Wind.</p><p class="en">Rolling hills with a plateau, waterfall, lake, a deep river with fords, forests and 3D grass in the wind.</p></div>
       <div class="tile"><h3><span class="de">Wege und Brücken</span><span class="en">Roads and bridges</span></h3><p class="de">Asphalt, Schotter und Feldwege, eine Betonbrücke und ein Holzsteg. Brücken lassen sich sprengen, die Stümpfe bleiben.</p><p class="en">Asphalt, gravel and dirt roads, a concrete bridge and a wooden footbridge. Bridges can be blown up, the stumps remain.</p></div>
-      <div class="tile"><h3><span class="de">Tag und Nacht</span><span class="en">Day and night</span></h3><p class="de">Ein Tag dauert 60 Minuten. Fahrzeug- und Gebäudelichter, Suchscheinwerfer, Flutlicht.</p><p class="en">A day lasts 60 minutes. Vehicle and building lights, searchlights, floodlights.</p></div>
+      <div class="tile"><h3><span class="de">Tag und Nacht</span><span class="en">Day and night</span></h3><p class="de">Ein Tag dauert 60 Minuten. Fahrzeug- und Gebäudelichter, Suchscheinwerfer, Flutlicht, Morgennebel und Wolkenschatten.</p><p class="en">A day lasts 60 minutes. Vehicle and building lights, searchlights, floodlights, morning fog and cloud shadows.</p></div>
       <div class="tile"><h3><span class="de">Kommandoleiste</span><span class="en">Command bar</span></h3><p class="de">Radar mit Wappen und Störbalken, Funkstation mit Ansager, Musik-Player mit Automatik.</p><p class="en">Radar with emblem and interference bars, radio station with announcer, music player that follows the action.</p></div>
       <div class="tile"><h3><span class="de">Rund ums Spiel</span><span class="en">Around the game</span></h3><p class="de">KeGu-Intro, Hauptmenü mit echter Spielszene, Ladebildschirm mit Panzerkette, Pausenmenü.</p><p class="en">KeGu intro, main menu with a live game scene, loading screen with a tank track, pause menu.</p></div>
       <div class="tile"><h3><span class="de">Einstellungen</span><span class="en">Settings</span></h3><p class="de">Ton in drei Kanälen, Deutsch und Englisch, Fenstermodus, 4K, FSR 2, Bildrate.</p><p class="en">Audio on three channels, German and English, window mode, 4K, FSR 2, frame rate.</p></div>
@@ -813,7 +824,7 @@ dialog.gross button.zu {
       <li><div><span class="t"><span class="de">Ehrliche Vorhersage</span><span class="en">An honest forecast</span></span><span class="d"><span class="de">Die Wetterstation zeigt echte Wahrscheinlichkeiten für jetzt, in 3 und in 6 Minuten.</span><span class="en">The weather station shows real probabilities for now, in 3 and in 6 minutes.</span></span></div></li>
       <li><div><span class="t"><span class="de">Gewitter mit Folgen</span><span class="en">Thunderstorms with consequences</span></span><span class="d"><span class="de">Blitze treffen hohe Punkte, Panzer schützen wie ein Faradayscher Käfig. Waldbrand und Hochwasser möglich.</span><span class="en">Lightning strikes high points, tanks protect their crews like a Faraday cage. Forest fires and floods can follow.</span></span></div></li>
       <li><div><span class="t"><span class="de">Sturmfolgen</span><span class="en">After the storm</span></span><span class="d"><span class="de">Schneewehen, Wanderdünen und Schlamm. Im Winter Lawinen an steilen Hängen.</span><span class="en">Snowdrifts, shifting dunes and mud. Avalanches on steep slopes in winter.</span></span></div></li>
-      <li><div><span class="t"><span class="de">Nebel und Wolken</span><span class="en">Fog and clouds</span></span><span class="d"><span class="de">Tal-, Hang- und Waldnebel nach Regen, Wolkenschatten und ein gemeinsamer Wind für Gras, Rauch und Fahnen.</span><span class="en">Valley, slope and forest fog after rain, cloud shadows and one shared wind for grass, smoke and flags.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Nebel und Wolken</span><span class="en">Fog and clouds</span></span><span class="d"><span class="de">Morgennebel in den Tälern, Wolkenschatten mit wechselndem Wetter und ein gemeinsamer Wind für Gras, Rauch und Flammen sind im Spiel. Noch offen: Hang- und Waldnebel nach Regen, Fahnen im Wind.</span><span class="en">Morning fog in the valleys, cloud shadows with changing weather and one shared wind for grass, smoke and flames are in the game. Still to come: slope and forest fog after rain, flags in the wind.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
       <li><div><span class="t"><span class="de">Hagel</span><span class="en">Hail</span></span><span class="d"><span class="de">Kurze, heftige Schauer im Sommergewitter. Die Körner prasseln auf Blech und Planen, die weiße Schicht taut schnell wieder.</span><span class="en">Short, heavy showers in summer storms. Hailstones rattle on steel and tarps, the white layer melts quickly.</span></span></div></li>
       <li><div><span class="t"><span class="de">Jahreszeiten</span><span class="en">Seasons</span></span><span class="d"><span class="de">Frühling, Sommer, Hochsommer, Herbst und Winter, zufällig oder gewählt. Jede mit eigenem Bild und eigenem Wetter.</span><span class="en">Spring, summer, high summer, autumn and winter, random or chosen. Each with its own look and its own weather.</span></span></div></li>
       <li><div><span class="t"><span class="de">Dürre</span><span class="en">Drought</span></span><span class="d"><span class="de">Gras trocknet stellenweise aus, Flüsse führen weniger Wasser und geben neue Furten frei. Nach Regen wird es wieder grün.</span><span class="en">Grass dries out in patches, rivers carry less water and reveal new fords. After rain it turns green again.</span></span></div></li>
