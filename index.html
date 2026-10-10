@@ -1,0 +1,1007 @@
+<!doctype html>
+<!-- Gebaut 10.10.2026 20:23 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<html lang="de" data-sprache="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ASHFRONT – Echtzeit-Strategie in der Tradition von Red Alert und Tiberian Sun, von KeGu Studios. Aktueller Stand, Fahrplan und Bilder aus dem Prototyp.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15120e">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="canonical" href="https://supulsi.github.io/project-ashfront/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASHFRONT Spielübersicht">
+<meta property="og:description" content="ASHFRONT – Echtzeit-Strategie in der Tradition von Red Alert und Tiberian Sun, von KeGu Studios. Aktueller Stand, Fahrplan und Bilder aus dem Prototyp.">
+<meta property="og:url" content="https://supulsi.github.io/project-ashfront/">
+<meta property="og:image" content="https://supulsi.github.io/project-ashfront/img/prototyp.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+@font-face{font-family:"Bebas Neue";src:url("schriften/BebasNeue-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Oswald";src:url("schriften/Oswald.ttf") format("truetype");font-weight:200 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow";src:url("schriften/barlow-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow";src:url("schriften/barlow-400-kursiv.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Barlow";src:url("schriften/barlow-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Barlow";src:url("schriften/barlow-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("schriften/plexmono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("schriften/plexmono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}</style>
+<title>ASHFRONT Spielübersicht</title>
+<style>
+/* Layout: Einsatzakte – Titel mit rieselnder Glut, Screenshot im HUD-Rahmen, Logbuch, dann Kapitel mit Etikett links und Inhalt rechts. Bewusst nur ein dunkles Thema (Asche und Glut). Deutsch und Englisch nebeneinander (.de/.en), Umschalter oben rechts. */
+:root {
+  color-scheme: dark;
+  --bg: #15120e;
+  --surface: #1c1814;
+  --surface-2: #241f19;
+  --line: #372f26;
+  --line-soft: #2a241d;
+  --text: #ece5d9;
+  --muted: #a89e8e;
+  --faint: #776d60;
+  --ember: #e8772e;
+  --ember-hot: #ffb35c;
+  --derylum: #d9b34b;
+  --derylum-blue: #5ba8dd;
+  --ok: #93b46b;
+  --foig: #4a79b9;
+  --foig-olive: #727a48;
+  --scoria: #b6492c;
+  --scoria-ash: #8c867d;
+  --scoria-basalt: #2b2724;
+  --aegis: #e8e6e1;
+  --aegis-dark: #3a3e44;
+  --aegis-amber: #f0a62f;
+
+  --f-display: "Bebas Neue", "Oswald", Impact, "Arial Narrow", sans-serif;
+  --f-head: "Oswald", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.84rem);
+  --step-0: clamp(0.98rem, 0.95rem + 0.15vw, 1.06rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.3vw, 1.3rem);
+  --step-2: clamp(1.45rem, 1.3rem + 0.6vw, 1.8rem);
+  --step-3: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+  --step-hero: clamp(3.2rem, 1.2rem + 11vw, 10.5rem);
+  --wrap: 1180px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0;
+  overflow-x: hidden;
+}
+.wrap { max-width: var(--wrap); margin-inline: auto; }
+a { color: var(--ember-hot); }
+:focus-visible { outline: 2px solid var(--ember-hot); outline-offset: 3px; }
+
+/* ---------- Kopf ---------- */
+.hero {
+  position: relative;
+  padding-block: clamp(48px, 8vw, 104px) clamp(28px, 4vw, 48px);
+  isolation: isolate;
+}
+.hero canvas {
+  position: absolute; inset: 0 -16px; width: calc(100% + 32px); height: 100%;
+  z-index: -1; pointer-events: none;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0 -16px; z-index: -2;
+  background:
+    radial-gradient(ellipse 60% 70% at 18% 100%, rgba(232,119,46,.16), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 85% 10%, rgba(91,168,221,.06), transparent 70%);
+}
+.studio {
+  font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: .22em;
+  text-transform: uppercase; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center;
+}
+.studio .dot { width: 6px; height: 6px; background: var(--ember); border-radius: 50%; box-shadow: 0 0 10px var(--ember); }
+h1 {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: var(--step-hero); line-height: .86; letter-spacing: .02em;
+  margin: 18px 0 0;
+  color: var(--text);
+  text-shadow: 0 0 40px rgba(232,119,46,.18);
+}
+h1 .burn {
+  background: linear-gradient(180deg, var(--text) 55%, var(--ember-hot) 85%, var(--ember) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.slogan {
+  font-family: var(--f-head); font-weight: 500; text-transform: uppercase;
+  letter-spacing: .32em; font-size: var(--step-1); color: var(--ember-hot);
+  margin: 14px 0 0;
+}
+.pitch { max-width: 62ch; margin: 22px 0 0; font-size: var(--step-1); line-height: 1.55; color: var(--text); }
+.pitch em { font-style: normal; color: var(--derylum); }
+
+.facts {
+  margin-top: 34px; display: grid; gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  background: var(--line); border: 1px solid var(--line);
+}
+.fact { background: var(--surface); padding: 12px 14px; min-width: 0; }
+.fact dt { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+.fact dd { margin: 2px 0 0; font-family: var(--f-head); font-size: var(--step-1); font-weight: 500; letter-spacing: .03em; }
+
+/* ---------- Screenshot ---------- */
+.shot { margin: clamp(20px, 3vw, 36px) 0 0; }
+.shot .frame {
+  position: relative; border: 1px solid var(--line); background: var(--surface);
+  padding: 6px;
+}
+.shot .frame::before, .shot .frame::after {
+  content: ""; position: absolute; width: 18px; height: 18px; border-color: var(--ember); border-style: solid;
+}
+.shot .frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.shot .frame::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.shot figcaption {
+  display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between;
+  font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); padding-top: 10px;
+}
+.shot figcaption b { color: var(--text); font-weight: 500; }
+
+/* ---------- Kapitel ---------- */
+section.chapter {
+  display: grid; grid-template-columns: minmax(0, 270px) minmax(0, 1fr); gap: 20px 48px;
+  padding-block: clamp(44px, 6vw, 76px);
+  border-top: 1px solid var(--line-soft);
+}
+section.chapter:first-of-type { border-top: 0; }
+.label { min-width: 0; }
+.label .eyebrow {
+  font-family: var(--f-mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ember);
+}
+.label h2 {
+  font-family: var(--f-display); font-weight: 400; font-size: var(--step-3); line-height: .95;
+  letter-spacing: .02em; margin: 8px 0 12px; text-wrap: balance;
+}
+.label p { color: var(--muted); margin: 0; font-size: .95rem; max-width: 36ch; }
+.label .tag { margin-top: 14px; }
+@media (min-width: 900px) {
+  .label { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+}
+.content { min-width: 0; }
+.wide { grid-column: 1 / -1; }
+
+/* Status-Chips */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-family: var(--f-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 8px; border: 1px solid currentColor; line-height: 1.3;
+}
+.chip.spiel { color: var(--ok); background: rgba(147,180,107,.08); }
+.chip.v1 { color: var(--ember-hot); background: rgba(232,119,46,.08); }
+.chip.arbeit { color: var(--ember-hot); background: rgba(232,119,46,.14); }
+.chip.arbeit::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ember-hot); animation: puls 1.6s ease-in-out infinite; }
+.chip.ausbau { color: var(--muted); border-style: dashed; }
+@keyframes puls { 50% { opacity: .25; } }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-top: 18px; color: var(--muted); font-size: .9rem; }
+
+/* Grundidee */
+.welt { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.welt h3, .rules h3 {
+  font-family: var(--f-head); font-weight: 500; text-transform: uppercase; letter-spacing: .08em;
+  font-size: var(--step-1); margin: 0 0 8px; color: var(--text);
+}
+.welt p { margin: 0; color: var(--text); max-width: 60ch; }
+.welt .derylum { color: var(--derylum); }
+.welt .blau { color: var(--derylum-blue); }
+.rules { margin-top: 36px; }
+.rules ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.rules li { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.rules li b { font-family: var(--f-head); font-weight: 500; letter-spacing: .03em; }
+.rules li span { color: var(--muted); }
+
+/* Fahrplan mit Panzerkette */
+.kette { display: flex; gap: 4px; align-items: stretch; margin-top: 4px; }
+.glied {
+  flex: 1 1 0; min-width: 0; height: 38px; position: relative;
+  border: 1px solid var(--line); background: var(--surface);
+  display: grid; place-items: center;
+  font-family: var(--f-mono); font-size: .72rem; color: var(--faint);
+  clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+}
+.glied.fertig { background: var(--ok); color: #15120e; border-color: var(--ok); }
+.glied.jetzt { background: var(--ember); color: #15120e; border-color: var(--ember); animation: glut 2.4s ease-in-out infinite; }
+.glied.v1 { background: rgba(232,119,46,.16); color: var(--ember-hot); }
+.glied.aus { background: transparent; color: var(--faint); border-style: dashed; }
+@keyframes glut { 50% { background: var(--ember-hot); } }
+.phasen { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 22px; }
+.phase { border-top: 3px solid var(--line); padding-top: 14px; min-width: 0; }
+.phase.fertig { border-color: var(--ok); }
+.phase.v1 { border-color: var(--ember); }
+.phase.aus { border-top-style: dashed; border-color: var(--faint); }
+.phase h3 { font-family: var(--f-head); font-weight: 500; text-transform: uppercase; letter-spacing: .1em; font-size: 1rem; margin: 0 0 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.phase ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.phase li { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 8px; align-items: baseline; }
+.phase li .nr { font-family: var(--f-mono); font-size: .8rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.phase li .jetzt-text { color: var(--ember-hot); }
+.phase p { color: var(--muted); font-size: .92rem; margin: 12px 0 0; }
+
+/* Bereits im Spiel */
+.tiles { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tile { background: var(--surface); padding: 18px 18px 20px; min-width: 0; }
+.tile h3 { font-family: var(--f-head); font-weight: 500; font-size: var(--step-1); letter-spacing: .03em; margin: 0 0 6px; display: flex; gap: 10px; align-items: center; }
+.tile h3::before { content: ""; width: 8px; height: 8px; background: var(--ok); flex: none; }
+.tile p { margin: 0; color: var(--muted); font-size: .95rem; }
+.tile:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* Fraktionen */
+.fraktionen { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 960px) { .fraktionen { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+section.chapter.stacked { grid-template-columns: minmax(0, 1fr); }
+section.chapter.stacked .label { position: static; }
+section.chapter.stacked .label p { max-width: 70ch; }
+.fr { background: var(--surface); border: 1px solid var(--line); min-width: 0; display: flex; flex-direction: column; }
+.fr .band { height: 8px; }
+.fr.foig .band { background: linear-gradient(90deg, var(--foig) 0 62%, var(--foig-olive) 62% 100%); }
+.fr.scoria .band { background: linear-gradient(90deg, var(--scoria) 0 55%, var(--scoria-ash) 55% 80%, var(--scoria-basalt) 80% 100%); }
+.fr.aegis .band { background: linear-gradient(90deg, var(--aegis-dark) 0 50%, var(--aegis) 50% 82%, var(--aegis-amber) 82% 100%); }
+.fr .kopf { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: center; padding: 18px 18px 6px; }
+.fr .wappen { width: 64px; height: auto; max-width: 100%; display: block; }   /* die Logos aus dem Spiel (assets/logos/<fraktion>_farbe.png) */
+.fr h3 { font-family: var(--f-display); font-weight: 400; font-size: 2.6rem; line-height: .9; letter-spacing: .03em; margin: 0; }
+.fr.foig h3 { color: #8fb0de; }
+.fr.scoria h3 { color: #e0896d; }
+.fr.aegis h3 { color: var(--aegis); }
+.fr .voll { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; color: var(--muted); line-height: 1.4; margin-top: 4px; }
+.fr .text { padding: 8px 18px 0; color: var(--text); margin: 0; }
+.fr dl { margin: 14px 18px 0; display: grid; gap: 0; }
+.fr dl div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 12px; padding: 9px 0; border-top: 1px solid var(--line-soft); }
+.fr dt { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); padding-top: 3px; }
+.fr dd { margin: 0; font-size: .95rem; min-width: 0; }
+.fr .fuss { margin-top: auto; padding: 14px 18px 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fr .fuss small { color: var(--faint); font-family: var(--f-mono); font-size: .7rem; letter-spacing: .08em; }
+.unit { display: inline-block; margin: 0 4px 4px 0; padding: 1px 7px; background: var(--surface-2); border: 1px solid var(--line); font-size: .86rem; }
+.unit.da { border-color: var(--ok); color: var(--ok); }   /* schon im Spiel */
+.note-row { margin-top: 18px; color: var(--muted); font-size: .95rem; max-width: 70ch; }
+
+/* Merkmal-Listen */
+.gruppe + .gruppe { margin-top: 30px; }
+.gruppe > h3 {
+  font-family: var(--f-mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+  font-weight: 500; margin: 0 0 4px;
+}
+ul.liste { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ul.liste li {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 18px; align-items: start;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+ul.liste li .t { font-family: var(--f-head); font-weight: 500; letter-spacing: .02em; font-size: 1.08rem; display: block; }
+ul.liste li .d { display: block; color: var(--muted); margin-top: 2px; max-width: 66ch; }
+ul.liste li .chip { margin-top: 4px; }
+kbd {
+  font-family: var(--f-mono); font-size: .8em; padding: 0 5px; border: 1px solid var(--line); border-bottom-width: 2px;
+  background: var(--surface-2); color: var(--text); white-space: nowrap;
+}
+
+/* Logbuch: gerade in Arbeit, als Nächstes, Einträge nach Datum (neueste oben) */
+.jetzt { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.jetzt > div { background: var(--surface); padding: 16px 18px 18px; min-width: 0; }
+.jetzt h3 { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; margin: 0 0 8px; color: var(--ember-hot); display: flex; gap: 8px; align-items: center; }
+.jetzt .naechstes h3 { color: var(--muted); }
+.jetzt ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.jetzt li { padding-left: 14px; position: relative; color: var(--text); }
+.jetzt li::before { content: ""; position: absolute; left: 0; top: .7em; width: 6px; height: 2px; background: var(--ember); }
+.jetzt .naechstes li::before { background: var(--faint); }
+.eintraege { list-style: none; margin: 30px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.eintrag { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); gap: 6px 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.eintrag time { font-family: var(--f-mono); font-size: .82rem; color: var(--ember); font-variant-numeric: tabular-nums; padding-top: 3px; }
+.eintrag h3 { font-family: var(--f-head); font-weight: 500; font-size: 1.12rem; letter-spacing: .02em; margin: 0; }
+.eintrag p { margin: 4px 0 0; color: var(--muted); max-width: 70ch; }
+.galerie { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0; padding: 0; }
+.galerie figure { margin: 0; min-width: 0; }
+.galerie img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); }
+.galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+/* Offene Fragen */
+.fragen { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.frage:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (max-width: 560px) { .fragen { grid-template-columns: minmax(0, 1fr); } }
+.frage { border: 1px dashed var(--faint); padding: 16px 18px; min-width: 0; }
+.frage b { display: block; font-family: var(--f-head); font-weight: 500; font-size: 1.06rem; letter-spacing: .02em; }
+.frage span { display: block; color: var(--muted); font-size: .93rem; margin-top: 4px; }
+
+/* Leitplanke am Ende */
+.schluss {
+  border: 1px solid var(--line); background: var(--surface); padding: clamp(20px, 3vw, 32px);
+  display: grid; gap: 10px 32px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: center;
+}
+.schluss .gross { font-family: var(--f-display); font-size: var(--step-3); line-height: .95; letter-spacing: .02em; }
+.schluss .gross span { color: var(--ember-hot); }
+.schluss p { margin: 0; color: var(--muted); }
+
+footer {
+  border-top: 1px solid var(--line); margin-top: clamp(30px, 5vw, 60px);
+  padding-block: 26px 40px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+  font-family: var(--f-mono); font-size: var(--step--1); color: var(--faint);
+}
+footer a { color: var(--muted); }
+/* Impressum und Datenschutz: klein unter dem Fuß, Pflicht für die öffentliche Seite (Österreich, § 25 MedienG) */
+.impressum {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px 40px;
+  padding-block: 0 48px; font-size: var(--step--1); color: var(--faint); line-height: 1.55;
+}
+.impressum > div { min-width: 0; }
+.impressum h2 {
+  font-family: var(--f-mono); font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 8px;
+}
+.impressum p { margin: 0 0 6px; max-width: 62ch; }
+
+@media (max-width: 899px) {
+  section.chapter { grid-template-columns: minmax(0, 1fr); }
+  .label p { max-width: 60ch; }
+}
+@media (max-width: 560px) {
+  .tiles { grid-template-columns: minmax(0, 1fr); }
+  .rules li { grid-template-columns: minmax(0, 1fr); }
+  ul.liste li { grid-template-columns: minmax(0, 1fr); }
+  ul.liste li .chip { justify-self: start; }
+  .glied { font-size: .6rem; height: 30px; }
+  .kette { gap: 2px; }
+  .fr dl div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .jetzt { grid-template-columns: minmax(0, 1fr); }
+  .eintrag { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .galerie { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip.arbeit::before, .glied.jetzt { animation: none; }
+}
+
+/* Sprache: Deutsch und Englisch stehen im Quelltext nebeneinander (.de / .en), der Schalter zeigt eine davon */
+:root[data-sprache="en"] .de, :root:not([data-sprache="en"]) .en { display: none !important; }
+.studio .sprache { margin-left: auto; display: inline-flex; border: 1px solid var(--line); }
+.sprache button {
+  font-family: var(--f-mono); font-size: .74rem; letter-spacing: .16em; color: var(--muted);
+  background: transparent; border: 0; padding: 5px 11px; cursor: pointer; line-height: 1.2;
+}
+.sprache button + button { border-left: 1px solid var(--line); }
+.sprache button[aria-pressed="true"] { background: var(--ember); color: var(--bg); }
+.sprache button:hover:not([aria-pressed="true"]) { color: var(--text); background: var(--surface-2); }
+
+/* Bilder zum Vergrößern */
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+dialog.gross {
+  padding: 0; border: 1px solid var(--line); background: var(--bg); color: var(--text);
+  width: min(1240px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: calc(100vh - 32px);
+}
+dialog.gross::backdrop { background: rgba(12, 10, 8, .88); }
+dialog.gross img { display: block; width: 100%; height: auto; max-height: calc(100vh - 110px); object-fit: contain; background: var(--bg); }
+dialog.gross .unten {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center;
+  padding: 10px 14px; font-family: var(--f-mono); font-size: .8rem; color: var(--muted);
+}
+dialog.gross .unten p { margin: 0; min-width: 0; }
+dialog.gross button.zu {
+  font-family: var(--f-mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; cursor: pointer;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--line); padding: 6px 12px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero" id="oben">
+  <canvas id="glut" aria-hidden="true"></canvas>
+  <div class="studio">
+    <span class="dot" aria-hidden="true"></span><span>KeGu Studios</span>
+    <span class="de">Echtzeit-Strategie</span><span class="en">Real-time strategy</span>
+    <span class="de">Arbeitstitel</span><span class="en">Working title</span>
+    <span class="sprache" role="group" aria-label="Sprache / Language">
+      <button type="button" id="sprache-de" data-sprache="de" aria-pressed="true" lang="de">DE</button>
+      <button type="button" id="sprache-en" data-sprache="en" aria-pressed="false" lang="en">EN</button>
+    </span>
+  </div>
+  <h1><span class="burn">ASHFRONT</span></h1>
+  <p class="slogan">Hold. Burn. Endure.</p>
+  <p class="pitch de">Ein Echtzeit-Strategiespiel in der Tradition von Red Alert und Tiberian Sun: Basis bauen, <em>Derylum</em> ernten, Armeen in die Schlacht schicken. In echtem 3D, mit drei Fraktionen und einer Welt, die auf Wetter, Tageszeit und jedes Gefecht reagiert.</p>
+  <p class="pitch en">A real-time strategy game in the tradition of Red Alert and Tiberian Sun: build a base, harvest <em>Derylum</em>, send armies into battle. In true 3D, with three factions and a world that reacts to weather, time of day and every fight.</p>
+  <dl class="facts">
+    <div class="fact"><dt>Engine</dt><dd>Godot 4.7.2</dd></div>
+    <div class="fact"><dt><span class="de">Plattform</span><span class="en">Platform</span></dt><dd>Windows</dd></div>
+    <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
+    <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
+    <div class="fact"><dt>Status</dt><dd><span class="de">Prototyp · Schritt 7</span><span class="en">Prototype · Step 7</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">10.10.2026</span><span class="en">Oct 10, 2026</span></dd></div>
+  </dl>
+</header>
+
+<figure class="shot">
+  <div class="frame"><button type="button" class="zoom"><img src="img/prototyp.jpg" alt="Szene aus dem Prototyp: zwei Panther-Panzer fahren zwischen Plateaus durch eine Wiese mit Bäumen, ein dritter steht oben im Bild; rechts die Bauleiste der FOIG mit 5000 Credits, Wappen, Funkstation und Musik-Player." data-alt-de="Szene aus dem Prototyp: zwei Panther-Panzer fahren zwischen Plateaus durch eine Wiese mit Bäumen, ein dritter steht oben im Bild; rechts die Bauleiste der FOIG mit 5000 Credits, Wappen, Funkstation und Musik-Player." data-alt-en="Scene from the prototype: two Panther tanks drive through a meadow with trees between plateaus, a third stands at the top; on the right the FOIG build bar with 5000 credits, emblem, radio station and music player." width="1600" height="900"></button></div>
+  <figcaption>
+    <span class="de"><b>Aus dem Prototyp.</b> Panther A1 im Gelände, rechts die Kommandoleiste der FOIG mit Radar, Funkstation und Musik-Player.</span>
+    <span class="en"><b>From the prototype.</b> Panther A1 in the field, on the right the FOIG command bar with radar, radio station and music player.</span>
+    <span><span class="de">Stand 09.10.2026</span><span class="en">Oct 9, 2026</span></span>
+  </figcaption>
+</figure>
+
+<section class="chapter" id="logbuch">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Logbuch</span><span class="en">Devlog</span></div>
+    <h2><span class="de">Woran gerade gearbeitet wird</span><span class="en">What we are working on</span></h2>
+    <p class="de">Was zuletzt ins Spiel gekommen ist und was als Nächstes ansteht. Neueste Einträge oben.</p>
+    <p class="en">What recently made it into the game and what comes next. Newest entries first.</p>
+    <div class="tag"><span class="chip arbeit"><span class="de">Schritt 7 · Kampf</span><span class="en">Step 7 · Combat</span></span></div>
+  </div>
+  <div class="content">
+    <div class="jetzt">
+      <div>
+        <h3><span class="de">Gerade in Arbeit</span><span class="en">In progress</span></h3>
+        <ul>
+          <li><span class="de">Pionier: baut gesprengte Brücken wieder auf und legt Behelfsbrücken</span><span class="en">Pioneer vehicle: rebuilds destroyed bridges and lays temporary bridges</span></li>
+        </ul>
+      </div>
+      <div class="naechstes">
+        <h3><span class="de">Als Nächstes</span><span class="en">Up next</span></h3>
+        <ul>
+          <li><span class="de">Kampf Stufe 2: Höhenvorteil im Hügelland, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
+          <li><span class="de">Eine Wiese voller Grashalme, über die man den Wind als Welle ziehen sieht</span><span class="en">A meadow full of grass blades with gusts of wind rolling across as visible waves</span></li>
+          <li><span class="de">Steine und Felsen mit Moos und Farn, halb im Boden statt obendrauf</span><span class="en">Rocks with moss and ferns, half sunk into the ground instead of sitting on top</span></li>
+          <li><span class="de">Höfe mit Blumenfeld, Windmühle und Wasserrad</span><span class="en">Farms with flower fields, a windmill and a water wheel</span></li>
+        </ul>
+      </div>
+    </div>
+    <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-10-10"><span class="de">10.10.2026</span><span class="en">Oct 10, 2026</span></time>
+        <div>
+          <h3><span class="de">Wege, Flussbett und Brücken, die man sprengen kann</span><span class="en">Roads, a river bed and bridges you can blow up</span></h3>
+          <p class="de">Alte Asphaltstraße, Schotterweg und Feldwege im Hügelland, stellenweise verschüttet und überwachsen. Der Fluss ist tief eingeschnitten und nur noch an Furten und Brücken zu queren. Neu aus Blender: eine Betonbrücke und ein Holzsteg. Mit Zwangsfeuer (<kbd>Alt</kbd> + Rechtsklick) lassen sie sich sprengen: Die Mitte stürzt ins Wasser, die Stümpfe bleiben stehen, und die Einheiten suchen sich einen anderen Weg. Dazu hat die FOIG ein neues Logo: Ein kantiges Metall-Monogramm ersetzt die Stahlfaust.</p>
+          <p class="en">An old asphalt road, a gravel track and dirt roads across the hills, buried and overgrown in places. The river now cuts deep into the ground and can only be crossed at fords and bridges. New from Blender: a concrete bridge and a wooden footbridge. Force fire (<kbd>Alt</kbd> + right-click) blows them up: the middle drops into the water, the stumps stay standing, and units find another way. The FOIG also has a new logo: an angular metal monogram replaces the steel fist.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/bruecke_beton.jpg" alt="Alte Betonbrücke über den eingeschnittenen Fluss, ein Panther-Panzer fährt darüber, die Asphaltstraße führt zur Brücke." data-alt-de="Alte Betonbrücke über den eingeschnittenen Fluss, ein Panther-Panzer fährt darüber, die Asphaltstraße führt zur Brücke." data-alt-en="Old concrete bridge over the deep river bed, a Panther tank crossing it, the asphalt road leading up to the bridge." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Betonbrücke über den Fluss</span><span class="en">Concrete bridge over the river</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/bruecke_eingestuerzt.jpg" alt="Dieselbe Brücke nach der Sprengung: die Mitte liegt versunken im Fluss, an beiden Ufern stehen die Stümpfe mit Geländer." data-alt-de="Dieselbe Brücke nach der Sprengung: die Mitte liegt versunken im Fluss, an beiden Ufern stehen die Stümpfe mit Geländer." data-alt-en="The same bridge after demolition: the middle section lies sunk in the river, the stumps with their railings remain on both banks." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Nach der Sprengung: die Stümpfe bleiben</span><span class="en">After demolition: the stumps remain</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/holzsteg.jpg" alt="Holzsteg aus alten und neuen Bohlen über einen Bach mit Kiesgrund, daneben Schilf." data-alt-de="Holzsteg aus alten und neuen Bohlen über einen Bach mit Kiesgrund, daneben Schilf." data-alt-en="Wooden footbridge of old and new planks over a creek with a gravel bed, reeds beside it." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Holzsteg über den Bach</span><span class="en">Wooden footbridge over the creek</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-09"><span class="de">09.10.2026</span><span class="en">Oct 9, 2026</span></time>
+        <div>
+          <h3><span class="de">Sammler DR-7C und sichtbarer Schaden</span><span class="en">DR-7C harvester and visible damage</span></h3>
+          <p class="de">Der Sammler ist neu aus Blender: sechs Räder mit Allradlenkung, drei Ernte-Module und Füllstands-Lämpchen. Fahrzeuge und Gebäude zeigen jetzt drei Schadensstufen mit Ruß, Einschlägen und Teilen, die abfallen. Zerstörte Gebäude bleiben als glühende Ruine stehen, Flammen neigen sich mit Wind und Fahrt.</p>
+          <p class="en">The harvester is new from Blender: six wheels with all-wheel steering, three harvesting arms and cargo lights. Vehicles and buildings now show three damage stages with soot, impact marks and parts that break off. Destroyed buildings remain as smouldering ruins, and flames lean with the wind and with movement.</p>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-08"><span class="de">08.10.2026</span><span class="en">Oct 8, 2026</span></time>
+        <div>
+          <h3><span class="de">Raffinerie, Gefechte und neues Logo</span><span class="en">Refinery, firefights and a new logo</span></h3>
+          <p class="de">Die Raffinerie ist neu aus Blender, mit Andockspur, Laufkatze und Schlauch. Schüsse streuen jetzt, Fehlschüsse hinterlassen Krater, die Mündung schlägt eine Druckwelle ins Gras. Gruppen fahren ohne Stau zu ihren Plätzen. Dazu kommen Staub nach Untergrund und das neue ASHFRONT-Logo im Menü.</p>
+          <p class="en">The refinery is new from Blender, with a docking lane, a trolley crane and a hose. Shots now scatter, misses leave craters, and the muzzle blast ripples through the grass. Groups drive to their spots without jamming. Plus dust that depends on the ground and the new ASHFRONT logo in the menu.</p>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-07"><span class="de">07.10.2026</span><span class="en">Oct 7, 2026</span></time>
+        <div>
+          <h3><span class="de">Kampf Stufe 1 und der Panther aus Blender</span><span class="en">Combat stage 1 and the Panther from Blender</span></h3>
+          <p class="de">Waffen, Treffer, Wracks und Brandflecken. Der Panther A1 hat Federung, schwingende Antennen, einen Kommandanten in der Luke und Abgas, und er hinterlässt Fahrspuren im Gras.</p>
+          <p class="en">Weapons, hits, wrecks and scorch marks. The Panther A1 has suspension, swaying antennas, a commander in the hatch and exhaust, and it leaves tracks in the grass.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="chapter" id="welt">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Grundidee</span><span class="en">Premise</span></div>
+    <h2><span class="de">Eine Welt aus Asche und Glut</span><span class="en">A world of ash and embers</span></h2>
+    <p class="de">Worum es in ASHFRONT geht.</p>
+    <p class="en">What ASHFRONT is about.</p>
+  </div>
+  <div class="content">
+    <div class="welt">
+      <div>
+        <h3>Derylum</h3>
+        <p class="de">Der Rohstoff, um den sich alles dreht: <span class="derylum">goldene Kristalle</span> mit <span class="blau">blauem Glühen</span>. Wertvoll und gefährlich. Wo er abgebaut wird, bleibt Aschenland zurück.</p>
+        <p class="en">The resource everything revolves around: <span class="derylum">golden crystals</span> with a <span class="blau">blue glow</span>. Valuable and dangerous. Wherever it is mined, it leaves ashland behind.</p>
+      </div>
+      <div>
+        <h3><span class="de">Die Geschichte</span><span class="en">The story</span></h3>
+        <p class="de">Das Aegis Consortium beutet die Felder aus. Die SCORIA, Menschen aus den verbrannten Gebieten, wehren sich. Die FOIG greift ein, und die Frage bleibt: für wen? Drei Kampagnen, drei Blickwinkel, moralisch bewusst grau.</p>
+        <p class="en">The Aegis Consortium exploits the fields. The SCORIA, people from the burned lands, fight back. The FOIG steps in, and the question remains: on whose side? Three campaigns, three points of view, deliberately morally grey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="fahrplan">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Fahrplan</span><span class="en">Roadmap</span></div>
+    <h2><span class="de">Schritt für Schritt zu Version 1</span><span class="en">Step by step to version 1</span></h2>
+    <p class="de">Die Schritte der Agenda. Version 1 umfasst Karten, Kampf, Sichtweite und KI mit FOIG und SCORIA.</p>
+    <p class="en">The steps of our plan. Version 1 covers maps, combat, line of sight and AI with FOIG and SCORIA.</p>
+  </div>
+  <div class="content">
+    <div class="kette" role="img" aria-label="Fortschritt: Schritte 1 bis 6 fertig, Schritt 7 in Arbeit, 8 und 9 folgen für Version 1, 10 und 11 und weitere Inhalte im Ausbau. / Progress: steps 1 to 6 done, step 7 in progress, 8 and 9 to follow for version 1, 10, 11 and more after that.">
+      <span class="glied fertig">1–2</span><span class="glied fertig">3</span><span class="glied fertig">4</span><span class="glied fertig">5</span>
+      <span class="glied fertig">6</span><span class="glied jetzt">7</span><span class="glied v1">8</span><span class="glied v1">9</span>
+      <span class="glied aus">10</span><span class="glied aus">11</span><span class="glied aus">+</span>
+    </div>
+    <div class="phasen">
+      <div class="phase fertig">
+        <h3><span class="de">Fertig</span><span class="en">Done</span> <span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></h3>
+        <ol>
+          <li><span class="nr">1–2</span><span><span class="de">Kamera, Auswahl, Wegfindung, Kolonnenfahrt</span><span class="en">Camera, selection, pathfinding, convoys</span></span></li>
+          <li><span class="nr">3</span><span><span class="de">Basisbau mit Credits, Strom und Produktion</span><span class="en">Base building with credits, power and production</span></span></li>
+          <li><span class="nr">4</span><span><span class="de">Mauern und Tore</span><span class="en">Walls and gates</span></span></li>
+          <li><span class="nr">5</span><span><span class="de">Derylum-Felder und Sammler-Kreislauf</span><span class="en">Derylum fields and the harvester loop</span></span></li>
+          <li><span class="nr">6</span><span><span class="de">Karten und Terrain</span><span class="en">Maps and terrain</span></span></li>
+        </ol>
+      </div>
+      <div class="phase v1">
+        <h3>Version 1 <span class="chip v1"><span class="de">Kern</span><span class="en">Core</span></span></h3>
+        <ol>
+          <li><span class="nr">7</span><span class="jetzt-text"><span class="de">Kampf, in Arbeit</span><span class="en">Combat, in progress</span></span></li>
+          <li><span class="nr">8</span><span><span class="de">Sichtweite und Nebel des Krieges</span><span class="en">Line of sight and fog of war</span></span></li>
+          <li><span class="nr">9</span><span><span class="de">Gegner-KI</span><span class="en">Enemy AI</span></span></li>
+        </ol>
+      </div>
+      <div class="phase aus">
+        <h3><span class="de">Ausbau</span><span class="en">Expansion</span> <span class="chip ausbau"><span class="de">Danach</span><span class="en">Later</span></span></h3>
+        <ol>
+          <li><span class="nr">10</span><span><span class="de">Wetter</span><span class="en">Weather</span></span></li>
+          <li><span class="nr">11</span><span><span class="de">Grafik-Meilenstein</span><span class="en">Graphics milestone</span></span></li>
+          <li><span class="nr">+</span><span><span class="de">Infanterie, Luft, Forschung, Superwaffen, AEGIS, Kampagnen</span><span class="en">Infantry, air, research, superweapons, AEGIS, campaigns</span></span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="im-spiel">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Bereits gebaut</span><span class="en">Already built</span></div>
+    <h2><span class="de">Das läuft schon</span><span class="en">Already running</span></h2>
+    <p class="de">Diese Teile sind im Prototyp spielbar und getestet.</p>
+    <p class="en">These parts are playable and tested in the prototype.</p>
+    <div class="tag"><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></div>
+  </div>
+  <div class="content">
+    <div class="tiles">
+      <div class="tile"><h3><span class="de">Steuerung</span><span class="en">Controls</span></h3><p class="de">Kamera, Auswahl, Gruppen mit <kbd>Strg</kbd>+Zahl, Wegfindung und Kolonnenfahrt.</p><p class="en">Camera, selection, groups with <kbd>Ctrl</kbd>+number, pathfinding and convoys.</p></div>
+      <div class="tile"><h3><span class="de">Basisbau</span><span class="en">Base building</span></h3><p class="de">Bauleiste, Credits, Strom, Produktion, Verkaufen, Reparieren und Techbaum.</p><p class="en">Build bar, credits, power, production, selling, repairing and a tech tree.</p></div>
+      <div class="tile"><h3><span class="de">Mauern und Tore</span><span class="en">Walls and gates</span></h3><p class="de">Reihen ziehen, Ecken verbinden sich, Tore öffnen nur für eigene Einheiten.</p><p class="en">Drag out rows, corners connect, gates only open for your own units.</p></div>
+      <div class="tile"><h3><span class="de">Derylum-Kreislauf</span><span class="en">Derylum loop</span></h3><p class="de">Verschmolzene Felder, die beim Ernten schrumpfen. Sammler DR-7C und Raffinerie mit Andockspur, beide aus Blender.</p><p class="en">Merged fields that shrink as they are harvested. DR-7C harvester and refinery with a docking lane, both built in Blender.</p></div>
+      <div class="tile"><h3><span class="de">Kampf, erste Stufe</span><span class="en">Combat, stage one</span></h3><p class="de">Waffen mit Streuung, Schadensstufen mit abfallenden Teilen, Wracks, Brandflecken und Ruinen. Angriffsbefehl und Zwangsfeuer mit <kbd>Alt</kbd> + Rechtsklick.</p><p class="en">Weapons with scatter, damage stages with parts breaking off, wrecks, scorch marks and ruins. Attack orders and force fire with <kbd>Alt</kbd> + right-click.</p></div>
+      <div class="tile"><h3><span class="de">Karten und Gelände</span><span class="en">Maps and terrain</span></h3><p class="de">Hügelland mit Plateau, Wasserfall, See, eingeschnittenem Fluss mit Furten, Wäldern und 3D-Gras im Wind.</p><p class="en">Rolling hills with a plateau, waterfall, lake, a deep river with fords, forests and 3D grass in the wind.</p></div>
+      <div class="tile"><h3><span class="de">Wege und Brücken</span><span class="en">Roads and bridges</span></h3><p class="de">Asphalt, Schotter und Feldwege, eine Betonbrücke und ein Holzsteg. Brücken lassen sich sprengen, die Stümpfe bleiben.</p><p class="en">Asphalt, gravel and dirt roads, a concrete bridge and a wooden footbridge. Bridges can be blown up, the stumps remain.</p></div>
+      <div class="tile"><h3><span class="de">Tag und Nacht</span><span class="en">Day and night</span></h3><p class="de">Ein Tag dauert 60 Minuten. Fahrzeug- und Gebäudelichter, Suchscheinwerfer, Flutlicht.</p><p class="en">A day lasts 60 minutes. Vehicle and building lights, searchlights, floodlights.</p></div>
+      <div class="tile"><h3><span class="de">Kommandoleiste</span><span class="en">Command bar</span></h3><p class="de">Radar mit Wappen und Störbalken, Funkstation mit Ansager, Musik-Player mit Automatik.</p><p class="en">Radar with emblem and interference bars, radio station with announcer, music player that follows the action.</p></div>
+      <div class="tile"><h3><span class="de">Rund ums Spiel</span><span class="en">Around the game</span></h3><p class="de">KeGu-Intro, Hauptmenü mit echter Spielszene, Ladebildschirm mit Panzerkette, Pausenmenü.</p><p class="en">KeGu intro, main menu with a live game scene, loading screen with a tank track, pause menu.</p></div>
+      <div class="tile"><h3><span class="de">Einstellungen</span><span class="en">Settings</span></h3><p class="de">Ton in drei Kanälen, Deutsch und Englisch, Fenstermodus, 4K, FSR 2, Bildrate.</p><p class="en">Audio on three channels, German and English, window mode, 4K, FSR 2, frame rate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter stacked" id="fraktionen">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Fraktionen</span><span class="en">Factions</span></div>
+    <h2><span class="de">Drei Seiten, drei Spielweisen</span><span class="en">Three sides, three ways to play</span></h2>
+    <p class="de">Gemeinsam ist nur die Aufgabe der Grundgebäude. Aussehen, Namen, Einheiten und Mechanik sind je Fraktion eigen. Grün umrandet: schon im Spiel, alles andere ist geplant. Spielbar ist bisher die FOIG.</p>
+    <p class="en">Only the role of the basic buildings is shared. Look, names, units and mechanics are unique to each faction. Green outline: already in the game, everything else is planned. So far the FOIG is playable.</p>
+  </div>
+  <div class="content">
+    <div class="fraktionen">
+
+      <article class="fr foig">
+        <div class="band" aria-hidden="true"></div>
+        <div class="kopf">
+          <img class="wappen" src="img/logo_foig.png" alt="" width="64" height="74">
+          <div>
+            <h3>FOIG</h3>
+            <div class="voll">First Offensive Intervention Group</div>
+          </div>
+        </div>
+        <p class="text de">Saubere, schwere Militärtechnik in Blau und Oliv. Eliteeinheit ist die Stahlfaust-Division. Auf Vorarlbergerisch heißt „Foig!“ so viel wie „Gehorche!“. Wahlspruch: „Fortschritt durch Ordnung, Eisen und Glut.“</p>
+        <p class="text en">Clean, heavy military hardware in blue and olive. Its elite unit is the Steel Fist Division. In the Vorarlberg dialect, “Foig!” means “Obey!”. Motto: “Progress through order, iron and embers.”</p>
+        <dl>
+          <div><dt><span class="de">Mechanik</span><span class="en">Mechanics</span></dt><dd><span class="de">Belagerungsmodus, schwere Panzer, Derylum-Resonator, Aerial Complex mit Fallschirmspringern, Aufklärung und Nachschub</span><span class="en">Siege mode, heavy tanks, Derylum Resonator, Aerial Complex with paratroopers, reconnaissance and supply drops</span></dd></div>
+          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit da">Panther A1</span><span class="unit da"><span class="de">Sammler DR-7C</span><span class="en">DR-7C harvester</span></span><span class="unit">Jäger</span><span class="unit">Basilisk</span><span class="unit"><span class="de">Artillerie</span><span class="en">Artillery</span></span><span class="unit"><span class="de">Pionier</span><span class="en">Pioneer vehicle</span></span><span class="unit">Igel</span><span class="unit">Otter</span></dd></div>
+          <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit"><span class="de">Sturmtrupp</span><span class="en">Assault squad</span></span><span class="unit"><span class="de">MG-Trupp</span><span class="en">MG squad</span></span><span class="unit"><span class="de">Grenadiere</span><span class="en">Grenadiers</span></span><span class="unit"><span class="de">Raketentrupp</span><span class="en">Rocket squad</span></span><span class="unit"><span class="de">Sanitäter</span><span class="en">Medics</span></span><span class="unit"><span class="de">Ingenieure</span><span class="en">Engineers</span></span></dd></div>
+          <div><dt><span class="de">Luft</span><span class="en">Air</span></dt><dd><span class="de">Hangar mit Kampfhubschrauber, TH-2 Boreas (Transporter) und SK-6 Atlas (Kranhubschrauber); Aerial Complex mit Fallschirmspringern, Aufklärungsflug und Nachschubabwurf</span><span class="en">Hangar with attack helicopter, TH-2 Boreas (transport) and SK-6 Atlas (heavy-lift crane); Aerial Complex with paratroopers, recon flights and supply drops</span></dd></div>
+          <div><dt><span class="de">Abwehr</span><span class="en">Defense</span></dt><dd><span class="de">Hydra, eine mehrköpfige Raketenabwehr, deren Köpfe nachwachsen, solange Strom da ist; Geschützturm, Infanteriebunker, Derylum-Resonator</span><span class="en">Hydra, a multi-headed missile defense whose heads grow back while it has power; gun turret, infantry bunker, Derylum Resonator</span></dd></div>
+          <div><dt><span class="de">Strom</span><span class="en">Power</span></dt><dd><span class="de">Wind, mit Sturmabschaltung</span><span class="en">Wind, with storm shutdown</span></dd></div>
+          <div><dt><span class="de">Superwaffe</span><span class="en">Superweapon</span></dt><dd><span class="de">Stahlhagel: Bomberverband legt einen Teppich entlang einer Linie</span><span class="en">Steel Hail: a bomber formation lays a carpet along a line</span></dd></div>
+        </dl>
+        <div class="fuss"><span class="chip v1">Version 1</span><small><span class="de">Neue Namen: Kürzel + Windgott</span><span class="en">New names: code + wind god</span></small></div>
+      </article>
+
+      <article class="fr scoria">
+        <div class="band" aria-hidden="true"></div>
+        <div class="kopf">
+          <img class="wappen" src="img/logo_scoria.png" alt="" width="64" height="74">
+          <div>
+            <h3>SCORIA</h3>
+            <div class="voll"><span class="de">Die Menschen der verbrannten Derylum-Gebiete</span><span class="en">The people of the burned Derylum lands</span></div>
+          </div>
+        </div>
+        <p class="text de">Horde aus Schrott und Beutegut in Rostrot und Aschgrau. Viele billige Einheiten, Hinterhalte und Sabotage. Sie verteidigen ihre Heimat.</p>
+        <p class="text en">A horde of scrap and salvage in rust red and ash grey. Many cheap units, ambushes and sabotage. They are defending their homeland.</p>
+        <dl>
+          <div><dt><span class="de">Mechanik</span><span class="en">Mechanics</span></dt><dd><span class="de">Bewegliche Basis: Das Lager ist ein umgebauter Bergbau-Crawler, die übrigen Gebäude folgen als Konvoi</span><span class="en">Mobile base: the camp is a converted mining crawler, the other buildings follow as a convoy</span></dd></div>
+          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit"><span class="de">Lager-Crawler</span><span class="en">Camp crawler</span></span><span class="unit">Scraper</span><span class="unit">Moloch</span><span class="unit">FireClaw</span><span class="unit"><span class="de">Motorrad-Trupp</span><span class="en">Dirt-bike squad</span></span><span class="unit"><span class="de">Umgebauter Pickup</span><span class="en">Converted pickup</span></span></dd></div>
+          <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit"><span class="de">Guerilla-Trupp</span><span class="en">Guerrilla squad</span></span><span class="unit"><span class="de">Schwefeltrupp</span><span class="en">Sulphur squad</span></span><span class="unit"><span class="de">Funkpiraten</span><span class="en">Radio pirates</span></span><span class="unit"><span class="de">Saboteure</span><span class="en">Saboteurs</span></span><span class="unit"><span class="de">Grenadiere</span><span class="en">Grenadiers</span></span><span class="unit"><span class="de">Feldscher</span><span class="en">Field medic</span></span></dd></div>
+          <div><dt><span class="de">Luft</span><span class="en">Air</span></dt><dd><span class="de">Nur Motorgleiter (Ultraleicht), die vom Crawler starten</span><span class="en">Only motor gliders (ultralights) launched from the crawler</span></dd></div>
+          <div><dt><span class="de">Besonders</span><span class="en">Special</span></dt><dd><span class="de">Schwefelgas, das entzündlich ist und alle trifft. Wärmeschutz-Planen gegen Wärmebild, Tunnel und Schmugglerrouten, im Sand- und Aschesturm im Vorteil</span><span class="en">Sulphur gas that is flammable and hits everyone. Thermal tarps against thermal imaging, tunnels and smuggling routes, an edge in sand and ash storms</span></dd></div>
+          <div><dt><span class="de">Strom</span><span class="en">Power</span></dt><dd><span class="de">Erdwärme, nur an heißen Stellen der Karte</span><span class="en">Geothermal, only at hot spots on the map</span></dd></div>
+          <div><dt><span class="de">Superwaffe</span><span class="en">Superweapon</span></dt><dd><span class="de">Eruption: Tunnel unter das Ziel, der Boden bricht auf, eine Aschewolke nimmt die Sicht</span><span class="en">Eruption: a tunnel under the target, the ground bursts open and an ash cloud blocks all sight</span></dd></div>
+        </dl>
+        <div class="fuss"><span class="chip v1">Version 1</span><small><span class="de">Ultraleicht statt Luftwaffe</span><span class="en">Ultralights instead of an air force</span></small></div>
+      </article>
+
+      <article class="fr aegis">
+        <div class="band" aria-hidden="true"></div>
+        <div class="kopf">
+          <img class="wappen" src="img/logo_aegis.png" alt="" width="64" height="74">
+          <div>
+            <h3>AEGIS</h3>
+            <div class="voll">Aegis Consortium · Automated Extraction Grid &amp; Industrial Shields</div>
+          </div>
+        </div>
+        <p class="text de">Rohstoffkonzern mit Privatarmee in Anthrazit, Weiß und Bernstein. Soldaten sind Cyborgs und heißen „Vermögenswerte“. Tagsüber am stärksten.</p>
+        <p class="text en">A resource corporation with a private army in anthracite, white and amber. Its soldiers are cyborgs called “assets”. Strongest by day.</p>
+        <dl>
+          <div><dt><span class="de">Mechanik</span><span class="en">Mechanics</span></dt><dd><span class="de">Schildgeneratoren, Drohnen mit Wärmebild, KI-Reaktor im Hauptquartier: Die Stimme der KI zerfällt, je mehr die Basis Schaden nimmt</span><span class="en">Shield generators, drones with thermal imaging, an AI reactor in the headquarters: the AI's voice breaks down as the base takes damage</span></dd></div>
+          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit">M-70 Warden</span><span class="unit">T-07 Titan</span><span class="unit"><span class="de">Drohnen</span><span class="en">Drones</span></span><span class="unit"><span class="de">Schwebe-Transporter</span><span class="en">Hover transport</span></span></dd></div>
+          <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit"><span class="de">Cyborg-Trupps</span><span class="en">Cyborg squads</span></span><span class="unit"><span class="de">Netz-Hacker</span><span class="en">Grid hackers</span></span><span class="unit"><span class="de">Wartungsdrohnen statt Sanitätern</span><span class="en">Maintenance drones instead of medics</span></span></dd></div>
+          <div><dt><span class="de">Luft</span><span class="en">Air</span></dt><dd><span class="de">Kipprotor-Flugzeug</span><span class="en">Tiltrotor aircraft</span></dd></div>
+          <div><dt><span class="de">Abwehr</span><span class="en">Defense</span></dt><dd><span class="de">Schildgeneratoren, die auch anfliegende Raketen abfangen</span><span class="en">Shield generators that also intercept incoming missiles</span></dd></div>
+          <div><dt><span class="de">Strom</span><span class="en">Power</span></dt><dd><span class="de">Solar und Speicher: stark am Tag, schwach in der Nacht und im Sturm</span><span class="en">Solar and storage: strong by day, weak at night and in storms</span></dd></div>
+          <div><dt><span class="de">Superwaffe</span><span class="en">Superweapon</span></dt><dd><span class="de">Helios: Spiegelsatelliten bündeln Sonnenlicht zu einem Brennstrahl, nur am Tag</span><span class="en">Helios: mirror satellites focus sunlight into a burning beam, only by day</span></dd></div>
+        </dl>
+        <div class="fuss"><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span><small><span class="de">Dritte Fraktion nach Version 1</span><span class="en">Third faction after version 1</span></small></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="kampf">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Kampf und Steuerung</span><span class="en">Combat and controls</span></div>
+    <h2><span class="de">Gefechte, die man lesen kann</span><span class="en">Battles you can read</span></h2>
+    <p class="de">Klassische Befehle wie bei C&amp;C, dazu Treffer, Schäden und Wracks, die Spuren hinterlassen.</p>
+    <p class="en">Classic C&amp;C-style orders, plus hits, damage and wrecks that leave their mark.</p>
+    <div class="tag"><span class="chip arbeit"><span class="de">Schritt 7 · in Arbeit</span><span class="en">Step 7 · in progress</span></span></div>
+  </div>
+  <div class="content">
+    <ul class="liste">
+      <li><div><span class="t"><span class="de">Waffen, Treffer, Zerstörung</span><span class="en">Weapons, hits, destruction</span></span><span class="d"><span class="de">Veteranenstatus, abwechslungsreiche Treffer mit eigenen Geräuschen, sichtbarer Schaden bis zu abfallenden Panzerplatten. Streuung und Schadensstufen mit abfallenden Teilen sind schon im Spiel.</span><span class="en">Veteran status, varied hits with their own sounds, visible damage down to armor plates falling off. Scatter and damage stages with parts breaking off are already in the game.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+      <li><div><span class="t"><span class="de">Belagerungsmodus</span><span class="en">Siege mode</span></span><span class="d"><span class="de">Basilisk, Railgun-Panzer und Artillerie gehen in Stellung und schießen weit, mit Mindestreichweite.</span><span class="en">Basilisk, railgun tanks and artillery dig in and fire at long range, with a minimum range.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Fähigkeiten mit Abklingzeit</span><span class="en">Abilities with cooldowns</span></span><span class="d"><span class="de">Feuerteppich der Artillerie, Flammenwerfer, Feldreparatur mit dem Schweißbrenner.</span><span class="en">Artillery barrage, flamethrowers, field repairs with a welding torch.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Befehle</span><span class="en">Orders</span></span><span class="d"><span class="de">Zwangsfeuer mit <kbd>Alt</kbd> + Rechtsklick, Angriffsbewegung mit <kbd>Strg</kbd> + Rechtsklick, Formation halten mit <kbd>G</kbd>. Haltungen, Schleichmodus, Frontpanzerung zum Gegner drehen. Zwangsfeuer ist schon im Spiel.</span><span class="en">Force fire with <kbd>Alt</kbd> + right-click, attack-move with <kbd>Ctrl</kbd> + right-click, hold formation with <kbd>G</kbd>. Stances, stealth mode, turning the front armor towards the enemy. Force fire is already in the game.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+      <li><div><span class="t"><span class="de">Hitze-System</span><span class="en">Heat system</span></span><span class="d"><span class="de">Gatling und Flammenwerfer überhitzen, Rohre glühen nach.</span><span class="en">Gatlings and flamethrowers overheat, barrels keep glowing.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Wracks bleiben liegen</span><span class="en">Wrecks stay on the field</span></span><span class="d"><span class="de">Sie brennen aus, versperren Wege und sehen je nach Treffer anders aus. Der Pionier räumt oder zerlegt sie.</span><span class="en">They burn out, block paths and look different depending on the hit. The pioneer vehicle clears or salvages them.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Schutzsysteme</span><span class="en">Protection systems</span></span><span class="d"><span class="de">Rauchgranaten, die sich entfalten, Flares gegen Raketen, Leuchtgeschosse in der Nacht.</span><span class="en">Smoke grenades that unfold, flares against missiles, illumination rounds at night.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Verteidigung</span><span class="en">Defenses</span></span><span class="d"><span class="de">Geschützturm, Infanteriebunker, Derylum-Resonator, dazu die vorhandenen Mauern und Tore.</span><span class="en">Gun turret, infantry bunker, Derylum Resonator, plus the existing walls and gates.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Bewegung ohne Stau</span><span class="en">Movement without jams</span></span><span class="d"><span class="de">Kollisions-Frühwarnung, gestaffelte Abfahrt, Zielplätze ohne Kreuzungen, Reißverschluss an Engstellen. Bis auf den Reißverschluss schon im Spiel.</span><span class="en">Early collision warning, staggered departures, destination slots without crossing paths, zipper merging at choke points. All but the zipper merging is already in the game.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+      <li><div><span class="t"><span class="de">Reichweiten nach Bildschirm</span><span class="en">Ranges fit the screen</span></span><span class="d"><span class="de">Reichweiten wachsen nicht mit der Kartengröße. Nur Belagerungseinheiten reichen weiter.</span><span class="en">Ranges do not grow with the map size. Only siege units reach further.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Feuer und Brandschneisen</span><span class="en">Fire and firebreaks</span></span><span class="d"><span class="de">Feuerwalzen ziehen mit dem Wind über Gras und Felder und brennen aus. Der Pionier pflügt Schneisen und löscht mit dem Wasserwerfer, Einheiten mit Flammenwerfer legen Gegenfeuer. Der Vorplatz schützt die Basis.</span><span class="en">Fire fronts sweep across grass and fields with the wind and burn out. The pioneer vehicle ploughs firebreaks and puts fires out with a water cannon, flamethrower units set counter-fires. The cleared ground around buildings protects the base.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Gelände im Gefecht</span><span class="en">Terrain in battle</span></span><span class="d"><span class="de">Schwere Panzer walzen junge Bäume, Zäune und Büsche nieder und kommen wuchtig über Kuppen und Gräben. Liegende Stämme bremsen und geben Infanterie Deckung.</span><span class="en">Heavy tanks flatten young trees, fences and bushes and crash over crests and ditches. Fallen trunks slow vehicles down and give infantry cover.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Superwaffen</span><span class="en">Superweapons</span></span><span class="d"><span class="de">Sirene und Countdown für alle Spieler, 8 bis 10 Minuten Ladezeit, brauchen Strom.</span><span class="en">Siren and countdown for all players, 8 to 10 minutes to charge, they need power.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="infanterie">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Infanterie</span><span class="en">Infantry</span></div>
+    <h2><span class="de">Trupps mit eigenem Kopf</span><span class="en">Squads with a mind of their own</span></h2>
+    <p class="de">Infanterie kommt mit Rigging und Animationen nach Version 1. Das Konzept steht.</p>
+    <p class="en">Infantry arrives with rigging and animations after version 1. The concept is ready.</p>
+    <div class="tag"><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></div>
+  </div>
+  <div class="content">
+    <ul class="liste">
+      <li><div><span class="t"><span class="de">Trupps statt Einzelsoldaten</span><span class="en">Squads instead of single soldiers</span></span><span class="d"><span class="de">Ein Klick wählt den ganzen Trupp. Bei Schaden fällt Soldat für Soldat, die Feuerkraft sinkt mit.</span><span class="en">One click selects the whole squad. As it takes damage, soldiers fall one by one and its firepower drops with them.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Rollen</span><span class="en">Roles</span></span><span class="d"><span class="de">Sturmtrupp, MG-Trupp, Grenadiere, Raketentrupp, Ingenieure, Sanitäter und der getarnte Whiteout Squad.</span><span class="en">Assault squad, machine-gun squad, grenadiers, rocket squad, engineers, medics and the camouflaged Whiteout Squad.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Gemischte Trupps</span><span class="en">Mixed squads</span></span><span class="d"><span class="de">Soldatinnen und Soldaten in allen Rollen, zufällig gemischt. Die Stimme kommt vom Truppführer oder der Truppführerin.</span><span class="en">Women and men in every role, randomly mixed. The voice belongs to the squad leader.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Hacker je Fraktion</span><span class="en">Hackers for each faction</span></span><span class="d"><span class="de">Die FOIG stört das Radar, AEGIS legt das Stromnetz lahm, SCORIA-Funkpiraten kapern Geschütztürme.</span><span class="en">The FOIG jams radar, AEGIS shuts down the power grid, SCORIA radio pirates take over gun turrets.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Niederhalten</span><span class="en">Suppression</span></span><span class="d"><span class="de">Der MG-Trupp drückt gegnerische Infanterie mit Dauerfeuer zu Boden: Sie zielt schlechter und kommt kaum voran. Der Sturmtrupp flankiert, Grenadiere holen den Gegner aus der Deckung.</span><span class="en">The machine-gun squad pins enemy infantry down with sustained fire: it aims worse and barely moves. The assault squad flanks, grenadiers flush the enemy out of cover.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Deckung und Verschanzen</span><span class="en">Cover and entrenching</span></span><span class="d"><span class="de">Trupps suchen selbst Deckung an Mauern, Kratern und Wracks. Jeder Trupp kann eine Feldbarriere bauen.</span><span class="en">Squads find cover by themselves behind walls, craters and wrecks. Every squad can build a field barrier.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Einsteigen und Aussteigen</span><span class="en">Boarding and unloading</span></span><span class="d"><span class="de">Ein System für Transporter, Bunker und Häuser.</span><span class="en">One system for transports, bunkers and houses.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Eigenes Gelände</span><span class="en">Infantry terrain</span></span><span class="d"><span class="de">Bewaldete Hänge, Maisfelder und Ruinen. Dort kommen Panzer nicht hin, Infanterie schon.</span><span class="en">Wooded slopes, cornfields and ruins. Tanks cannot get there, infantry can.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Überfahren mit Ausweichen</span><span class="en">Dodging tanks</span></span><span class="d"><span class="de">Nur schwere Kettenfahrzeuge walzen. Soldaten springen zur Seite, wenn sie nicht beschäftigt sind. Darstellung realistisch und zurückhaltend.</span><span class="en">Only heavy tracked vehicles can crush infantry. Soldiers jump aside when they are not busy. Shown realistically and with restraint.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Verwundete</span><span class="en">Wounded</span></span><span class="d"><span class="de">Rufe nach dem Sanitäter und ein Countdown-Ring über Verwundeten. Eigenes Sanitätszeichen: Spritze mit Verband.</span><span class="en">Calls for a medic and a countdown ring above the wounded. Our own medic sign: a syringe with a bandage.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Verhalten nach Wetter</span><span class="en">Behaviour by weather</span></span><span class="d"><span class="de">Im Leerlauf suchen Soldaten bei Hitze Schatten unter Planen, bei Regen ein Dach, bei Kälte rücken sie zusammen. AEGIS-Cyborgs stehen ungerührt in der Sonne.</span><span class="en">When idle, soldiers seek shade under tarps in the heat, a roof in the rain, and huddle together in the cold. AEGIS cyborgs stand unmoved in the sun.</span></span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="wirtschaft">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Wirtschaft</span><span class="en">Economy</span></div>
+    <h2><span class="de">Derylum und Strom</span><span class="en">Derylum and power</span></h2>
+    <p class="de">Ein einfacher Kreislauf mit Gründen, sich auf der Karte auszudehnen.</p>
+    <p class="en">A simple loop with reasons to expand across the map.</p>
+  </div>
+  <div class="content">
+    <ul class="liste">
+      <li><div><span class="t"><span class="de">Sammler und Raffinerie</span><span class="en">Harvester and refinery</span></span><span class="d"><span class="de">Ein Sammler bringt rund 350 bis 400 Credits pro Minute (700 je Ladung, eine Runde dauert knapp zwei Minuten). Eine Raffinerie entlädt immer nur einen Sammler. Felder wachsen langsam nach.</span><span class="en">One harvester brings in about 350 to 400 credits per minute (700 per load, one round trip takes just under two minutes). A refinery unloads one harvester at a time. Fields slowly grow back.</span></span></div><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></li>
+      <li><div><span class="t"><span class="de">Mutterstein und endliche Felder</span><span class="en">Mother stone and finite fields</span></span><span class="d"><span class="de">Felder wachsen von einem Mutterstein aus und sind irgendwann erschöpft. Wer weiterwachsen will, muss sich ausdehnen.</span><span class="en">Fields grow from a mother stone and run dry eventually. To keep growing, you have to expand.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Bohrstationen</span><span class="en">Drilling stations</span></span><span class="d"><span class="de">Neutral auf der Karte, bringen laufend Credits für den, der sie hält.</span><span class="en">Neutral on the map, they bring a steady flow of credits to whoever holds them.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Lost Places und Kisten</span><span class="en">Lost places and crates</span></span><span class="d"><span class="de">Verlassene Orte wie alter Bahnhof, Tankstelle oder Bunker, mit Fundstücken.</span><span class="en">Abandoned sites such as an old train station, a petrol station or a bunker, with things to find.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Mobiler Außenposten</span><span class="en">Mobile outpost</span></span><span class="d"><span class="de">Kleiner beweglicher Bauhof für neue Derylum-Felder mit begrenzten Bauoptionen. Beim Aufbau wird die Fraktionsflagge gehisst.</span><span class="en">A small mobile construction yard for new Derylum fields with limited build options. The faction flag is raised when it deploys.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+      <li><div><span class="t"><span class="de">Strom aus der Natur</span><span class="en">Power from nature</span></span><span class="d"><span class="de">Kraftwerks-Module je Fraktion: Wind, Erdwärme, Solar. Das Wetter rechnet mit.</span><span class="en">Power plant modules for each faction: wind, geothermal, solar. The weather plays its part.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+      <li><div><span class="t"><span class="de">Gezielte Forschung</span><span class="en">Focused research</span></span><span class="d"><span class="de">Eine Handvoll spürbarer Upgrades je Fraktion statt eines riesigen Baums.</span><span class="en">A handful of noticeable upgrades for each faction instead of a huge tree.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="karten">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Karten und Welt</span><span class="en">Maps and world</span></div>
+    <h2><span class="de">Eine Landschaft, die lebt</span><span class="en">A living landscape</span></h2>
+    <p class="de">Zufallskarten, die wie echte Gegenden wirken, und ein Schlachtfeld, das sich mit jedem Gefecht verändert. Die Grundlage steht, der Feinschliff folgt.</p>
+    <p class="en">Random maps that feel like real places, and a battlefield that changes with every fight. The foundation is in place, polish follows.</p>
+    <div class="tag"><span class="chip spiel"><span class="de">Schritt 6 · Grundlage im Spiel</span><span class="en">Step 6 · foundation in the game</span></span></div>
+  </div>
+  <div class="content">
+    <div class="gruppe">
+      <h3><span class="de">Karten</span><span class="en">Maps</span></h3>
+      <ul class="liste">
+        <li><div><span class="t"><span class="de">Zufallskarten mit Seed</span><span class="en">Random maps from a seed</span></span><span class="d"><span class="de">Eine Hälfte wird erzeugt und gespiegelt, damit es fair bleibt. Erreichbarkeit wird automatisch geprüft.</span><span class="en">One half is generated and mirrored to keep it fair. Reachability is checked automatically.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Wald, Wüste, Winter</span><span class="en">Forest, desert, winter</span></span><span class="d"><span class="de">Jeder Kartentyp mit eigenem Boden, eigenen Pflanzen und eigener Stimmung. Jahreszeiten als Varianten.</span><span class="en">Every map type with its own ground, plants and mood. Seasons as variants.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Große Karten</span><span class="en">Large maps</span></span><span class="d"><span class="de">Autobahnen mit Talbrücken, Landstraßen und Laternen, die nachts angehen.</span><span class="en">Motorways with viaducts, country roads and street lights that switch on at night.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+      </ul>
+    </div>
+    <div class="gruppe">
+      <h3><span class="de">Landschaft</span><span class="en">Landscape</span></h3>
+      <ul class="liste">
+        <li><div><span class="t"><span class="de">Plateaus und Hänge</span><span class="en">Plateaus and slopes</span></span><span class="d"><span class="de">Flache, bewaldete Hänge, die nur Infanterie hinaufkommt. Fahrzeuge brauchen Auffahrten. Steile Wände nur an Klippe, Schlucht und Wasserfall.</span><span class="en">Gentle wooded slopes that only infantry can climb. Vehicles need ramps. Sheer walls only at cliffs, gorges and waterfalls.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Wasser</span><span class="en">Water</span></span><span class="d"><span class="de">Flüsse mit echtem Flussbett und Furten, Wasserfälle, Seen, Eis im Winter. Bis auf das Eis schon im Spiel.</span><span class="en">Rivers with a real river bed and fords, waterfalls, lakes, ice in winter. All but the ice is already in the game.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+        <li><div><span class="t"><span class="de">Wege und Brücken</span><span class="en">Roads and bridges</span></span><span class="d"><span class="de">Ein Wegenetz zu den Flussübergängen, feste Holz- und Betonbrücken, die sich gezielt sprengen lassen. Der Pionier repariert sie oder baut Behelfsbrücken.</span><span class="en">A road network leading to the river crossings, solid wooden and concrete bridges that can be blown up on purpose. The pioneer vehicle repairs them or builds temporary bridges.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+        <li><div><span class="t"><span class="de">Steine und Felsen</span><span class="en">Rocks and boulders</span></span><span class="d"><span class="de">Moos auf der Oberseite und im Schatten, Farn am Fuß, halb im Boden eingesunken statt obendrauf, Geröll an Hangfüßen und in Rinnen.</span><span class="en">Moss on top and on the shady side, ferns at the base, half sunk into the ground instead of sitting on it, scree at the foot of slopes and in gullies.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Ländliche Zonen</span><span class="en">Countryside</span></span><span class="d"><span class="de">Zäune am Weg, Weizen, Mais und Gemüse als Flickenteppich, Höfe mit Scheune und Obstbäumen. Dazu Blumenfelder nach Jahreszeit, eine Windmühle, deren Flügel den Wind anzeigen, und ein Wasserrad am Bach.</span><span class="en">Fences along the roads, a patchwork of wheat, corn and vegetables, farms with barns and fruit trees. Plus flower fields by season, a windmill whose sails show the wind, and a water wheel by the creek.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Dörfer und Siedlungen</span><span class="en">Villages and settlements</span></span><span class="d"><span class="de">Alpine Holzdörfer, Lehmbauten in der Wüste, zerstörte Viertel. Besetzbar und zerstörbar.</span><span class="en">Alpine wooden villages, mud-brick buildings in the desert, ruined districts. They can be occupied and destroyed.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Treibsand</span><span class="en">Quicksand</span></span><span class="d"><span class="de">Feste, sichtbare Gefahrenzone an Oasen. Der Pionier zieht festsitzende Fahrzeuge heraus.</span><span class="en">A fixed, visible danger zone near oases. The pioneer vehicle pulls stuck vehicles out.</span></span></div></li>
+      </ul>
+    </div>
+    <div class="gruppe">
+      <h3><span class="de">Lebendige Welt</span><span class="en">Living world</span></h3>
+      <ul class="liste">
+        <li><div><span class="t"><span class="de">Das Schlachtfeld verändert sich</span><span class="en">The battlefield changes</span></span><span class="d"><span class="de">Krater, Brandflecken, Kettenspuren und ausgefahrene Wege bleiben. Der Wald wird dünner, Panzer walzen Zäune nieder, Strommasten fallen.</span><span class="en">Craters, scorch marks, track marks and worn paths stay. The forest thins out, tanks flatten fences, power pylons fall.</span></span></div><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></li>
+        <li><div><span class="t"><span class="de">Fahrzeuge wirken echt</span><span class="en">Vehicles feel real</span></span><span class="d"><span class="de">Trägheit, Federung, Ketten folgen dem Boden, Staub nach Untergrund, Abgas, Rohrrückstoß. Schnee kommt mit dem Winter.</span><span class="en">Inertia, suspension, tracks that follow the ground, dust that depends on the surface, exhaust, recoil. Snow comes with winter.</span></span></div><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></li>
+        <li><div><span class="t"><span class="de">Wiese im Wind</span><span class="en">Meadow in the wind</span></span><span class="d"><span class="de">Eine Wiese voller Grashalme, über die Böen als Welle ziehen. Kahle Stellen unter Bäumen, auf Kuppen, an Wegrändern und dort, wo oft gefahren wird.</span><span class="en">A meadow full of grass blades with gusts rolling across in waves. Bare patches under trees, on crests, along roads and where vehicles often drive.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Wind und Stoff</span><span class="en">Wind and cloth</span></span><span class="d"><span class="de">Böen ziehen sichtbar über Felder und Wälder, Blätter wirbeln, Planen, Tarnnetze und Flaggen wehen. Je höher die Kamera, desto lauter der Wind.</span><span class="en">Gusts sweep visibly across fields and forests, leaves swirl, tarps, camouflage nets and flags flutter. The higher the camera, the louder the wind.</span></span></div></li>
+        <li><div><span class="t"><span class="de">Tierwelt</span><span class="en">Wildlife</span></span><span class="d"><span class="de">Vögel, Enten, Fische, Kühe, Schafe, Rehe, Schneehasen und ein Biber am Damm. Ein gemeinsames Lärm-System lässt sie fliehen, sterben tun sie nie.</span><span class="en">Birds, ducks, fish, cows, sheep, deer, snow hares and a beaver at its dam. A shared noise system makes them flee; they never die.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="wetter">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Wetter</span><span class="en">Weather</span></div>
+    <h2><span class="de">Wetter als Gegner und Verbündeter</span><span class="en">Weather as enemy and ally</span></h2>
+    <p class="de">Jeder Kartentyp hat seinen Sturm und seine Folgen. Wer die Vorhersage liest, plant besser.</p>
+    <p class="en">Every map type has its own storm and its own consequences. Read the forecast and plan better.</p>
+    <div class="tag"><span class="chip ausbau"><span class="de">Ausbau · Schritt 10</span><span class="en">Expansion · step 10</span></span></div>
+  </div>
+  <div class="content">
+    <ul class="liste">
+      <li><div><span class="t"><span class="de">Tag und Nacht</span><span class="en">Day and night</span></span><span class="d"><span class="de">Goldene und blaue Stunde, nachts weniger Sicht, Flutlicht deckt auf.</span><span class="en">Golden and blue hour, less sight at night, floodlights reveal.</span></span></div><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></li>
+      <li><div><span class="t"><span class="de">Stürme je Kartentyp</span><span class="en">Storms by map type</span></span><span class="d"><span class="de">Sandsturm, Gewitter, Schneesturm. Die Sicht sinkt, Luftfahrzeuge müssen landen.</span><span class="en">Sandstorm, thunderstorm, blizzard. Sight drops, aircraft have to land.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Ehrliche Vorhersage</span><span class="en">An honest forecast</span></span><span class="d"><span class="de">Die Wetterstation zeigt echte Wahrscheinlichkeiten für jetzt, in 3 und in 6 Minuten.</span><span class="en">The weather station shows real probabilities for now, in 3 and in 6 minutes.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Gewitter mit Folgen</span><span class="en">Thunderstorms with consequences</span></span><span class="d"><span class="de">Blitze treffen hohe Punkte, Panzer schützen wie ein Faradayscher Käfig. Waldbrand und Hochwasser möglich.</span><span class="en">Lightning strikes high points, tanks protect their crews like a Faraday cage. Forest fires and floods can follow.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Sturmfolgen</span><span class="en">After the storm</span></span><span class="d"><span class="de">Schneewehen, Wanderdünen und Schlamm. Im Winter Lawinen an steilen Hängen.</span><span class="en">Snowdrifts, shifting dunes and mud. Avalanches on steep slopes in winter.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Nebel und Wolken</span><span class="en">Fog and clouds</span></span><span class="d"><span class="de">Tal-, Hang- und Waldnebel nach Regen, Wolkenschatten und ein gemeinsamer Wind für Gras, Rauch und Fahnen.</span><span class="en">Valley, slope and forest fog after rain, cloud shadows and one shared wind for grass, smoke and flags.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Hagel</span><span class="en">Hail</span></span><span class="d"><span class="de">Kurze, heftige Schauer im Sommergewitter. Die Körner prasseln auf Blech und Planen, die weiße Schicht taut schnell wieder.</span><span class="en">Short, heavy showers in summer storms. Hailstones rattle on steel and tarps, the white layer melts quickly.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Jahreszeiten</span><span class="en">Seasons</span></span><span class="d"><span class="de">Frühling, Sommer, Hochsommer, Herbst und Winter, zufällig oder gewählt. Jede mit eigenem Bild und eigenem Wetter.</span><span class="en">Spring, summer, high summer, autumn and winter, random or chosen. Each with its own look and its own weather.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Dürre</span><span class="en">Drought</span></span><span class="d"><span class="de">Gras trocknet stellenweise aus, Flüsse führen weniger Wasser und geben neue Furten frei. Nach Regen wird es wieder grün.</span><span class="en">Grass dries out in patches, rivers carry less water and reveal new fords. After rain it turns green again.</span></span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="ton">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Oberfläche, Ton, Präsentation</span><span class="en">Interface, sound, presentation</span></div>
+    <h2><span class="de">Klar lesbar, gut zu hören</span><span class="en">Easy to read, good to hear</span></h2>
+    <p class="de">Eine Oberfläche, die im Gefecht nicht im Weg steht, und Ton, der informiert statt nur zu lärmen.</p>
+    <p class="en">An interface that stays out of the way in battle, and sound that informs instead of just making noise.</p>
+  </div>
+  <div class="content">
+    <ul class="liste">
+      <li><div><span class="t"><span class="de">Kommandoleiste</span><span class="en">Command bar</span></span><span class="d"><span class="de">Radar, Funkstation mit Ansager und Musik-Player, der automatisch zur Lage wechselt.</span><span class="en">Radar, radio station with announcer and a music player that switches automatically with the situation.</span></span></div><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></li>
+      <li><div><span class="t"><span class="de">Lesbarkeit</span><span class="en">Readability</span></span><span class="d"><span class="de">Lebensanzeige in Kästchen, moderne Auswahl, Umrisse durch Bäume, Kameradrehung mit <kbd>Q</kbd> und <kbd>E</kbd> optional.</span><span class="en">Segmented health bars, modern selection, outlines through trees, optional camera rotation with <kbd>Q</kbd> and <kbd>E</kbd>.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Stimmen und Geräusche</span><span class="en">Voices and sound</span></span><span class="d"><span class="de">Mit ElevenLabs auf Deutsch und Englisch, eigener Ansager je Fraktion. Musik mit Suno.</span><span class="en">Made with ElevenLabs in German and English, a separate announcer for each faction. Music made with Suno.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Meldungen mit Ort</span><span class="en">Alerts with a location</span></span><span class="d"><span class="de">Angriffsmeldungen nennen, wo es brennt. Echte Gefechte außerhalb des Bildes hört man als fernes Grollen.</span><span class="en">Attack alerts say where the trouble is. Real fights off-screen can be heard as distant rumbling.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Erweiterte Toneinstellungen</span><span class="en">Advanced sound settings</span></span><span class="d"><span class="de">Mechanik-Geräusche einzeln abschaltbar, Nachtmodus für leises Spielen.</span><span class="en">Mechanical sounds can be switched off one by one, and a night mode for playing quietly.</span></span></div><span class="chip v1">Version 1</span></li>
+      <li><div><span class="t"><span class="de">Gefechtsmodus nach Wunsch</span><span class="en">Skirmish your way</span></span><span class="d"><span class="de">Startgeld, Jahreszeit, Wetter, Dürre, KI-Stärke und Superwaffen einstellbar, dazu „Alles zufällig“ und gespeicherte Vorlagen.</span><span class="en">Starting money, season, weather, drought, AI strength and superweapons can be set, plus “everything random” and saved presets.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+      <li><div><span class="t"><span class="de">Menü und Zwischenszenen</span><span class="en">Menu and cutscenes</span></span><span class="d"><span class="de">Filmische Menü-Szenen, Eröffnung über den Hügel ins Aschenland, glühende Asche am Schriftzug.</span><span class="en">Cinematic menu scenes, an opening flight over the hill into the ashland, glowing embers on the logo.</span></span></div><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="chapter" id="offen">
+  <div class="label">
+    <div class="eyebrow"><span class="de">Offen</span><span class="en">Open</span></div>
+    <h2><span class="de">Noch zu entscheiden</span><span class="en">Still to decide</span></h2>
+    <p class="de">Fragen, die vor dem jeweiligen Schritt geklärt werden.</p>
+    <p class="en">Questions we answer before the step they belong to.</p>
+  </div>
+  <div class="content">
+    <div class="fragen">
+      <div class="frage"><b><span class="de">Teamfarben</span><span class="en">Team colours</span></b><span><span class="de">Eigene Farbe Blau steht, die Gegnerfarbe ist offen.</span><span class="en">Our own colour is blue, the enemy colour is still open.</span></span></div>
+      <div class="frage"><b>Whiteout Squad</b><span><span class="de">Gehört er zur FOIG oder zur SCORIA?</span><span class="en">Does it belong to the FOIG or to the SCORIA?</span></span></div>
+      <div class="frage"><b><span class="de">Gefechte im Nebel</span><span class="en">Battles in the fog of war</span></b><span><span class="de">Hört man sie? Vorschlag: nur die grobe Richtung, ohne Markierung.</span><span class="en">Can you hear them? Suggestion: only the rough direction, without a marker.</span></span></div>
+      <div class="frage"><b><span class="de">Abgebrannte Hänge</span><span class="en">Burned slopes</span></b><span><span class="de">Werden sie für Fahrzeuge befahrbar, wenn der Wald weg ist?</span><span class="en">Do they become passable for vehicles once the forest is gone?</span></span></div>
+      <div class="frage"><b>Winter</b><span><span class="de">Eigener Kartentyp oder eine Jahreszeit der normalen Landschaft?</span><span class="en">A map type of its own, or a season of the regular landscape?</span></span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span><span class="de">© 2026 KeGu Studios · ASHFRONT ist ein Arbeitstitel · Prototyp</span><span class="en">© 2026 KeGu Studios · ASHFRONT is a working title · prototype</span></span>
+  <span><span class="de">Stand 10.10.2026 · aus Agenda und Ideen-Sammlung · <a href="#impressum">Impressum und Datenschutz</a></span><span class="en">As of Oct 10, 2026 · from our plan and idea collection · <a href="#impressum">Legal notice and privacy</a></span></span>
+</footer>
+
+<section class="impressum" id="impressum" aria-label="Impressum / Legal notice">
+  <div>
+    <h2><span class="de">Impressum</span><span class="en">Legal notice</span></h2>
+    <p class="de">Offenlegung nach § 25 Mediengesetz. Medieninhaber: Kevin Gut, 6824 Schlins, Österreich.</p>
+    <p class="en">Disclosure under Section 25 of the Austrian Media Act. Media owner: Kevin Gut, 6824 Schlins, Austria.</p>
+    <p class="de">Die Seite zeigt den Entwicklungsstand von ASHFRONT (Arbeitstitel), einem Spiel in Arbeit von KeGu Studios.</p>
+    <p class="en">This page shows the development status of ASHFRONT (working title), a game in progress by KeGu Studios.</p>
+  </div>
+  <div>
+    <h2><span class="de">Datenschutz</span><span class="en">Privacy</span></h2>
+    <p class="de">Keine Cookies, kein Tracking, keine Schriften oder Skripte von fremden Servern. Die Sprachwahl merkt sich nur dein Browser. Die Seite liegt bei GitHub Pages (GitHub Inc., USA); beim Aufruf verarbeitet GitHub technisch nötige Daten wie die IP-Adresse, siehe die Datenschutzerklärung von GitHub.</p>
+    <p class="en">No cookies, no tracking, no fonts or scripts from third-party servers. Only your browser remembers the language you picked. The page is hosted on GitHub Pages (GitHub Inc., USA); when you visit, GitHub processes technically necessary data such as your IP address, see GitHub's privacy statement.</p>
+  </div>
+</section>
+
+</div>
+
+<dialog id="gross" class="gross" aria-label="Bild / Image">
+  <img id="gross-bild" src="" alt="">
+  <div class="unten">
+    <p id="gross-text"></p>
+    <button type="button" class="zu" id="gross-zu"><span class="de">Schließen</span><span class="en">Close</span></button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var canvas = document.getElementById('glut');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w = 0, h = 0, parts = [], running = true, last = 0;
+
+  function size() {
+    var r = canvas.getBoundingClientRect();
+    w = Math.max(1, r.width); h = Math.max(1, r.height);
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function spawn(initial) {
+    return {
+      x: Math.random() * w,
+      y: initial ? Math.random() * h : -10 - Math.random() * 40,
+      r: 0.6 + Math.random() * 1.8,
+      vy: 8 + Math.random() * 18,
+      vx: 4 + Math.random() * 10,
+      ph: Math.random() * Math.PI * 2,
+      fl: 1.5 + Math.random() * 3,
+      heat: Math.random()
+    };
+  }
+  function count() { return Math.round(Math.min(90, Math.max(30, w / 14))); }
+  function init() {
+    size();
+    parts = [];
+    for (var i = 0; i < count(); i++) parts.push(spawn(true));
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      var a = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(p.ph + t * p.fl)) * (1 - p.y / (h * 1.15));
+      if (a < 0) a = 0;
+      var g = p.heat > 0.7 ? '255,200,120' : (p.heat > 0.3 ? '255,150,70' : '232,110,45');
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(' + g + ',' + a.toFixed(3) + ')';
+      ctx.shadowColor = 'rgba(255,140,60,' + (a * 0.9).toFixed(3) + ')';
+      ctx.shadowBlur = 6 * p.r;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  }
+  function step(now) {
+    if (!running) return;
+    var dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
+    last = now;
+    var t = now / 1000;
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      p.y += p.vy * dt;
+      p.x += (p.vx + Math.sin(t * 0.7 + p.ph) * 8) * dt;
+      if (p.y > h + 10 || p.x > w + 20) parts[i] = spawn(false);
+    }
+    draw(t);
+    requestAnimationFrame(step);
+  }
+  init();
+  if (reduce) { draw(0); return; }
+  requestAnimationFrame(step);
+  window.addEventListener('resize', function () { init(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { running = false; }
+    else if (!running) { running = true; last = 0; requestAnimationFrame(step); }
+  });
+})();
+</script>
+
+<script>
+/* Sprache: Deutsch oder Englisch – aus #de/#en im Link, sonst die zuletzt gewählte, sonst nach der Browsersprache */
+(function () {
+  var root = document.documentElement;
+  var TITEL = { de: 'ASHFRONT Spielübersicht', en: 'ASHFRONT Game Overview' };
+  var knoepfe = document.querySelectorAll('.sprache button');
+  function setzen(s, merken) {
+    root.setAttribute('data-sprache', s);
+    root.setAttribute('lang', s);
+    document.title = TITEL[s];
+    var bilder = document.querySelectorAll('img[data-alt-' + s + ']');
+    for (var i = 0; i < bilder.length; i++) bilder[i].alt = bilder[i].getAttribute('data-alt-' + s);
+    for (var k = 0; k < knoepfe.length; k++) {
+      knoepfe[k].setAttribute('aria-pressed', knoepfe[k].getAttribute('data-sprache') === s ? 'true' : 'false');
+    }
+    if (merken) { try { localStorage.setItem('ashfront-sprache', s); } catch (e) {} }
+  }
+  var start = 'de';
+  var anker = (location.hash || '').slice(1).toLowerCase();
+  var gemerkt = null;
+  try { gemerkt = localStorage.getItem('ashfront-sprache'); } catch (e) {}
+  if (anker === 'en' || anker === 'de') start = anker;
+  else if (gemerkt === 'en' || gemerkt === 'de') start = gemerkt;
+  else if (navigator.language && navigator.language.slice(0, 2).toLowerCase() !== 'de') start = 'en';
+  setzen(start, false);
+  for (var k = 0; k < knoepfe.length; k++) {
+    knoepfe[k].addEventListener('click', function (ev) { setzen(ev.currentTarget.getAttribute('data-sprache'), true); });
+  }
+})();
+
+/* Bilder per Klick groß */
+(function () {
+  var dialog = document.getElementById('gross');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  var bild = document.getElementById('gross-bild');
+  var text = document.getElementById('gross-text');
+  var knoepfe = document.querySelectorAll('.zoom');
+  for (var i = 0; i < knoepfe.length; i++) {
+    knoepfe[i].addEventListener('click', function (ev) {
+      var img = ev.currentTarget.querySelector('img');
+      var figur = ev.currentTarget.closest('figure');
+      var sprache = document.documentElement.getAttribute('data-sprache') || 'de';
+      var unterschrift = figur ? figur.querySelector('figcaption .' + sprache) : null;
+      bild.src = img.getAttribute('src');
+      bild.alt = img.alt;
+      text.textContent = unterschrift ? unterschrift.textContent : '';
+      dialog.showModal();
+    });
+  }
+  document.getElementById('gross-zu').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (ev) { if (ev.target === dialog) dialog.close(); });
+})();
+</script>
+</body>
+</html>
