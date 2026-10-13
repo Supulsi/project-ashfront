@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 11.10.2026 23:03 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 13.10.2026 21:19 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -303,6 +303,37 @@ kbd {
 .galerie figure { margin: 0; min-width: 0; }
 .galerie img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); }
 .galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; display: flex; align-items: flex-start; gap: 4px 10px; }
+.galerie.vier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Soundtrack: ein Player oben (läuft gerade, Abspielen/Pause, Fortschritt), darunter die Titel – nie automatisch */
+.player {
+  border: 1px solid var(--line); background: var(--surface); padding: 16px 18px;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 16px; align-items: center;
+}
+.player .knopf {
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ember); background: var(--surface-2);
+  color: var(--ember-hot); cursor: pointer; display: grid; place-items: center; padding: 0;
+}
+.player .knopf:hover { background: var(--ember); color: var(--bg); }
+.player .knopf svg { width: 18px; height: 18px; fill: currentColor; }
+.player .knopf .pause, .player.spielt .knopf .start { display: none; }
+.player.spielt .knopf .pause { display: block; }
+.player .jetzt-titel { font-family: var(--f-head); font-weight: 500; font-size: 1.12rem; letter-spacing: .02em; min-width: 0; overflow-wrap: anywhere; }
+.player .jetzt-gruppe { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.player .leiste { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; font-family: var(--f-mono); font-size: .76rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.player input[type="range"] { width: 100%; accent-color: var(--ember); margin: 0; }
+ol.titel { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--line); counter-reset: titel; }
+ol.titel li { border-bottom: 1px solid var(--line); }
+ol.titel button {
+  width: 100%; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto auto; gap: 6px 14px; align-items: baseline;
+  padding: 11px 4px; background: none; border: 0; color: var(--text); cursor: pointer; text-align: left; font: inherit;
+}
+ol.titel button:hover { background: var(--surface); }
+ol.titel .nr { font-family: var(--f-mono); font-size: .76rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+ol.titel .name { font-family: var(--f-head); font-weight: 500; letter-spacing: .02em; min-width: 0; overflow-wrap: anywhere; }
+ol.titel .gruppe-t { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+ol.titel .dauer { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+ol.titel button[aria-current="true"] .name, ol.titel button[aria-current="true"] .nr { color: var(--ember-hot); }
 
 /* „Gefällt mir" unter den Bildern – erscheint erst, wenn der Zähler-Dienst antwortet */
 .daumen {
@@ -371,7 +402,9 @@ footer a { color: var(--muted); }
   .eintrag { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
-  .galerie { grid-template-columns: minmax(0, 1fr); }
+  .galerie, .galerie.vier { grid-template-columns: minmax(0, 1fr); }
+  ol.titel button { grid-template-columns: 2rem minmax(0, 1fr) auto; }
+  ol.titel .gruppe-t { grid-column: 2; grid-row: 2; }
 }
 @media (prefers-reduced-motion: reduce) {
   .chip.arbeit::before, .glied.jetzt { animation: none; }
@@ -431,7 +464,7 @@ dialog.gross button.zu {
     <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
     <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
     <div class="fact"><dt>Status</dt><dd><span class="de">Prototyp · Schritt 7</span><span class="en">Prototype · Step 7</span></dd></div>
-    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">11.10.2026</span><span class="en">Oct 11, 2026</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">13.10.2026</span><span class="en">Oct 13, 2026</span></dd></div>
   </dl>
 </header>
 
@@ -457,18 +490,42 @@ dialog.gross button.zu {
       <div>
         <h3><span class="de">Gerade in Arbeit</span><span class="en">In progress</span></h3>
         <ul>
-          <li><span class="de">Kampf Stufe 2: Höhenvorteil im Hügelland, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
+          <li><span class="de">Der Basilisk kommt ins Spiel: schwerer Doppelrohrpanzer mit vier Ketten und Flammenwerfer</span><span class="en">The Basilisk joins the game: a heavy twin-gun tank with four tracks and a flamethrower</span></li>
+          <li><span class="de">Musik-Player im Spiel: Lieblingsstücke markieren und nur diese hören</span><span class="en">In-game music player: mark favourite tracks and listen to just those</span></li>
         </ul>
       </div>
       <div class="naechstes">
         <h3><span class="de">Als Nächstes</span><span class="en">Up next</span></h3>
         <ul>
-          <li><span class="de">Steine und Felsen mit Moos und Farn, halb im Boden statt obendrauf</span><span class="en">Rocks with moss and ferns, half sunk into the ground instead of sitting on top</span></li>
-          <li><span class="de">Höfe mit Blumenfeld, Windmühle und Wasserrad</span><span class="en">Farms with flower fields, a windmill and a water wheel</span></li>
+          <li><span class="de">Waffenfabrik mit Halle, aus der die Fahrzeuge ausrollen</span><span class="en">A war factory with a hall that the vehicles roll out of</span></li>
+          <li><span class="de">Rauch, der wie ein Körper wirkt: von der Sonne beleuchtet, langsam quellend</span><span class="en">Smoke with real volume: lit by the sun, slowly billowing</span></li>
+          <li><span class="de">Kampf Stufe 2: Höhenvorteil im Hügelland, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
         </ul>
       </div>
     </div>
     <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-10-13"><span class="de">13.10.2026</span><span class="en">Oct 13, 2026</span></time>
+        <div>
+          <h3><span class="de">Neue Musik – drei Stücke zum Reinhören</span><span class="en">New music – three tracks to listen to</span></h3>
+          <p class="de">Im Spiel laufen jetzt fast dreißig eigene Stücke – für den Basisbau, für brenzlige Lagen, für Gefechte und im Hauptmenü; neu hinzugekommen sind vor allem Stücke für den Basisbau. Als Vorgeschmack gibt es drei davon weiter unten zum <a href="#soundtrack">Anhören</a>. Komponiert von KeGu.</p>
+          <p class="en">The game now plays almost thirty original tracks – for base building, for tense moments, for battles and in the main menu; most of the new ones are for base building. As a taste, three of them are further down this page to <a href="#soundtrack">listen to</a>. Composed by KeGu.</p>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-12"><span class="de">12.10.2026</span><span class="en">Oct 12, 2026</span></time>
+        <div>
+          <h3><span class="de">Bauhof, Kraftwerk und Raffinerie neu – und Gebäude, die sich aufbauen</span><span class="en">New construction yard, power plant and refinery – and buildings that assemble themselves</span></h3>
+          <p class="de">Die drei Grundgebäude sind neu aus Blender. Der Bauhof liegt jetzt flach am Boden, mit Montagekran, einem Tarnnetz, das im Wind weht, und einer roten Rundumleuchte, solange gebaut wird; das Kraftwerk dreht zwei Turbinen im Wind, nachts leuchten Strahler seine Isolatoren an. Neue Gebäude bauen sich in Etappen auf: Die Platte fällt mit einer Staubwolke, dann heben sich die Teile nacheinander heraus. Treffer richten Schaden je Bauteil an – Scheiben bersten, Isolatoren sprühen Funken, ein beschädigtes Kraftwerk liefert weniger Strom. Mit dem neuen Knopf „Reparieren" werden Gebäude gegen Credits wieder instand gesetzt, Schweißfunken sprühen und abgefallene Teile kommen zurück. Die Lebensanzeige besteht jetzt aus Kästchen.</p>
+          <p class="en">The three core buildings are new from Blender. The construction yard now sits flat on the ground, with an assembly crane, a camouflage net that moves in the wind and a red rotating beacon while it builds; the power plant spins two turbines in the wind, and at night floodlights pick out its insulators. New buildings assemble themselves in stages: the foundation drops with a cloud of dust, then the parts rise out of it one after another. Hits now damage individual parts – windows shatter, insulators spark, and a damaged power plant delivers less power. With the new “Repair” button, buildings are fixed up for credits, welding sparks fly and parts that fell off come back. Health bars are now made of small squares.</p>
+          <div class="galerie vier">
+            <figure><button type="button" class="zoom"><img src="img/basis_v3.jpg" alt="Die Basis im Hügelland am Nachmittag: der neue Bauhof mit Kran und Tarnnetz, davor das Kraftwerk mit zwei Schloten, rechts die Raffinerie mit Andockspur, oben Panther A1 in Reihe." data-alt-de="Die Basis im Hügelland am Nachmittag: der neue Bauhof mit Kran und Tarnnetz, davor das Kraftwerk mit zwei Schloten, rechts die Raffinerie mit Andockspur, oben Panther A1 in Reihe." data-alt-en="The base in the hills in the afternoon: the new construction yard with its crane and camouflage net, the power plant with two stacks in front, the refinery with its docking lane on the right, Panther A1 tanks lined up at the top." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Bauhof, Kraftwerk und Raffinerie</span><span class="en">Construction yard, power plant and refinery</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/aufbau_kraftwerk.jpg" alt="Ein Kraftwerk baut sich auf: Die Halle steht schon, Kühler und Trafos heben sich gerade aus der Platte, Staub liegt noch in der Luft." data-alt-de="Ein Kraftwerk baut sich auf: Die Halle steht schon, Kühler und Trafos heben sich gerade aus der Platte, Staub liegt noch in der Luft." data-alt-en="A power plant assembling itself: the hall is already up, coolers and transformers are rising out of the foundation, dust still hangs in the air." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Ein Kraftwerk baut sich auf</span><span class="en">A power plant assembling itself</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/reparatur_raffinerie.jpg" alt="Eine schwer beschädigte Raffinerie brennt auf dem Dach; über dem Lebensbalken aus Kästchen blinkt der Schraubenschlüssel der Reparatur." data-alt-de="Eine schwer beschädigte Raffinerie brennt auf dem Dach; über dem Lebensbalken aus Kästchen blinkt der Schraubenschlüssel der Reparatur." data-alt-en="A badly damaged refinery burning on its roof; above the health bar made of squares, the repair wrench blinks." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Reparatur an der brennenden Raffinerie</span><span class="en">Repairing the burning refinery</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/kraftwerk_nacht.jpg" alt="Das Kraftwerk bei Nacht: Strahler leuchten die Isolatoren im Trafohof an, Fensterband und Teamstreifen glühen." data-alt-de="Das Kraftwerk bei Nacht: Strahler leuchten die Isolatoren im Trafohof an, Fensterband und Teamstreifen glühen." data-alt-en="The power plant at night: floodlights pick out the insulators in the transformer yard, the window band and team stripes glow." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Das Kraftwerk bei Nacht</span><span class="en">The power plant at night</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
       <li class="eintrag">
         <time datetime="2026-10-11"><span class="de">11.10.2026</span><span class="en">Oct 11, 2026</span></time>
         <div>
@@ -880,6 +937,37 @@ dialog.gross button.zu {
   </div>
 </section>
 
+<section class="chapter" id="soundtrack">
+  <div class="label">
+    <div class="eyebrow">Soundtrack</div>
+    <h2><span class="de">Musik aus dem Spiel</span><span class="en">Music from the game</span></h2>
+    <p class="de">Eine kleine Auswahl der Stücke, die im Spiel laufen – je nach Lage für den Basisbau, für brenzlige Momente, für Gefechte oder im Hauptmenü. Komponiert von KeGu. Zum Anhören einen Titel antippen.</p>
+    <p class="en">A small selection of the tracks that play in the game – for base building, for tense moments, for battles or in the main menu, depending on the situation. Composed by KeGu. Tap a title to listen.</p>
+    <div class="tag"><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></div>
+  </div>
+  <div class="content">
+    <div class="player" id="player">
+      <button type="button" class="knopf" id="player-knopf" aria-label="Abspielen / Play">
+        <svg class="start" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+        <svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
+      </button>
+      <div>
+        <div class="jetzt-gruppe" id="player-gruppe"><span class="de">Bereit</span><span class="en">Ready</span></div>
+        <div class="jetzt-titel" id="player-titel"><span class="de">Einen Titel wählen</span><span class="en">Choose a track</span></div>
+      </div>
+      <div class="leiste">
+        <span id="player-zeit">0:00</span>
+        <input type="range" id="player-fortschritt" min="0" max="1000" value="0" step="1" aria-label="Fortschritt / Progress">
+        <span id="player-dauer">0:00</span>
+      </div>
+    </div>
+    <ol class="titel" id="titel"><li><button type="button" data-src="musik/menue-observation.mp3" data-titel="Observation" data-dauer="2:46"><span class="nr">01</span><span class="name">Observation</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:46</span></button></li>
+      <li><button type="button" data-src="musik/menue-waves.mp3" data-titel="Waves" data-dauer="2:09"><span class="nr">02</span><span class="name">Waves</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:09</span></button></li>
+      <li><button type="button" data-src="musik/basis-fliessband.mp3" data-titel="Fliessband" data-dauer="3:09"><span class="nr">03</span><span class="name">Fliessband</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:09</span></button></li></ol>
+    <audio id="musik" preload="none"></audio>
+  </div>
+</section>
+
 <section class="chapter" id="offen">
   <div class="label">
     <div class="eyebrow"><span class="de">Offen</span><span class="en">Open</span></div>
@@ -900,7 +988,7 @@ dialog.gross button.zu {
 
 <footer>
   <span><span class="de">© 2026 KeGu Studios · ASHFRONT ist ein Arbeitstitel · Prototyp</span><span class="en">© 2026 KeGu Studios · ASHFRONT is a working title · prototype</span></span>
-  <span><span class="de">Stand 11.10.2026 · aus Agenda und Ideen-Sammlung · <a href="#impressum">Impressum und Datenschutz</a></span><span class="en">As of Oct 11, 2026 · from our plan and idea collection · <a href="#impressum">Legal notice and privacy</a></span></span>
+  <span><span class="de">Stand 13.10.2026 · aus Agenda und Ideen-Sammlung · <a href="#impressum">Impressum und Datenschutz</a></span><span class="en">As of Oct 13, 2026 · from our plan and idea collection · <a href="#impressum">Legal notice and privacy</a></span></span>
 </footer>
 
 <section class="impressum" id="impressum" aria-label="Impressum / Legal notice">
@@ -1118,6 +1206,67 @@ dialog.gross button.zu {
       }
     })
     .catch(function () {});
+})();
+</script>
+
+<script>
+/* Soundtrack: ein Audio-Element für alle Titel. Spielt nie von selbst los; nach einem Titel geht es mit dem nächsten
+   weiter. Die Titelliste setzt tools/uebersicht/seite_bauen.py aus audio/musik/ ein – ohne Titel bleibt der Abschnitt weg. */
+(function () {
+  var audio = document.getElementById('musik');
+  var liste = document.getElementById('titel');
+  if (!audio || !liste) return;
+  var knoepfe = liste.querySelectorAll('button[data-src]');
+  if (!knoepfe.length) { document.getElementById('soundtrack').hidden = true; return; }
+  var player = document.getElementById('player');
+  var knopf = document.getElementById('player-knopf');
+  var titel = document.getElementById('player-titel');
+  var gruppe = document.getElementById('player-gruppe');
+  var zeit = document.getElementById('player-zeit');
+  var dauer = document.getElementById('player-dauer');
+  var fortschritt = document.getElementById('player-fortschritt');
+  var aktuell = -1, ziehen = false;
+  function mmss(s) {
+    if (!isFinite(s) || s < 0) return '0:00';
+    s = Math.floor(s);
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+  function spielen() { var p = audio.play(); if (p && p.catch) p.catch(function () {}); }
+  function waehlen(i, los) {
+    aktuell = i;
+    var b = knoepfe[i];
+    for (var k = 0; k < knoepfe.length; k++) knoepfe[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+    audio.src = b.getAttribute('data-src');
+    titel.textContent = b.getAttribute('data-titel');
+    gruppe.innerHTML = b.querySelector('.gruppe-t').innerHTML;
+    fortschritt.value = 0;
+    zeit.textContent = '0:00';
+    dauer.textContent = b.getAttribute('data-dauer') || '0:00';
+    if (los) spielen();
+  }
+  function umschalten() { if (audio.paused) spielen(); else audio.pause(); }
+  for (var k = 0; k < knoepfe.length; k++) {
+    knoepfe[k].addEventListener('click', (function (i) {
+      return function () { if (i === aktuell) umschalten(); else waehlen(i, true); };
+    })(k));
+  }
+  knopf.addEventListener('click', function () { if (aktuell < 0) waehlen(0, true); else umschalten(); });
+  audio.addEventListener('play', function () { player.classList.add('spielt'); });
+  audio.addEventListener('pause', function () { player.classList.remove('spielt'); });
+  audio.addEventListener('loadedmetadata', function () { dauer.textContent = mmss(audio.duration); });
+  audio.addEventListener('timeupdate', function () {
+    zeit.textContent = mmss(audio.currentTime);
+    if (!ziehen && audio.duration) fortschritt.value = Math.round(audio.currentTime / audio.duration * 1000);
+  });
+  audio.addEventListener('ended', function () { if (aktuell + 1 < knoepfe.length) waehlen(aktuell + 1, true); });
+  fortschritt.addEventListener('input', function () {
+    ziehen = true;
+    if (audio.duration) zeit.textContent = mmss(fortschritt.value / 1000 * audio.duration);
+  });
+  fortschritt.addEventListener('change', function () {
+    ziehen = false;
+    if (audio.duration) audio.currentTime = fortschritt.value / 1000 * audio.duration;
+  });
 })();
 </script>
 </body>
