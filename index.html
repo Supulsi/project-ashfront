@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 13.10.2026 21:19 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 13.10.2026 21:27 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -131,6 +131,23 @@ h1 .burn {
 .fact { background: var(--surface); padding: 12px 14px; min-width: 0; }
 .fact dt { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
 .fact dd { margin: 2px 0 0; font-family: var(--f-head); font-size: var(--step-1); font-weight: 500; letter-spacing: .03em; }
+
+/* Soundtrack gleich oben anhören – erscheint nur, wenn es Titel gibt */
+.hoeren { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.hoeren button {
+  display: inline-flex; align-items: center; gap: 12px; cursor: pointer;
+  font-family: var(--f-head); font-weight: 500; font-size: 1rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--ember); padding: 8px 20px 8px 8px;
+  transition: background .15s, border-color .15s;
+}
+.hoeren button:hover { background: var(--surface); border-color: var(--ember-hot); }
+.hoeren .kreis {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--ember); color: var(--bg);
+  display: grid; place-items: center; box-shadow: 0 0 14px rgba(232,119,46,.45);
+}
+.hoeren .kreis svg { width: 15px; height: 15px; fill: currentColor; }
+.hoeren .meta { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: .08em; color: var(--muted); }
+.hoeren .laeuft { color: var(--ember-hot); }
 
 /* ---------- Screenshot ---------- */
 .shot { margin: clamp(20px, 3vw, 36px) 0 0; }
@@ -334,6 +351,41 @@ ol.titel .name { font-family: var(--f-head); font-weight: 500; letter-spacing: .
 ol.titel .gruppe-t { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 ol.titel .dauer { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 ol.titel button[aria-current="true"] .name, ol.titel button[aria-current="true"] .nr { color: var(--ember-hot); }
+.hoeren .pause, .hoeren.spielt .start, .mini .pause, .mini.spielt .start { display: none; }
+.hoeren.spielt .pause, .mini.spielt .pause { display: block; }
+
+/* Abspiel-Leiste unten: erscheint nach dem ersten Abspielen, damit die Musik beim Weiterlesen läuft;
+   weg, solange der Soundtrack-Abschnitt selbst im Bild ist */
+.mini {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -10px 28px rgba(0,0,0,.45);
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+}
+.mini .linie { position: absolute; top: -1px; left: 0; height: 2px; width: 0; background: var(--ember); }
+.mini-innen {
+  max-width: var(--wrap); margin-inline: auto;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 12px; align-items: center;
+}
+.mini .knopf {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--ember); background: var(--surface-2);
+  color: var(--ember-hot); cursor: pointer; display: grid; place-items: center; padding: 0;
+}
+.mini .knopf:hover { background: var(--ember); color: var(--bg); }
+.mini .knopf svg { width: 15px; height: 15px; fill: currentColor; }
+.mini a.wer { min-width: 0; color: var(--text); text-decoration: none; line-height: 1.25; }
+.mini a.wer:hover .t { color: var(--ember-hot); }
+.mini .t {
+  display: block; font-family: var(--f-head); font-weight: 500; letter-spacing: .02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mini .g { display: block; font-family: var(--f-mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.mini .klein {
+  width: 34px; height: 34px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  background: none; border: 1px solid var(--line); color: var(--muted);
+}
+.mini .klein:hover { color: var(--text); border-color: var(--faint); }
+.mini .klein svg { width: 14px; height: 14px; fill: currentColor; }
+body.mit-mini { padding-block-end: 72px; }
 
 /* „Gefällt mir" unter den Bildern – erscheint erst, wenn der Zähler-Dienst antwortet */
 .daumen {
@@ -458,6 +510,17 @@ dialog.gross button.zu {
   <p class="slogan">Hold. Burn. Endure.</p>
   <p class="pitch de">Ein Echtzeit-Strategiespiel in der Tradition von Red Alert und Tiberian Sun: Basis bauen, <em>Derylum</em> ernten, Armeen in die Schlacht schicken. In echtem 3D, mit drei Fraktionen und einer Welt, die auf Wetter, Tageszeit und jedes Gefecht reagiert.</p>
   <p class="pitch en">A real-time strategy game in the tradition of Red Alert and Tiberian Sun: build a base, harvest <em>Derylum</em>, send armies into battle. In true 3D, with three factions and a world that reacts to weather, time of day and every fight.</p>
+  <div class="hoeren" id="hoeren" hidden>
+    <button type="button" id="hoeren-knopf">
+      <span class="kreis" aria-hidden="true">
+        <svg class="start" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>
+        <svg class="pause" viewBox="0 0 24 24"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
+      </span>
+      <span class="de">Soundtrack anhören</span><span class="en">Listen to the soundtrack</span>
+    </button>
+    <span class="meta" id="hoeren-meta"><span id="hoeren-anzahl"></span> <span class="de">Stücke aus dem Spiel · KeGu</span><span class="en">tracks from the game · KeGu</span></span>
+    <span class="meta laeuft" id="hoeren-laeuft" hidden></span>
+  </div>
   <dl class="facts">
     <div class="fact"><dt>Engine</dt><dd>Godot 4.7.2</dd></div>
     <div class="fact"><dt><span class="de">Plattform</span><span class="en">Platform</span></dt><dd>Windows</dd></div>
@@ -507,9 +570,9 @@ dialog.gross button.zu {
       <li class="eintrag">
         <time datetime="2026-10-13"><span class="de">13.10.2026</span><span class="en">Oct 13, 2026</span></time>
         <div>
-          <h3><span class="de">Neue Musik – drei Stücke zum Reinhören</span><span class="en">New music – three tracks to listen to</span></h3>
-          <p class="de">Im Spiel laufen jetzt fast dreißig eigene Stücke – für den Basisbau, für brenzlige Lagen, für Gefechte und im Hauptmenü; neu hinzugekommen sind vor allem Stücke für den Basisbau. Als Vorgeschmack gibt es drei davon weiter unten zum <a href="#soundtrack">Anhören</a>. Komponiert von KeGu.</p>
-          <p class="en">The game now plays almost thirty original tracks – for base building, for tense moments, for battles and in the main menu; most of the new ones are for base building. As a taste, three of them are further down this page to <a href="#soundtrack">listen to</a>. Composed by KeGu.</p>
+          <h3><span class="de">Neue Musik – vier Stücke zum Reinhören</span><span class="en">New music – four tracks to listen to</span></h3>
+          <p class="de">Im Spiel laufen jetzt fast dreißig eigene Stücke – für den Basisbau, für brenzlige Lagen, für Gefechte und im Hauptmenü; neu hinzugekommen sind vor allem Stücke für den Basisbau. Als Vorgeschmack gibt es vier davon weiter unten zum <a href="#soundtrack">Anhören</a>. Komponiert von KeGu.</p>
+          <p class="en">The game now plays almost thirty original tracks – for base building, for tense moments, for battles and in the main menu; most of the new ones are for base building. As a taste, four of them are further down this page to <a href="#soundtrack">listen to</a>. Composed by KeGu.</p>
         </div>
       </li>
       <li class="eintrag">
@@ -604,6 +667,55 @@ dialog.gross button.zu {
     </ol>
   </div>
 </section>
+
+<section class="chapter" id="soundtrack">
+  <div class="label">
+    <div class="eyebrow">Soundtrack</div>
+    <h2><span class="de">Musik aus dem Spiel</span><span class="en">Music from the game</span></h2>
+    <p class="de">Eine kleine Auswahl der Stücke, die im Spiel laufen – je nach Lage für den Basisbau, für brenzlige Momente, für Gefechte oder im Hauptmenü. Komponiert von KeGu. Zum Anhören einen Titel antippen.</p>
+    <p class="en">A small selection of the tracks that play in the game – for base building, for tense moments, for battles or in the main menu, depending on the situation. Composed by KeGu. Tap a title to listen.</p>
+    <div class="tag"><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></div>
+  </div>
+  <div class="content">
+    <div class="player" id="player">
+      <button type="button" class="knopf" id="player-knopf" aria-label="Abspielen / Play">
+        <svg class="start" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+        <svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
+      </button>
+      <div>
+        <div class="jetzt-gruppe" id="player-gruppe"><span class="de">Bereit</span><span class="en">Ready</span></div>
+        <div class="jetzt-titel" id="player-titel"><span class="de">Einen Titel wählen</span><span class="en">Choose a track</span></div>
+      </div>
+      <div class="leiste">
+        <span id="player-zeit">0:00</span>
+        <input type="range" id="player-fortschritt" min="0" max="1000" value="0" step="1" aria-label="Fortschritt / Progress">
+        <span id="player-dauer">0:00</span>
+      </div>
+    </div>
+    <ol class="titel" id="titel"><li><button type="button" data-src="musik/menue-observation.mp3" data-titel="Observation" data-dauer="2:46"><span class="nr">01</span><span class="name">Observation</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:46</span></button></li>
+      <li><button type="button" data-src="musik/menue-waves.mp3" data-titel="Waves" data-dauer="2:09"><span class="nr">02</span><span class="name">Waves</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:09</span></button></li>
+      <li><button type="button" data-src="musik/basis-fliessband.mp3" data-titel="Fliessband" data-dauer="3:09"><span class="nr">03</span><span class="name">Fliessband</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:09</span></button></li>
+      <li><button type="button" data-src="musik/basis-ashwind.mp3" data-titel="Ashwind" data-dauer="3:24"><span class="nr">04</span><span class="name">Ashwind</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:24</span></button></li></ol>
+    <audio id="musik" preload="none"></audio>
+  </div>
+</section>
+
+<div class="mini" id="mini" hidden>
+  <div class="linie" id="mini-linie"></div>
+  <div class="mini-innen">
+    <button type="button" class="knopf" id="mini-knopf" aria-label="Abspielen / Pause">
+      <svg class="start" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+      <svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
+    </button>
+    <a class="wer" href="#soundtrack"><span class="t" id="mini-titel"></span><span class="g" id="mini-gruppe"></span></a>
+    <button type="button" class="klein" id="mini-weiter" aria-label="Nächster Titel / Next track">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14l10-7zM16 5h3v14h-3z"/></svg>
+    </button>
+    <button type="button" class="klein" id="mini-zu" aria-label="Musik beenden / Stop music">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg>
+    </button>
+  </div>
+</div>
 
 <section class="chapter" id="welt">
   <div class="label">
@@ -937,37 +1049,6 @@ dialog.gross button.zu {
   </div>
 </section>
 
-<section class="chapter" id="soundtrack">
-  <div class="label">
-    <div class="eyebrow">Soundtrack</div>
-    <h2><span class="de">Musik aus dem Spiel</span><span class="en">Music from the game</span></h2>
-    <p class="de">Eine kleine Auswahl der Stücke, die im Spiel laufen – je nach Lage für den Basisbau, für brenzlige Momente, für Gefechte oder im Hauptmenü. Komponiert von KeGu. Zum Anhören einen Titel antippen.</p>
-    <p class="en">A small selection of the tracks that play in the game – for base building, for tense moments, for battles or in the main menu, depending on the situation. Composed by KeGu. Tap a title to listen.</p>
-    <div class="tag"><span class="chip spiel"><span class="de">Im Spiel</span><span class="en">In the game</span></span></div>
-  </div>
-  <div class="content">
-    <div class="player" id="player">
-      <button type="button" class="knopf" id="player-knopf" aria-label="Abspielen / Play">
-        <svg class="start" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
-        <svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
-      </button>
-      <div>
-        <div class="jetzt-gruppe" id="player-gruppe"><span class="de">Bereit</span><span class="en">Ready</span></div>
-        <div class="jetzt-titel" id="player-titel"><span class="de">Einen Titel wählen</span><span class="en">Choose a track</span></div>
-      </div>
-      <div class="leiste">
-        <span id="player-zeit">0:00</span>
-        <input type="range" id="player-fortschritt" min="0" max="1000" value="0" step="1" aria-label="Fortschritt / Progress">
-        <span id="player-dauer">0:00</span>
-      </div>
-    </div>
-    <ol class="titel" id="titel"><li><button type="button" data-src="musik/menue-observation.mp3" data-titel="Observation" data-dauer="2:46"><span class="nr">01</span><span class="name">Observation</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:46</span></button></li>
-      <li><button type="button" data-src="musik/menue-waves.mp3" data-titel="Waves" data-dauer="2:09"><span class="nr">02</span><span class="name">Waves</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:09</span></button></li>
-      <li><button type="button" data-src="musik/basis-fliessband.mp3" data-titel="Fliessband" data-dauer="3:09"><span class="nr">03</span><span class="name">Fliessband</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:09</span></button></li></ol>
-    <audio id="musik" preload="none"></audio>
-  </div>
-</section>
-
 <section class="chapter" id="offen">
   <div class="label">
     <div class="eyebrow"><span class="de">Offen</span><span class="en">Open</span></div>
@@ -1211,13 +1292,37 @@ dialog.gross button.zu {
 
 <script>
 /* Soundtrack: ein Audio-Element für alle Titel. Spielt nie von selbst los; nach einem Titel geht es mit dem nächsten
-   weiter. Die Titelliste setzt tools/uebersicht/seite_bauen.py aus audio/musik/ ein – ohne Titel bleibt der Abschnitt weg. */
+   weiter. Die Titelliste setzt tools/uebersicht/seite_bauen.py aus audio/musik/ ein – ohne Titel bleibt der Abschnitt weg.
+   Starten auch über den Knopf im Kopf; nach dem ersten Abspielen hält die Leiste unten (#mini) die Musik beim Lesen
+   bedienbar – nur nicht, solange der Player selbst im Bild ist. */
 (function () {
   var audio = document.getElementById('musik');
   var liste = document.getElementById('titel');
   if (!audio || !liste) return;
   var knoepfe = liste.querySelectorAll('button[data-src]');
   if (!knoepfe.length) { document.getElementById('soundtrack').hidden = true; return; }
+  var hoeren = document.getElementById('hoeren');
+  var hoerenMeta = document.getElementById('hoeren-meta');
+  var hoerenLaeuft = document.getElementById('hoeren-laeuft');
+  var mini = document.getElementById('mini');
+  var miniTitel = document.getElementById('mini-titel');
+  var miniGruppe = document.getElementById('mini-gruppe');
+  var miniLinie = document.getElementById('mini-linie');
+  var gestartet = false, geschlossen = false, playerSichtbar = false;
+  document.getElementById('hoeren-anzahl').textContent = knoepfe.length;
+  hoeren.hidden = false;
+  function leisteZeigen() {
+    var zeigen = gestartet && !geschlossen && !playerSichtbar;
+    mini.hidden = !zeigen;
+    document.body.classList.toggle('mit-mini', zeigen);
+  }
+  function anzeigen(spielt) {
+    player.classList.toggle('spielt', spielt);
+    hoeren.classList.toggle('spielt', spielt);
+    mini.classList.toggle('spielt', spielt);
+    hoerenMeta.hidden = spielt;
+    hoerenLaeuft.hidden = !spielt;
+  }
   var player = document.getElementById('player');
   var knopf = document.getElementById('player-knopf');
   var titel = document.getElementById('player-titel');
@@ -1239,6 +1344,10 @@ dialog.gross button.zu {
     audio.src = b.getAttribute('data-src');
     titel.textContent = b.getAttribute('data-titel');
     gruppe.innerHTML = b.querySelector('.gruppe-t').innerHTML;
+    miniTitel.textContent = b.getAttribute('data-titel');
+    miniGruppe.innerHTML = gruppe.innerHTML;
+    hoerenLaeuft.textContent = '♪ ' + b.getAttribute('data-titel');
+    miniLinie.style.width = '0';
     fortschritt.value = 0;
     zeit.textContent = '0:00';
     dauer.textContent = b.getAttribute('data-dauer') || '0:00';
@@ -1250,13 +1359,27 @@ dialog.gross button.zu {
       return function () { if (i === aktuell) umschalten(); else waehlen(i, true); };
     })(k));
   }
-  knopf.addEventListener('click', function () { if (aktuell < 0) waehlen(0, true); else umschalten(); });
-  audio.addEventListener('play', function () { player.classList.add('spielt'); });
-  audio.addEventListener('pause', function () { player.classList.remove('spielt'); });
+  function startOderUmschalten() { if (aktuell < 0) waehlen(0, true); else umschalten(); }
+  knopf.addEventListener('click', startOderUmschalten);
+  document.getElementById('hoeren-knopf').addEventListener('click', startOderUmschalten);
+  document.getElementById('mini-knopf').addEventListener('click', umschalten);
+  document.getElementById('mini-weiter').addEventListener('click', function () { waehlen((aktuell + 1) % knoepfe.length, true); });
+  document.getElementById('mini-zu').addEventListener('click', function () { audio.pause(); geschlossen = true; leisteZeigen(); });
+  audio.addEventListener('play', function () { gestartet = true; geschlossen = false; anzeigen(true); leisteZeigen(); });
+  audio.addEventListener('pause', function () { anzeigen(false); });
+  function playerPruefen() {
+    var r = player.getBoundingClientRect();
+    var sichtbar = r.bottom > 0 && r.top < window.innerHeight;
+    if (sichtbar !== playerSichtbar) { playerSichtbar = sichtbar; leisteZeigen(); }
+  }
+  window.addEventListener('scroll', playerPruefen, { passive: true });
+  window.addEventListener('resize', playerPruefen);
+  playerPruefen();
   audio.addEventListener('loadedmetadata', function () { dauer.textContent = mmss(audio.duration); });
   audio.addEventListener('timeupdate', function () {
     zeit.textContent = mmss(audio.currentTime);
     if (!ziehen && audio.duration) fortschritt.value = Math.round(audio.currentTime / audio.duration * 1000);
+    if (audio.duration) miniLinie.style.width = (audio.currentTime / audio.duration * 100) + '%';
   });
   audio.addEventListener('ended', function () { if (aktuell + 1 < knoepfe.length) waehlen(aktuell + 1, true); });
   fortschritt.addEventListener('input', function () {
