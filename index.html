@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 15.10.2026 23:17 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 16.10.2026 19:32 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -111,6 +111,17 @@ h1 {
   color: var(--text);
   text-shadow: 0 0 40px rgba(232,119,46,.18);
 }
+/* Titel als Bild (seit 16.10.2026 aus Blender: Emblem, ASH glühend, FRONT Beton) – das Bild hat rundum etwas Rand für den
+   Glutschein, darum leicht nach links gerückt, damit die Schrift mit dem Text darunter fluchtet */
+h1.titelbild { position: relative; width: min(100%, 880px); margin: 10px 0 0 -1.2%; line-height: 0; }
+h1.titelbild img { display: block; width: 100%; height: auto; }
+/* Glut von ASH lebt: Leuchten als eigene Ebene darübergelegt (durchsichtig – mix-blend-mode zeichnete einen schwarzen Kasten), flackert unregelmäßig */
+h1.titelbild .glut { position: absolute; inset: 0; pointer-events: none; animation: glimmen 4.6s ease-in-out infinite; }
+@keyframes glimmen {
+  0% { opacity: .78; } 11% { opacity: 1; } 19% { opacity: .7; } 33% { opacity: .95; } 41% { opacity: .58; }
+  56% { opacity: 1; } 64% { opacity: .82; } 77% { opacity: .66; } 89% { opacity: .96; } 100% { opacity: .78; }
+}
+@media (prefers-reduced-motion: reduce) { h1.titelbild .glut { animation: none; opacity: .85; } }
 h1 .burn {
   background: linear-gradient(180deg, var(--text) 55%, var(--ember-hot) 85%, var(--ember) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -506,7 +517,7 @@ dialog.gross button.zu {
       <button type="button" id="sprache-en" data-sprache="en" aria-pressed="false" lang="en">EN</button>
     </span>
   </div>
-  <h1><span class="burn">ASHFRONT</span></h1>
+  <h1 class="titelbild"><img src="img/titel.webp" alt="ASHFRONT" width="2000" height="965"><img class="glut" src="img/titel_glut.webp" alt="" aria-hidden="true" width="2000" height="965"></h1>
   <p class="slogan">Hold. Burn. Endure.</p>
   <p class="pitch de">Ein Echtzeit-Strategiespiel in der Tradition von Red Alert und Tiberian Sun: Basis bauen, <em>Derylum</em> ernten, Armeen in die Schlacht schicken. In echtem 3D, mit drei Fraktionen und einer Welt, die auf Wetter, Hitze und Kälte, Tag und Nacht reagiert – und auf jedes Gefecht.</p>
   <p class="pitch en">A real-time strategy game in the tradition of Red Alert and Tiberian Sun: build a base, harvest <em>Derylum</em>, send armies into battle. In true 3D, with three factions and a world that reacts to weather, heat and cold, day and night – and to every fight.</p>
@@ -1155,6 +1166,24 @@ dialog.gross button.zu {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
   var w = 0, h = 0, parts = [], running = true, last = 0;
+  // Funken aus den glühenden ASH-Buchstaben des Titelbilds (Bereich als Anteil des Bilds, aus titel_zusammensetzen.py)
+  var titel = document.querySelector('h1.titelbild img');
+  var ASH = { x: 0.0392, y: 0.5727, b: 0.3538, h: 0.2321 };
+  var funken = [];
+  function ashRect() {
+    if (!titel) return null;
+    var c = canvas.getBoundingClientRect(), t = titel.getBoundingClientRect();
+    if (!t.width) return null;
+    return { x: t.left - c.left + ASH.x * t.width, y: t.top - c.top + ASH.y * t.height, b: ASH.b * t.width, h: ASH.h * t.height };
+  }
+  function funke(r) {
+    var leben = 1.1 + Math.random() * 1.4;
+    return {
+      x: r.x + Math.random() * r.b, y: r.y + r.h * Math.random() * 0.35,
+      vx: (Math.random() - 0.35) * 22, vy: -(22 + Math.random() * 50),
+      r: 1.0 + Math.random() * 1.5, t: 0, leben: leben, ph: Math.random() * 6.3
+    };
+  }
 
   function size() {
     var r = canvas.getBoundingClientRect();
@@ -1194,6 +1223,19 @@ dialog.gross button.zu {
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
     }
+    // Funken aus ASH: gelb → orange → rot, verglühen
+    for (var j = 0; j < funken.length; j++) {
+      var f = funken[j], k = f.t / f.leben;
+      var fa = (k < 0.08 ? k / 0.08 : 1 - k) * (0.75 + 0.25 * Math.sin(f.ph + t * 14));
+      if (fa <= 0) continue;
+      var farbe = k < 0.35 ? '255,215,140' : (k < 0.7 ? '255,140,45' : '220,60,20');
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(' + farbe + ',' + fa.toFixed(3) + ')';
+      ctx.shadowColor = 'rgba(255,120,40,' + (fa * 0.9).toFixed(3) + ')';
+      ctx.shadowBlur = 8 * f.r;
+      ctx.arc(f.x, f.y, f.r * (1 - 0.5 * k), 0, Math.PI * 2);
+      ctx.fill();
+    }
     ctx.shadowBlur = 0;
   }
   function step(now) {
@@ -1206,6 +1248,17 @@ dialog.gross button.zu {
       p.y += p.vy * dt;
       p.x += (p.vx + Math.sin(t * 0.7 + p.ph) * 8) * dt;
       if (p.y > h + 10 || p.x > w + 20) parts[i] = spawn(false);
+    }
+    var r = ashRect();
+    if (r && funken.length < Math.max(12, Math.round(r.b / 7)) && Math.random() < 0.6) funken.push(funke(r));
+    for (var j = funken.length - 1; j >= 0; j--) {
+      var f = funken[j];
+      f.t += dt;
+      f.vy += 30 * dt * -0.4;               // steigen weiter (warme Luft), werden gebremst
+      f.vx *= 1 - 0.8 * dt; f.vy *= 1 - 0.6 * dt;
+      f.x += (f.vx + Math.sin(t * 2.3 + f.ph) * 9) * dt;
+      f.y += f.vy * dt;
+      if (f.t > f.leben) funken.splice(j, 1);
     }
     draw(t);
     requestAnimationFrame(step);
