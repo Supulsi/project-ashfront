@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 16.10.2026 19:32 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 16.10.2026 19:36 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -113,7 +113,11 @@ h1 {
 }
 /* Titel als Bild (seit 16.10.2026 aus Blender: Emblem, ASH glühend, FRONT Beton) – das Bild hat rundum etwas Rand für den
    Glutschein, darum leicht nach links gerückt, damit die Schrift mit dem Text darunter fluchtet */
-h1.titelbild { position: relative; width: min(100%, 880px); margin: 10px 0 0 -1.2%; line-height: 0; }
+h1.titelbild { position: relative; width: min(100%, 1000px); margin: 10px auto 0; line-height: 0; }
+/* Kopf mittig wie ein Titelbildschirm (KevO 16.10.2026) – Text etwas breiter, aber lesbar (gut 70 Zeichen) */
+.hero .slogan { text-align: center; }
+.hero .pitch { max-width: 74ch; margin-inline: auto; text-align: center; }
+.hero .hoeren { justify-content: center; }
 h1.titelbild img { display: block; width: 100%; height: auto; }
 /* Glut von ASH lebt: Leuchten als eigene Ebene darübergelegt (durchsichtig – mix-blend-mode zeichnete einen schwarzen Kasten), flackert unregelmäßig */
 h1.titelbild .glut { position: absolute; inset: 0; pointer-events: none; animation: glimmen 4.6s ease-in-out infinite; }
