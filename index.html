@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 19.10.2026 23:07 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 20.10.2026 23:18 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -334,6 +334,7 @@ kbd {
 .galerie { display: grid; gap: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0; padding: 0; }
 .galerie figure { margin: 0; min-width: 0; }
 .galerie img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); }
+.galerie video { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); background: #000; }
 .galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; display: flex; align-items: flex-start; gap: 4px 10px; }
 .galerie.vier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -542,7 +543,7 @@ dialog.gross button.zu {
     <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
     <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
     <div class="fact"><dt>Status</dt><dd><span class="de">Prototyp · Schritt 7</span><span class="en">Prototype · Step 7</span></dd></div>
-    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">19.10.2026</span><span class="en">Oct 19, 2026</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">20.10.2026</span><span class="en">Oct 20, 2026</span></dd></div>
   </dl>
 </header>
 
@@ -568,20 +569,38 @@ dialog.gross button.zu {
       <div>
         <h3><span class="de">Gerade in Arbeit</span><span class="en">In progress</span></h3>
         <ul>
-          <li><span class="de">Nasser Boden nach dem Regen: dunklere Erde, Pfützen und ein Glitzern, wenn die Sonne durchbricht</span><span class="en">Wet ground after the rain: darker earth, puddles and a glitter when the sun breaks through</span></li>
+          <li><span class="de">Sandsack-Barrieren, die Panzer niederwalzen</span><span class="en">Sandbag barriers that tanks can flatten</span></li>
+          <li><span class="de">Große Bäume als echte Hindernisse – Panzer fahren um sie herum, Infanterie findet Deckung</span><span class="en">Large trees as real obstacles – tanks drive around them, infantry finds cover</span></li>
         </ul>
       </div>
       <div class="naechstes">
         <h3><span class="de">Als Nächstes</span><span class="en">Up next</span></h3>
         <ul>
-          <li><span class="de">Brennende Flächen und Glutnester aus derselben Feuersimulation wie die neuen Flammen</span><span class="en">Burning patches and embers from the same fire simulation as the new flames</span></li>
+          <li><span class="de">Mehr Leben in der Landschaft: Farne, Steine und Geröll, Flussbett und Seeufer, Nadelbäume in mehr Grüntönen</span><span class="en">More life in the landscape: ferns, rocks and scree, riverbeds and lake shores, conifers in more shades of green</span></li>
           <li><span class="de">Gewitter mit Blitz und Donner, danach Schneefall und dichter Nebel</span><span class="en">Thunderstorms with lightning and thunder, then snowfall and thick fog</span></li>
+          <li><span class="de">Nasser Boden nach dem Regen: dunklere Erde, Pfützen und ein Glitzern, wenn die Sonne durchbricht</span><span class="en">Wet ground after the rain: darker earth, puddles and a glitter when the sun breaks through</span></li>
           <li><span class="de">Waffenfabrik mit Halle, aus der die Fahrzeuge ausrollen</span><span class="en">A war factory with a hall that the vehicles roll out of</span></li>
           <li><span class="de">Kampf Stufe 2: Höhenvorteil im Hügelland, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
         </ul>
       </div>
     </div>
     <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-10-20"><span class="de">20.10.2026</span><span class="en">Oct 20, 2026</span></time>
+        <div>
+          <h3><span class="de">Eine neue Karte – und Panzer walzen alles nieder</span><span class="en">A new map – and tanks flatten everything in their way</span></h3>
+          <p class="de">Mit dem Weidental gibt es die erste große Karte für zwei Spieler: ein Fluss in ruhigen Bögen mit zwei Stromschnellen, eine Landstraße über die Brücke im Dorf, Höfe mit Koppeln, Wälder mit jungem Wuchs am Rand – und die Startplätze werden jedes Mal neu gelost. Was am Weg steht, lässt sich jetzt überfahren: Leitplanken knicken unter dem Bug weg oder reißen am Stoß, junge Bäume stemmen sich erst gegen den Panzer, ehe sie brechen und ihre Krone zerbirst, Holzzäune splittern, und manchmal fliegen Latten über das Fahrzeug hinweg. Der Panzer kippt und wippt dabei über die Hindernisse, der Motor heult auf und stößt schwarzen Ruß aus. Leitpfosten knicken um – nachts leuchten ihre Rückstrahler im Scheinwerferlicht auf.</p>
+          <p class="en">Weidental is the first large map for two players: a river winding in calm bends with two rapids, a country road crossing the bridge in the village, farms with paddocks, forests with young growth along their edges – and the starting positions are drawn anew every match. Whatever stands by the road can now be run over: guardrails buckle under the bow or tear at a joint, young trees push back against the tank before they snap and their crowns shatter, wooden fences splinter, and sometimes rails fly up over the vehicle. The tank tilts and rocks over the obstacles while its engine roars and belches black soot. Roadside posts fold over – and at night their reflectors light up in the headlights.</p>
+          <div class="galerie">
+            <figure><video src="img/holzzaun.mp4" poster="img/holzzaun.jpg" width="1200" height="800" autoplay muted loop playsinline preload="metadata" aria-label="Ein Panzer bricht durch einen Holzzaun; Latten splittern und werden mitgerissen, ein Brett landet auf dem Fahrzeug und rutscht herunter."></video><figcaption><span class="de">Durch den Holzzaun (Video)</span><span class="en">Through the wooden fence (video)</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/leitplanke_bruch.jpg" alt="Ein Panther fährt quer über eine Leitplanke: Unter ihm liegt sie platt, an einer Stelle ist sie gebrochen, das abgerissene Stück liegt verbogen im Gras." data-alt-de="Ein Panther fährt quer über eine Leitplanke: Unter ihm liegt sie platt, an einer Stelle ist sie gebrochen, das abgerissene Stück liegt verbogen im Gras." data-alt-en="A Panther drives across a guardrail: it lies flattened beneath the tank, it has torn apart at one joint, and the broken-off section lies bent in the grass." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Leitplanke gebrochen</span><span class="en">A torn guardrail</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/jungbaum_druecken.jpg" alt="Ein Panther drückt gegen einen jungen Baum, der sich schon schräg neigt; aus dem Auspuff steigt schwarzer Ruß." data-alt-de="Ein Panther drückt gegen einen jungen Baum, der sich schon schräg neigt; aus dem Auspuff steigt schwarzer Ruß." data-alt-en="A Panther pushes against a young tree that is already leaning over; black soot rises from its exhaust." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Der Panzer stemmt sich gegen den Baum</span><span class="en">The tank pushes against the tree</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/jungbaum_krone.jpg" alt="Der Panther fährt über den umgestürzten Baum, dessen Krone zerbricht; Blätter wirbeln auf, Äste und Laubbüschel liegen im Gras." data-alt-de="Der Panther fährt über den umgestürzten Baum, dessen Krone zerbricht; Blätter wirbeln auf, Äste und Laubbüschel liegen im Gras." data-alt-en="The Panther rolls over the fallen tree as its crown shatters; leaves whirl up, and branches and clumps of foliage lie in the grass." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Die Krone zerbricht</span><span class="en">The crown shatters</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/weidental_strasse.jpg" alt="Weidental: Die Landstraße führt in einem weiten Bogen zur Brücke, an der Zufahrt geschwungene Leitplanken, am Rand weiße Leitpfosten, ringsum Wiesen und Wald." data-alt-de="Weidental: Die Landstraße führt in einem weiten Bogen zur Brücke, an der Zufahrt geschwungene Leitplanken, am Rand weiße Leitpfosten, ringsum Wiesen und Wald." data-alt-en="Weidental: the country road sweeps in a wide curve towards the bridge, with curved guardrails along the approach, white roadside posts at the edge, and meadows and forest all around." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Weidental: Landstraße zur Brücke</span><span class="en">Weidental: the road to the bridge</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/koppel.jpg" alt="Eine Koppel mit altem Holzzaun auf einer Wiese im Weidental, die Einfahrt zum Hof steht offen." data-alt-de="Eine Koppel mit altem Holzzaun auf einer Wiese im Weidental, die Einfahrt zum Hof steht offen." data-alt-en="A paddock with an old wooden fence on a meadow in Weidental, its entrance towards the farm left open." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Koppel am Hof</span><span class="en">A paddock by the farm</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
       <li class="eintrag">
         <time datetime="2026-10-19"><span class="de">19.10.2026</span><span class="en">Oct 19, 2026</span></time>
         <div>
@@ -896,8 +915,9 @@ dialog.gross button.zu {
       <div class="tile"><h3><span class="de">Mauern und Tore</span><span class="en">Walls and gates</span></h3><p class="de">Reihen ziehen, Ecken verbinden sich, Tore öffnen nur für eigene Einheiten.</p><p class="en">Drag out rows, corners connect, gates only open for your own units.</p></div>
       <div class="tile"><h3><span class="de">Derylum-Kreislauf</span><span class="en">Derylum loop</span></h3><p class="de">Verschmolzene Felder, die beim Ernten schrumpfen. Sammler DR-7C und Raffinerie mit Andockspur, beide aus Blender.</p><p class="en">Merged fields that shrink as they are harvested. DR-7C harvester and refinery with a docking lane, both built in Blender.</p></div>
       <div class="tile"><h3><span class="de">Kampf, erste Stufe</span><span class="en">Combat, stage one</span></h3><p class="de">Waffen mit Streuung, Schadensstufen mit abfallenden Teilen, Wracks, Brandflecken und Ruinen. Angriffsbefehl und Zwangsfeuer mit <kbd>Alt</kbd> + Rechtsklick.</p><p class="en">Weapons with scatter, damage stages with parts breaking off, wrecks, scorch marks and ruins. Attack orders and force fire with <kbd>Alt</kbd> + right-click.</p></div>
-      <div class="tile"><h3><span class="de">Karten und Gelände</span><span class="en">Maps and terrain</span></h3><p class="de">Hügelland mit Plateau, Wasserfall, See, eingeschnittenem Fluss mit Furten, Wäldern und 3D-Gras im Wind.</p><p class="en">Rolling hills with a plateau, waterfall, lake, a deep river with fords, forests and 3D grass in the wind.</p></div>
+      <div class="tile"><h3><span class="de">Karten und Gelände</span><span class="en">Maps and terrain</span></h3><p class="de">Hügelland mit Plateau, Wasserfall, See, eingeschnittenem Fluss mit Furten, Wäldern und 3D-Gras im Wind. Dazu Weidental, die erste große Karte für zwei Spieler: Dorf an der Brücke, Höfe mit Koppeln und jedes Mal andere Startplätze.</p><p class="en">Rolling hills with a plateau, waterfall, lake, a deep river with fords, forests and 3D grass in the wind. Plus Weidental, the first large map for two players: a village by the bridge, farms with paddocks and different starting positions every time.</p></div>
       <div class="tile"><h3><span class="de">Wege und Brücken</span><span class="en">Roads and bridges</span></h3><p class="de">Asphalt, Schotter und Feldwege, eine Betonbrücke und ein Holzsteg. Brücken lassen sich sprengen, die Stümpfe bleiben.</p><p class="en">Asphalt, gravel and dirt roads, a concrete bridge and a wooden footbridge. Bridges can be blown up, the stumps remain.</p></div>
+      <div class="tile"><h3><span class="de">Überfahren</span><span class="en">Running things over</span></h3><p class="de">Leitplanken, Leitpfosten, Holzzäune und junge Bäume: Panzer walzen sie nieder, kippen und wippen darüber, der Motor arbeitet und raucht.</p><p class="en">Guardrails, roadside posts, wooden fences and young trees: tanks flatten them, tilt and rock as they roll over, and the engine strains and smokes.</p></div>
       <div class="tile"><h3><span class="de">Tag und Nacht</span><span class="en">Day and night</span></h3><p class="de">Ein Tag dauert 60 Minuten. Fahrzeug- und Gebäudelichter, Suchscheinwerfer, Flutlicht, Morgennebel und Wolkenschatten.</p><p class="en">A day lasts 60 minutes. Vehicle and building lights, searchlights, floodlights, morning fog and cloud shadows.</p></div>
       <div class="tile"><h3><span class="de">Kommandoleiste</span><span class="en">Command bar</span></h3><p class="de">Radar mit Wappen und Störbalken, Funkstation mit Ansager, Musik-Player mit Automatik.</p><p class="en">Radar with emblem and interference bars, radio station with announcer, music player that follows the action.</p></div>
       <div class="tile"><h3><span class="de">Rund ums Spiel</span><span class="en">Around the game</span></h3><p class="de">KeGu-Intro, Hauptmenü mit echter Spielszene, Ladebildschirm mit Panzerkette, Pausenmenü.</p><p class="en">KeGu intro, main menu with a live game scene, loading screen with a tank track, pause menu.</p></div>
