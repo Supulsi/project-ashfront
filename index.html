@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 29.10.2026 10:38 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 30.10.2026 02:18 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -337,6 +337,7 @@ kbd {
 .galerie video { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); background: #000; }
 .galerie figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); margin-top: 6px; line-height: 1.45; display: flex; align-items: flex-start; gap: 4px 10px; }
 .galerie.vier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.galerie.breit img, .galerie.breit video { aspect-ratio: 16 / 9; }
 
 /* Soundtrack: ein Player oben (läuft gerade, Abspielen/Pause, Fortschritt), darunter die Titel – nie automatisch */
 .player {
@@ -543,7 +544,7 @@ dialog.gross button.zu {
     <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
     <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
     <div class="fact"><dt>Status</dt><dd><span class="de">Pre-Alpha · Schritt 9</span><span class="en">Pre-alpha · Step 9</span></dd></div>
-    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">29.10.2026</span><span class="en">Oct 29, 2026</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">30.10.2026</span><span class="en">Oct 30, 2026</span></dd></div>
   </dl>
 </header>
 
@@ -582,6 +583,35 @@ dialog.gross button.zu {
       </div>
     </div>
     <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-10-30"><span class="de">30.10.2026</span><span class="en">Oct 30, 2026</span></time>
+        <div>
+          <h3><span class="de">Ein Späher für die FOIG – und ein Ladebildschirm, der hochfährt</span><span class="en">A scout for FOIG – and a loading screen that boots up</span></h3>
+          <p class="de">Neu in der Waffenfabrik: der SP-3 Zephyr, ein gepanzerter Allrad-Späher mit MG-Ring auf dem Dach. Jedes Rad hängt an Querlenkern und federt einzeln; bei voller Fahrt springt er über Kuppen und Dünen – in der Luft dreht der Motor bis an den Begrenzer –, und nachts leuchtet der Schütze mit dem Suchscheinwerfer voraus. Auch die Gegner-KI baut ihn und schickt ihn als Späher los, solange sie die Basis des Spielers nicht kennt. Der Ladebildschirm fährt jetzt erst hoch wie ein altes Militärsystem – die Röhre zündet, ein Selbsttest läuft, der Funker meldet sich – und lädt dann. Und die Ketten der Panzer haben Glieder bekommen.</p>
+          <p class="en">New in the war factory: the SP-3 Zephyr, an armoured four-wheel-drive scout with a machine-gun ring on the roof. Every wheel hangs on wishbones and springs on its own; at full speed it jumps over crests and dunes – in the air the engine revs into the limiter – and at night the gunner lights the way with the searchlight. The enemy AI builds it too and sends it out scouting as long as it doesn't know where the player's base is. The loading screen now boots up first like an old military system – the tube flickers on, a self-test runs, the radio operator checks in – and then loads. And the tanks' tracks now have proper links.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/zephyr_sprung.jpg" alt="Ein gepanzerter Geländewagen mit MG auf dem Dach fliegt mit voller Fahrt über einen Dünenkamm, sein Schatten liegt ein Stück neben ihm im Sand, hinter ihm eine Staubspur." data-alt-de="Ein gepanzerter Geländewagen mit MG auf dem Dach fliegt mit voller Fahrt über einen Dünenkamm, sein Schatten liegt ein Stück neben ihm im Sand, hinter ihm eine Staubspur." data-alt-en="An armoured off-road vehicle with a machine gun on the roof flies over a dune crest at full speed, its shadow a little apart from it on the sand, a trail of dust behind it." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Der Zephyr springt über eine Düne</span><span class="en">The Zephyr jumping a dune</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/zephyr_nacht.jpg" alt="Nachts in der Wüste: Der Zephyr fährt mit Scheinwerfern, vom Dach strahlt der Suchscheinwerfer weit voraus durch den Staub, hinten leuchten die Rücklichter rot im aufgewirbelten Sand." data-alt-de="Nachts in der Wüste: Der Zephyr fährt mit Scheinwerfern, vom Dach strahlt der Suchscheinwerfer weit voraus durch den Staub, hinten leuchten die Rücklichter rot im aufgewirbelten Sand." data-alt-en="At night in the desert: the Zephyr drives with its headlights on, the searchlight on the roof shines far ahead through the dust, and the tail lights glow red in the stirred-up sand." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Nachts mit Suchscheinwerfer</span><span class="en">At night with the searchlight</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/lade_hochfahren.jpg" alt="Der Ladebildschirm beim Hochfahren: rechts ein Selbsttest mit Zeilen wie Stromversorgung, Speichertest und Funkmodul, jeweils mit OK, links baut sich der runde Rundsichtschirm Ring für Ring auf." data-alt-de="Der Ladebildschirm beim Hochfahren: rechts ein Selbsttest mit Zeilen wie Stromversorgung, Speichertest und Funkmodul, jeweils mit OK, links baut sich der runde Rundsichtschirm Ring für Ring auf." data-alt-en="The loading screen booting up: on the right a self-test with lines such as power supply, memory test and radio module, each marked OK; on the left the round radar display builds up ring by ring." width="1200" height="675" loading="lazy"></button><figcaption><span class="de">Das System fährt hoch</span><span class="en">The system boots up</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-30"><span class="de">30.10.2026</span><span class="en">Oct 30, 2026</span></time>
+        <div>
+          <h3><span class="de">Die Fahrzeuge im Diorama</span><span class="en">The vehicles in diorama</span></h3>
+          <p class="de">Die Fahrzeuge der FOIG drehen sich jetzt im Diorama – mit Ketten aus einzelnen Gliedern, Staub im Licht und Sandsäcken am Rand –, dazu die ersten Modelle der SCORIA, die als zweite Fraktion folgt.</p>
+          <p class="en">The FOIG vehicles now turn in a diorama – with tracks made of individual links, dust in the light and sandbags at the edge – along with the first models of SCORIA, the second faction to come.</p>
+          <div class="galerie breit">
+            <figure><video src="img/diorama_panther.mp4" poster="img/diorama_panther.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der Kampfpanzer Panther A1 dreht sich auf einer runden Bühne."></video><figcaption><span class="de">Panther A1</span><span class="en">Panther A1</span></figcaption></figure>
+            <figure><video src="img/diorama_basilisk.mp4" poster="img/diorama_basilisk.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der schwere Belagerungspanzer Basilisk mit Doppelrohr dreht sich auf einer runden Bühne."></video><figcaption><span class="de">Basilisk</span><span class="en">Basilisk</span></figcaption></figure>
+            <figure><video src="img/diorama_zephyr.mp4" poster="img/diorama_zephyr.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der Späher SP-3 Zephyr mit MG-Ring dreht sich auf einer runden Bühne."></video><figcaption><span class="de">SP-3 Zephyr</span><span class="en">SP-3 Zephyr</span></figcaption></figure>
+            <figure><video src="img/diorama_pionier.mp4" poster="img/diorama_pionier.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der Pionierpanzer PB-1 mit Faltbrücke und Räumschild dreht sich auf einer runden Bühne."></video><figcaption><span class="de">Pionier PB-1</span><span class="en">PB-1 pioneer vehicle</span></figcaption></figure>
+            <figure><video src="img/diorama_moloch.mp4" poster="img/diorama_moloch.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der schwere Durchbruchspanzer Moloch der SCORIA aus Schrott dreht sich auf einer runden Bühne."></video><figcaption><span class="de">Moloch (SCORIA, Modell)</span><span class="en">Moloch (SCORIA, model)</span></figcaption></figure>
+            <figure><video src="img/diorama_fireclaw.mp4" poster="img/diorama_fireclaw.jpg" width="1280" height="720" muted loop playsinline preload="none" data-im-bild aria-label="Der Flammenpanzer FireClaw der SCORIA dreht sich auf einer runden Bühne."></video><figcaption><span class="de">FireClaw (SCORIA, Modell)</span><span class="en">FireClaw (SCORIA, model)</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
       <li class="eintrag">
         <time datetime="2026-10-29"><span class="de">29.10.2026</span><span class="en">Oct 29, 2026</span></time>
         <div>
@@ -975,7 +1005,8 @@ dialog.gross button.zu {
     <ol class="titel" id="titel"><li><button type="button" data-src="musik/menue-observation.mp3" data-titel="Observation" data-dauer="2:46"><span class="nr">01</span><span class="name">Observation</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:46</span></button></li>
       <li><button type="button" data-src="musik/menue-waves.mp3" data-titel="Waves" data-dauer="2:09"><span class="nr">02</span><span class="name">Waves</span><span class="gruppe-t"><span class="de">Hauptmenü</span><span class="en">Main menu</span></span><span class="dauer">2:09</span></button></li>
       <li><button type="button" data-src="musik/basis-fliessband.mp3" data-titel="Fliessband" data-dauer="3:09"><span class="nr">03</span><span class="name">Fliessband</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:09</span></button></li>
-      <li><button type="button" data-src="musik/basis-ashwind.mp3" data-titel="Ashwind" data-dauer="3:24"><span class="nr">04</span><span class="name">Ashwind</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:24</span></button></li></ol>
+      <li><button type="button" data-src="musik/basis-ashwind.mp3" data-titel="Ashwind" data-dauer="3:24"><span class="nr">04</span><span class="name">Ashwind</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">3:24</span></button></li>
+      <li><button type="button" data-src="musik/basis-phase.mp3" data-titel="Phase" data-dauer="2:37"><span class="nr">05</span><span class="name">Phase</span><span class="gruppe-t"><span class="de">Basis</span><span class="en">Base</span></span><span class="dauer">2:37</span></button></li></ol>
     <audio id="musik" preload="none"></audio>
   </div>
 </section>
@@ -1116,7 +1147,7 @@ dialog.gross button.zu {
         <p class="text en">Clean, heavy military hardware in blue and olive. Its elite unit is the Steel Fist Division. In the Vorarlberg dialect, “Foig!” means “Obey!”. Motto: “Progress through order, iron and embers.”</p>
         <dl>
           <div><dt><span class="de">Mechanik</span><span class="en">Mechanics</span></dt><dd><span class="de">Belagerungsmodus, schwere Panzer, Derylum-Resonator, Aerial Complex mit Fallschirmspringern, Aufklärung und Nachschub</span><span class="en">Siege mode, heavy tanks, Derylum Resonator, Aerial Complex with paratroopers, reconnaissance and supply drops</span></dd></div>
-          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit da">Panther A1</span><span class="unit da"><span class="de">Sammler DR-7C</span><span class="en">DR-7C harvester</span></span><span class="unit">Jäger</span><span class="unit da">Basilisk</span><span class="unit"><span class="de">Artillerie</span><span class="en">Artillery</span></span><span class="unit da"><span class="de">Pionier PB-1</span><span class="en">PB-1 pioneer vehicle</span></span><span class="unit">Igel</span><span class="unit">Otter</span></dd></div>
+          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit da">Panther A1</span><span class="unit da"><span class="de">Sammler DR-7C</span><span class="en">DR-7C harvester</span></span><span class="unit da">SP-3 Zephyr</span><span class="unit da">Basilisk</span><span class="unit"><span class="de">Artillerie</span><span class="en">Artillery</span></span><span class="unit da"><span class="de">Pionier PB-1</span><span class="en">PB-1 pioneer vehicle</span></span><span class="unit">Igel</span><span class="unit">Otter</span></dd></div>
           <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit"><span class="de">Sturmtrupp</span><span class="en">Assault squad</span></span><span class="unit"><span class="de">MG-Trupp</span><span class="en">MG squad</span></span><span class="unit"><span class="de">Grenadiere</span><span class="en">Grenadiers</span></span><span class="unit"><span class="de">Raketentrupp</span><span class="en">Rocket squad</span></span><span class="unit"><span class="de">Sanitäter</span><span class="en">Medics</span></span><span class="unit"><span class="de">Ingenieure</span><span class="en">Engineers</span></span></dd></div>
           <div><dt><span class="de">Luft</span><span class="en">Air</span></dt><dd><span class="de">Hangar mit Kampfhubschrauber, TH-2 Boreas (Transporter) und SK-6 Atlas (Kranhubschrauber); Aerial Complex mit Fallschirmspringern, Aufklärungsflug und Nachschubabwurf</span><span class="en">Hangar with attack helicopter, TH-2 Boreas (transport) and SK-6 Atlas (heavy-lift crane); Aerial Complex with paratroopers, recon flights and supply drops</span></dd></div>
           <div><dt><span class="de">Abwehr</span><span class="en">Defense</span></dt><dd><span class="de">Panzerabwehrturm und MG-Stand an der Mauer, Sandsäcke, Beton-T-Wände und Flutlichter – schon im Spiel; dazu Hydra, eine mehrköpfige Raketenabwehr, deren Köpfe nachwachsen, solange Strom da ist, Infanteriebunker und Derylum-Resonator</span><span class="en">Anti-tank turret and machine-gun post on the wall, sandbags, concrete T-walls and floodlights – already in the game; plus the Hydra, a multi-headed missile defense whose heads grow back while it has power, an infantry bunker and the Derylum Resonator</span></dd></div>
@@ -1373,6 +1404,17 @@ dialog.gross button.zu {
 </dialog>
 
 <script>
+(function () {
+  var videos = document.querySelectorAll('video[data-im-bild]');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  var beobachter = new IntersectionObserver(function (liste) {
+    liste.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); }
+    });
+  }, { threshold: 0.35 });
+  videos.forEach(function (v) { beobachter.observe(v); });
+})();
 (function () {
   var canvas = document.getElementById('glut');
   if (!canvas || !canvas.getContext) return;
