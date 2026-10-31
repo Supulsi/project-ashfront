@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 31.10.2026 03:42 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 31.10.2026 11:06 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -175,7 +175,7 @@ h1 .burn {
 }
 .shot .frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 .shot .frame::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
-.shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.shot img, .shot video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .shot figcaption {
   display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between;
   font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); padding-top: 10px;
@@ -498,7 +498,7 @@ dialog.gross {
 }
 dialog.gross::backdrop { background: rgba(12, 10, 8, .88); }
 dialog.gross img, dialog.gross video { display: block; width: 100%; height: auto; max-height: calc(100vh - 110px); object-fit: contain; background: var(--bg); }
-.galerie video.zoom-video { cursor: zoom-in; }
+.galerie video.zoom-video, .shot video.zoom-video { cursor: zoom-in; }
 .galerie video.zoom-video:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
 dialog.gross .unten {
   display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center;
@@ -546,16 +546,16 @@ dialog.gross button.zu {
     <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
     <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
     <div class="fact"><dt>Status</dt><dd><span class="de">Pre-Alpha · Schritt 9</span><span class="en">Pre-alpha · Step 9</span></dd></div>
-    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">30.10.2026</span><span class="en">Oct 30, 2026</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">31.10.2026</span><span class="en">Oct 31, 2026</span></dd></div>
   </dl>
 </header>
 
 <figure class="shot">
-  <div class="frame"><button type="button" class="zoom"><img src="img/belagerung_windmuehle.jpg" alt="Winter auf einer verschneiten Anhöhe: Vor einer weißen Turmwindmühle, deren Flügel sich im Schneefall drehen, steht der Basilisk und geht in Belagerungsstellung; dahinter verschneite Fichten." data-alt-de="Winter auf einer verschneiten Anhöhe: Vor einer weißen Turmwindmühle, deren Flügel sich im Schneefall drehen, steht der Basilisk und geht in Belagerungsstellung; dahinter verschneite Fichten." data-alt-en="Winter on a snowy hilltop: in front of a white tower windmill, its sails turning in the falling snow, the Basilisk digs in for siege mode; snow-covered spruces behind." width="1600" height="900"></button></div>
+  <div class="frame"><video src="img/trupp_winter.mp4" poster="img/trupp_winter.jpg" width="1600" height="900" autoplay muted loop playsinline preload="auto" aria-label="Nachts im Schneefall dreht sich ein verschneiter Felssockel: ein FOIG-Trupp in Schneetarn, vorne kniend, hinten stehend, dahinter der Basilisk mit Doppelrohr und einem Kommandanten in der Luke, ein Flutlichtmast, verschneite Fichten und die FOIG-Fahne."></video></div>
   <figcaption>
-    <span class="de"><b>Aus dem Spiel.</b> Winter auf der Anhöhe: Neben der Windmühle geht der Basilisk in Belagerungsstellung – gleich schlägt sein Schuss unten im Tal ein. Eine der Szenen im Hintergrund des Hauptmenüs.</span>
-    <span class="en"><b>From the game.</b> Winter on the hilltop: next to the windmill the Basilisk digs in for siege mode – moments before its shell lands in the valley below. One of the scenes behind the main menu.</span>
-    <span><span class="de">Stand 25.10.2026</span><span class="en">Oct 25, 2026</span></span>
+    <span class="de"><b>Diorama.</b> Wintereinsatz: Ein Trupp der FOIG mit dem Basilisken im Schneefall, das Flutlicht zieht seinen Kegel durch Dunst und Flocken – gerendert mit den Modellen aus dem Spiel. Die Infanterie ist gerade im Bau.</span>
+    <span class="en"><b>Diorama.</b> Winter operation: a FOIG squad with the Basilisk in falling snow, the floodlight cutting its beam through haze and flakes – rendered with the in-game models. Infantry is being built right now.</span>
+    <span><span class="de">Stand 31.10.2026</span><span class="en">Oct 31, 2026</span></span>
   </figcaption>
 </figure>
 
@@ -1606,7 +1606,7 @@ dialog.gross button.zu {
   for (var i = 0; i < knoepfe.length; i++) {
     knoepfe[i].addEventListener('click', function (ev) { zeige_bild(ev.currentTarget.querySelector('img')); });
   }
-  var videos = document.querySelectorAll('.galerie video');
+  var videos = document.querySelectorAll('.galerie video, figure.shot video');
   for (var j = 0; j < videos.length; j++) {
     var v = videos[j];
     v.classList.add('zoom-video');
@@ -1650,7 +1650,9 @@ dialog.gross button.zu {
   function zeigen(k, n) { k.setAttribute('data-n', n); k.querySelector('.zahl').textContent = n > 0 ? String(n) : ''; }
   function bild_von(fig) {
     var img = fig.querySelector('img');
-    var m = img ? (img.getAttribute('src') || '').match(/img\/([a-z0-9_]+)\.jpg$/) : null;
+    var film = fig.classList.contains('shot') ? fig.querySelector('video') : null;   // Kopfbild als Video: Daumen über das Standbild
+    var quelle = img ? img.getAttribute('src') : (film ? film.getAttribute('poster') : '');
+    var m = (quelle || '').match(/img\/([a-z0-9_]+)\.jpg$/);
     return m ? m[1] : null;
   }
   function klick(ev) {
