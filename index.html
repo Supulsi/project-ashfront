@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 30.10.2026 04:55 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 31.10.2026 03:42 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -497,7 +497,9 @@ dialog.gross {
   width: min(1240px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: calc(100vh - 32px);
 }
 dialog.gross::backdrop { background: rgba(12, 10, 8, .88); }
-dialog.gross img { display: block; width: 100%; height: auto; max-height: calc(100vh - 110px); object-fit: contain; background: var(--bg); }
+dialog.gross img, dialog.gross video { display: block; width: 100%; height: auto; max-height: calc(100vh - 110px); object-fit: contain; background: var(--bg); }
+.galerie video.zoom-video { cursor: zoom-in; }
+.galerie video.zoom-video:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
 dialog.gross .unten {
   display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center;
   padding: 10px 14px; font-family: var(--f-mono); font-size: .8rem; color: var(--muted);
@@ -1402,6 +1404,7 @@ dialog.gross button.zu {
 
 <dialog id="gross" class="gross" aria-label="Bild / Image">
   <img id="gross-bild" src="" alt="">
+  <video id="gross-video" muted loop playsinline preload="none" hidden></video>
   <div class="unten">
     <p id="gross-text"></p>
     <button type="button" class="zu" id="gross-zu"><span class="de">Schließen</span><span class="en">Close</span></button>
@@ -1565,27 +1568,72 @@ dialog.gross button.zu {
   }
 })();
 
-/* Bilder per Klick groß */
+/* Bilder und Videos (Dioramen) per Klick groß */
 (function () {
   var dialog = document.getElementById('gross');
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var bild = document.getElementById('gross-bild');
+  var film = document.getElementById('gross-video');
   var text = document.getElementById('gross-text');
+  var klein = null;   // das Video in der Galerie, solange es groß läuft (pausiert)
+  function unterschrift_von(el) {
+    var figur = el.closest('figure');
+    var sprache = document.documentElement.getAttribute('data-sprache') || 'de';
+    var u = figur ? figur.querySelector('figcaption .' + sprache) : null;
+    return u ? u.textContent : '';
+  }
+  function zeige_bild(img) {
+    film.pause(); film.hidden = true; film.removeAttribute('src');
+    bild.hidden = false;
+    bild.src = img.getAttribute('src');
+    bild.alt = img.alt;
+    text.textContent = unterschrift_von(img);
+    dialog.showModal();
+  }
+  function zeige_video(v) {
+    bild.hidden = true; bild.removeAttribute('src'); bild.alt = '';
+    film.hidden = false;
+    film.poster = v.getAttribute('poster') || '';
+    film.src = v.getAttribute('src');
+    film.setAttribute('aria-label', v.getAttribute('aria-label') || '');
+    text.textContent = unterschrift_von(v);
+    klein = v;
+    v.pause();
+    dialog.showModal();
+    var p = film.play(); if (p && p.catch) p.catch(function () {});
+  }
   var knoepfe = document.querySelectorAll('.zoom');
   for (var i = 0; i < knoepfe.length; i++) {
-    knoepfe[i].addEventListener('click', function (ev) {
-      var img = ev.currentTarget.querySelector('img');
-      var figur = ev.currentTarget.closest('figure');
-      var sprache = document.documentElement.getAttribute('data-sprache') || 'de';
-      var unterschrift = figur ? figur.querySelector('figcaption .' + sprache) : null;
-      bild.src = img.getAttribute('src');
-      bild.alt = img.alt;
-      text.textContent = unterschrift ? unterschrift.textContent : '';
-      dialog.showModal();
+    knoepfe[i].addEventListener('click', function (ev) { zeige_bild(ev.currentTarget.querySelector('img')); });
+  }
+  var videos = document.querySelectorAll('.galerie video');
+  for (var j = 0; j < videos.length; j++) {
+    var v = videos[j];
+    v.classList.add('zoom-video');
+    v.setAttribute('tabindex', '0');
+    v.setAttribute('role', 'button');
+    v.addEventListener('click', function (ev) { zeige_video(ev.currentTarget); });
+    v.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); zeige_video(ev.currentTarget); }
     });
   }
-  document.getElementById('gross-zu').addEventListener('click', function () { dialog.close(); });
-  dialog.addEventListener('click', function (ev) { if (ev.target === dialog) dialog.close(); });
+  // Aufräumen nach dem Schließen – direkt beim Klick und noch einmal beim close-Ereignis (Esc); das Ereignis kann verspätet
+  // kommen, darum nichts tun, wenn der Dialog inzwischen wieder offen ist
+  function aufraeumen() {
+    if (dialog.open) return;
+    if (film.getAttribute('src')) { film.pause(); film.removeAttribute('src'); film.load(); }
+    if (klein) {
+      var r = klein.getBoundingClientRect();
+      var sichtbar = r.bottom > 0 && r.top < (window.innerHeight || 0);
+      if (sichtbar || klein.hasAttribute('autoplay')) { var p = klein.play(); if (p && p.catch) p.catch(function () {}); }
+      klein = null;
+    }
+  }
+  function schliessen() { dialog.close(); aufraeumen(); }
+  dialog.addEventListener('close', aufraeumen);
+  dialog.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') { ev.preventDefault(); schliessen(); } });
+  document.getElementById('gross-zu').addEventListener('click', schliessen);
+  dialog.addEventListener('click', function (ev) { if (ev.target === dialog) schliessen(); });
 })();
 
 /* Gefällt mir: Zähler vom Worker ashfront-likes (Cloudflare, tools/uebersicht/bewertung) – antwortet er nicht, bleiben die Knöpfe weg */
