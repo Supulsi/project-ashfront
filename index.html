@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Gebaut 31.10.2026 11:06 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
+<!-- Gebaut 03.11.2026 03:27 aus rts_prototyp/docs/uebersicht/uebersicht.html mit tools/uebersicht/seite_bauen.py – hier nicht von Hand ändern. -->
 <html lang="de" data-sprache="de">
 <head>
 <meta charset="utf-8">
@@ -546,15 +546,15 @@ dialog.gross button.zu {
     <div class="fact"><dt><span class="de">Fraktionen</span><span class="en">Factions</span></dt><dd>FOIG · SCORIA · AEGIS</dd></div>
     <div class="fact"><dt><span class="de">Sprachen</span><span class="en">Languages</span></dt><dd><span class="de">Deutsch · Englisch</span><span class="en">German · English</span></dd></div>
     <div class="fact"><dt>Status</dt><dd><span class="de">Pre-Alpha · Schritt 9</span><span class="en">Pre-alpha · Step 9</span></dd></div>
-    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">31.10.2026</span><span class="en">Oct 31, 2026</span></dd></div>
+    <div class="fact"><dt><span class="de">Stand</span><span class="en">As of</span></dt><dd><span class="de">03.11.2026</span><span class="en">Nov 3, 2026</span></dd></div>
   </dl>
 </header>
 
 <figure class="shot">
   <div class="frame"><video src="img/trupp_winter.mp4" poster="img/trupp_winter.jpg" width="1600" height="900" autoplay muted loop playsinline preload="auto" aria-label="Nachts im Schneefall dreht sich ein verschneiter Felssockel: ein FOIG-Trupp in Schneetarn, vorne kniend, hinten stehend, dahinter der Basilisk mit Doppelrohr und einem Kommandanten in der Luke, ein Flutlichtmast, verschneite Fichten und die FOIG-Fahne."></video></div>
   <figcaption>
-    <span class="de"><b>Diorama.</b> Wintereinsatz: Ein Trupp der FOIG mit dem Basilisken im Schneefall, das Flutlicht zieht seinen Kegel durch Dunst und Flocken – gerendert mit den Modellen aus dem Spiel. Die Infanterie ist gerade im Bau.</span>
-    <span class="en"><b>Diorama.</b> Winter operation: a FOIG squad with the Basilisk in falling snow, the floodlight cutting its beam through haze and flakes – rendered with the in-game models. Infantry is being built right now.</span>
+    <span class="de"><b>Diorama.</b> Wintereinsatz: Ein Trupp der FOIG mit dem Basilisken im Schneefall, das Flutlicht zieht seinen Kegel durch Dunst und Flocken – gerendert mit den Modellen aus dem Spiel.</span>
+    <span class="en"><b>Diorama.</b> Winter operation: a FOIG squad with the Basilisk in falling snow, the floodlight cutting its beam through haze and flakes – rendered with the in-game models.</span>
     <span><span class="de">Stand 31.10.2026</span><span class="en">Oct 31, 2026</span></span>
   </figcaption>
 </figure>
@@ -572,19 +572,80 @@ dialog.gross button.zu {
       <div>
         <h3><span class="de">Gerade in Arbeit</span><span class="en">In progress</span></h3>
         <ul>
-          <li><span class="de">Testpartien gegen die Gegner-KI und Feinschliff nach dem, was dabei auffällt</span><span class="en">Test matches against the enemy AI and polishing whatever they turn up</span></li>
+          <li><span class="de">Testpartien mit Infanterie und gegen die Gegner-KI, Feinschliff nach dem, was dabei auffällt</span><span class="en">Test matches with infantry and against the enemy AI, polishing whatever they turn up</span></li>
+          <li><span class="de">Eine erste spielbare Demo mit Installer</span><span class="en">A first playable demo with an installer</span></li>
         </ul>
       </div>
       <div class="naechstes">
         <h3><span class="de">Als Nächstes</span><span class="en">Up next</span></h3>
         <ul>
           <li><span class="de">Mehrere Spieler auf einer Karte – Menschen und KI, auch KI gegen KI</span><span class="en">Several players on one map – humans and AI, including AI against AI</span></li>
-          <li><span class="de">Infanterie: Trupps, die Häuser besetzen und aus der Deckung kämpfen</span><span class="en">Infantry: squads that occupy houses and fight from cover</span></li>
+          <li><span class="de">Weitere Abwehr der FOIG, etwa der Derylum-Resonator</span><span class="en">More FOIG defenses, such as the Derylum Resonator</span></li>
+          <li><span class="de">Die Luft: Hubschrauber und ihr Hangar</span><span class="en">The air: helicopters and their hangar</span></li>
           <li><span class="de">Kampf Stufe 2: Höhenvorteil, Wachbereich, Wracks als Deckung</span><span class="en">Combat stage 2: high-ground advantage, guard areas, wrecks as cover</span></li>
         </ul>
       </div>
     </div>
     <ol class="eintraege">
+      <li class="eintrag">
+        <time datetime="2026-11-03"><span class="de">03.11.2026</span><span class="en">Nov 3, 2026</span></time>
+        <div>
+          <h3><span class="de">Deutlich mehr Bilder pro Sekunde</span><span class="en">Far more frames per second</span></h3>
+          <p class="de">Standen viele Panzer herum, brach die Bildrate ein – nicht wegen der Grafik, sondern weil jeder Panzer in jedem Rechenschritt genau nachrechnete, wie seine Kette über den nächsten Stein liegt, auch wenn er sich gar nicht bewegte. Das rechnet er jetzt nur noch, wenn es etwas zu sehen gibt, und der Wolkenschatten braucht nur noch einen Bruchteil der Zeit. In 4K: eine Basis mit acht Panthern von 65 auf 88 Bilder pro Sekunde, dreißig stehende Panther von 32 auf 83.</p>
+          <p class="en">When lots of tanks stood around, the frame rate collapsed – not because of the graphics, but because every tank recalculated in every step exactly how its track lies over the nearest stone, even when it wasn't moving. It now only does so when there is something to see, and the cloud shadows take a fraction of the time. In 4K: a base with eight Panthers went from 65 to 88 frames per second, thirty idle Panthers from 32 to 83.</p>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-11-02"><span class="de">02.11.2026</span><span class="en">Nov 2, 2026</span></time>
+        <div>
+          <h3><span class="de">Die Infanterie ist da</span><span class="en">The infantry has arrived</span></h3>
+          <p class="de">Aus der Kaserne kommen jetzt ganze Trupps: Sturmtrupp, MG-Trupp, Grenadiere, Raketen- und Mörsertrupp, Sanitäter, Ingenieure und die getarnten Scharfschützen des Whiteout Squad – Soldatinnen und Soldaten gemischt. Sie suchen selbst Deckung an Sandsäcken, Mauern und Hausecken, tauchen zum Schießen auf und wieder ab, besetzen Häuser und Ruinen und springen in Schützengräben. Rollt ein Panzer auf sie zu, hechten sie zur Seite; eine Granate wirft sie durch die Luft. Wer fällt, ist oft erst verwundet: Der Sanitäter zieht oder trägt ihn in Deckung und holt ihn zurück. Im Gefecht rufen sich die Soldaten Warnungen zu und zeigen auf den Feind, je nach Umgebung mit Hall. Ein Trupp sitzt auf dem Zephyr auf und schießt von der Bank, Ingenieure nehmen feindliche Gebäude ein – und auch die Gegner-KI baut und führt jetzt Infanterie.</p>
+          <p class="en">Whole squads now march out of the barracks: assault squad, machine-gun squad, grenadiers, rocket and mortar squads, medics, engineers and the camouflaged snipers of the Whiteout Squad – women and men mixed. They find cover by themselves at sandbags, walls and house corners, pop up to fire and drop back down, occupy houses and ruins and jump into trenches. When a tank rolls at them they dive aside; a shell throws them through the air. Many who fall are only wounded: the medic drags or carries them into cover and brings them back. In battle soldiers shout warnings to each other and point at the enemy, with an echo that depends on the surroundings. A squad can ride on the Zephyr and fire from its bench, engineers capture enemy buildings – and the enemy AI now builds and leads infantry too.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/inf_deckung.jpg" alt="Zwei FOIG-Trupps in Deckung auf der Wiese: Der eine kniet hinter Sandsäcken, der andere steht hinter einer halbhohen Betonmauer und schießt darüber, oben rechts rücken Feinde zwischen Staubwolken vor." data-alt-de="Zwei FOIG-Trupps in Deckung auf der Wiese: Der eine kniet hinter Sandsäcken, der andere steht hinter einer halbhohen Betonmauer und schießt darüber, oben rechts rücken Feinde zwischen Staubwolken vor." data-alt-en="Two FOIG squads in cover on the meadow: one kneels behind sandbags, the other stands behind a low concrete wall and fires over it, while enemies advance through puffs of dust at the top right." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">In Deckung an Sandsäcken und Halbmauer</span><span class="en">In cover behind sandbags and a low wall</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/inf_graben.jpg" alt="Ein Trupp steht in einem verschalten Schützengraben im Zickzack, die Köpfe knapp über der Brustwehr." data-alt-de="Ein Trupp steht in einem verschalten Schützengraben im Zickzack, die Köpfe knapp über der Brustwehr." data-alt-en="A squad stands in a revetted zigzag trench, heads just above the parapet." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Im Schützengraben</span><span class="en">In the trench</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/inf_haus.jpg" alt="Ein Dorfhaus wird zur Stellung: Über dem Dach steht die Besatzung 5/8, ein feindlicher Panther schießt darauf, unten rückt ein zweiter Trupp an." data-alt-de="Ein Dorfhaus wird zur Stellung: Über dem Dach steht die Besatzung 5/8, ein feindlicher Panther schießt darauf, unten rückt ein zweiter Trupp an." data-alt-en="A village house becomes a strongpoint: the garrison 5/8 shows above the roof, an enemy Panther fires at it while a second squad moves up below." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Ein Haus wird zur Stellung</span><span class="en">A house becomes a strongpoint</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/inf_sanitaeter.jpg" alt="Ein Sanitäter in grauer Uniform beugt sich neben einem Felsen im hohen Gras über einen Verwundeten und macht die Herzdruckmassage." data-alt-de="Ein Sanitäter in grauer Uniform beugt sich neben einem Felsen im hohen Gras über einen Verwundeten und macht die Herzdruckmassage." data-alt-en="A medic in a grey uniform bends over a wounded soldier in the tall grass next to a boulder, giving chest compressions." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Der Sanitäter holt Verwundete zurück</span><span class="en">The medic brings the wounded back</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/inf_whiteout.jpg" alt="Whiteout Squad: Der Späher kniet im Tarnanzug aus Fasern und Laub mit dem Fernglas, rechts daneben liegt der Scharfschütze flach am Boden." data-alt-de="Whiteout Squad: Der Späher kniet im Tarnanzug aus Fasern und Laub mit dem Fernglas, rechts daneben liegt der Scharfschütze flach am Boden." data-alt-en="Whiteout Squad: the spotter kneels with binoculars in a suit of fibres and foliage, the sniper lies flat on the ground to the right." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Whiteout Squad: Scharfschütze und Späher</span><span class="en">Whiteout Squad: sniper and spotter</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/inf_rohr.jpg" alt="Zwei Raketenschützen knien auf der Wiese und feuern auf einen Panther: Zwei Rauchspuren ziehen quer übers Bild, am Panzer steht ein Qualmball mit Glut, hinter den Schützen hängt der Rückstrahl." data-alt-de="Zwei Raketenschützen knien auf der Wiese und feuern auf einen Panther: Zwei Rauchspuren ziehen quer übers Bild, am Panzer steht ein Qualmball mit Glut, hinter den Schützen hängt der Rückstrahl." data-alt-en="Two rocket troopers kneel on the meadow and fire at a Panther: two smoke trails cross the picture, a ball of smoke with embers hangs at the tank, the backblast lingers behind the troopers." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Der Raketentrupp gegen einen Panther</span><span class="en">The rocket squad against a Panther</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-11-02"><span class="de">02.11.2026</span><span class="en">Nov 2, 2026</span></time>
+        <div>
+          <h3><span class="de">Zenit: ein Mörser auf Rädern</span><span class="en">Zenit: a mortar on wheels</span></h3>
+          <p class="de">Neu aus der Waffenfabrik: der Zenit, ein achträdriger Panzer, dessen Dach sich wie zwei Flügel aufklappt. Sein Mörser feuert im hohen Bogen über Mauern hinweg – auf die Stelle, nicht auf das Ziel: Wer rechtzeitig weiterfährt, ist weg, wenn die Granate fällt. Auf Knopfdruck schießt er einen Feuerteppich. Dazu meldet jetzt die Besatzung über den Bordfunk Ziele und Treffer, die Ketten klingen je nach Untergrund anders – Asphalt, Kies, Schnee, Holz –, und in der Waffenfabrik lassen sich mehrere Fahrzeuge in eine Warteschlange stellen.</p>
+          <p class="en">New from the war factory: the Zenit, an eight-wheeled vehicle whose roof folds open like two wings. Its mortar fires in a high arc over walls – at the spot, not the target: whoever drives on in time is gone when the shell lands. At the press of a button it fires a barrage. On top of that, crews now report targets and hits over the intercom, tracks sound different depending on the surface – asphalt, gravel, snow, wood – and vehicles can be queued in the war factory.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/zenit_stellung.jpg" alt="Der Zenit steht in Stellung: Die Dachhälften liegen aufgeklappt wie Flügel neben dem Aufbau, das Mörserrohr ragt steil nach oben." data-alt-de="Der Zenit steht in Stellung: Die Dachhälften liegen aufgeklappt wie Flügel neben dem Aufbau, das Mörserrohr ragt steil nach oben." data-alt-en="The Zenit deployed: the roof halves lie folded out like wings next to the hull, the mortar tube points steeply upwards." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">In Stellung, das Dach aufgeklappt</span><span class="en">Deployed, roof folded open</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-31"><span class="de">31.10.2026</span><span class="en">Oct 31, 2026</span></time>
+        <div>
+          <h3><span class="de">Eine Rakete und ein Krater</span><span class="en">A missile and a crater</span></h3>
+          <p class="de">Mit dem Technologiezentrum lässt sich eine Raketenstellung bauen. Der Hubring fährt aus, der Deckel gleitet unter ihn, Trockeneisnebel läuft über den Rand, und die Rakete fährt hoch. Beim Abschuss heult der Alarm, dann stößt der Gasdruck sie aus dem Schacht, sie zündet und zieht im Bogen ins Ziel. Der Einschlag ist eine eigene Simulation: Feuerball, aufsteigender Pilz und ein Druckring, der über die Wiese läuft und Gras und Bäume umbiegt – erst danach kommt der Knall. Zurück bleibt ein echter Krater, in dem es noch eine Weile glüht. Auch die Gegner-KI baut Stellungen und sucht sich lohnende Ziele.</p>
+          <p class="en">The technology centre unlocks a missile site. The lifting ring rises, the lid slides under it, dry-ice fog spills over the rim and the missile rises. On launch the alarm wails, gas pressure ejects it from the silo, it ignites and arcs towards the target. The impact is its own simulation: a fireball, a rising mushroom and a pressure ring that runs across the meadow, bending grass and trees – only then comes the bang. What remains is a real crater that keeps glowing for a while. The enemy AI builds sites too and picks worthwhile targets.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/rakete_bereit.jpg" alt="Die Raketenstellung bei Nacht: Aus dem runden Schacht ragt die Spitze der Rakete, weißer Nebel quillt über den Ring, grüne Leuchten am Ring, Flutlicht auf dem Betonplatz." data-alt-de="Die Raketenstellung bei Nacht: Aus dem runden Schacht ragt die Spitze der Rakete, weißer Nebel quillt über den Ring, grüne Leuchten am Ring, Flutlicht auf dem Betonplatz." data-alt-en="The missile site at night: the tip of the missile rises from the round silo, white fog wells over the ring, green lights on the ring, floodlights on the concrete apron." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Bereit: Nebel quillt aus dem Schacht</span><span class="en">Ready: fog wells from the silo</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/rakete_einschlag.jpg" alt="Der Einschlag: Ein oranger Feuerball steigt auf, am Boden rollt eine graue Staubwalze über die Wiese." data-alt-de="Der Einschlag: Ein oranger Feuerball steigt auf, am Boden rollt eine graue Staubwalze über die Wiese." data-alt-en="The impact: an orange fireball rises while a grey wall of dust rolls across the meadow at its base." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Feuerball und Staubwalze</span><span class="en">Fireball and wall of dust</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
+      <li class="eintrag">
+        <time datetime="2026-10-31"><span class="de">31.10.2026</span><span class="en">Oct 31, 2026</span></time>
+        <div>
+          <h3><span class="de">Das Weidental wächst weiter</span><span class="en">The Weidental keeps growing</span></h3>
+          <p class="de">Im Weidental stehen jetzt sieben Getreidefelder, die im Sommer goldfarben im Wind wogen und im Herbst zu Stoppeln mit Strohschwaden werden – Panzer walzen eine Gasse hinein, Einschläge legen das Korn sternförmig um. Der Ortskern hat Kopfsteinpflaster bekommen, die Wälder bemooste Felsen, am See steht eine alte Eiche, deren Ast weit übers Wasser reicht. Das Wasser spiegelt jetzt, was am Ufer steht. Am Himmel kreist ein Bussard in der Thermik, und an Herbstabenden zieht eine Starenwolke über die Wiesen.</p>
+          <p class="en">The Weidental now has seven grain fields that sway golden in the summer wind and turn to stubble and straw swaths in autumn – tanks crush a lane through them, explosions flatten the grain in a star. The village centre has cobblestones, the forests mossy boulders, and by the lake stands an old oak whose bough reaches far across the water. The water now reflects what stands on the shore. A buzzard circles in the thermals, and on autumn evenings a murmuration of starlings drifts over the meadows.</p>
+          <div class="galerie">
+            <figure><button type="button" class="zoom"><img src="img/weidental_weizen.jpg" alt="Ein goldenes Weizenfeld mit Fahrgassen und ausgefranstem Rand zwischen Wiesen." data-alt-de="Ein goldenes Weizenfeld mit Fahrgassen und ausgefranstem Rand zwischen Wiesen." data-alt-en="A golden wheat field with tramlines and a frayed edge between meadows." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Weizen im Sommer</span><span class="en">Wheat in summer</span></figcaption></figure>
+            <figure><button type="button" class="zoom"><img src="img/weidental_pflaster.jpg" alt="Die Kreuzung im Dorf: Kopfsteinpflaster mit Randsteinen zwischen Feuerwehrhaus, dem Gastgarten des Wirtshauses und kleinen Häusern." data-alt-de="Die Kreuzung im Dorf: Kopfsteinpflaster mit Randsteinen zwischen Feuerwehrhaus, dem Gastgarten des Wirtshauses und kleinen Häusern." data-alt-en="The village crossroads: cobblestones with kerbs between the fire station, the inn's beer garden and small houses." width="1200" height="800" loading="lazy"></button><figcaption><span class="de">Pflaster im Ortskern</span><span class="en">Cobblestones in the village centre</span></figcaption></figure>
+          </div>
+        </div>
+      </li>
       <li class="eintrag">
         <time datetime="2026-10-30"><span class="de">30.10.2026</span><span class="en">Oct 30, 2026</span></time>
         <div>
@@ -1096,7 +1157,7 @@ dialog.gross button.zu {
         <ol>
           <li><span class="nr">10</span><span><span class="de">Wetter</span><span class="en">Weather</span></span></li>
           <li><span class="nr">11</span><span><span class="de">Grafik-Meilenstein</span><span class="en">Graphics milestone</span></span></li>
-          <li><span class="nr">+</span><span><span class="de">Infanterie, Luft, Forschung, Superwaffen, AEGIS, Kampagnen</span><span class="en">Infantry, air, research, superweapons, AEGIS, campaigns</span></span></li>
+          <li><span class="nr">+</span><span><span class="de">Luft, Forschung, Superwaffen, SCORIA, AEGIS, Kampagnen</span><span class="en">Air, research, superweapons, SCORIA, AEGIS, campaigns</span></span></li>
         </ol>
       </div>
     </div>
@@ -1154,8 +1215,8 @@ dialog.gross button.zu {
         <p class="text en">Clean, heavy military hardware in blue and olive. Its elite unit is the Steel Fist Division. In the Vorarlberg dialect, “Foig!” means “Obey!”. Motto: “Progress through order, iron and embers.”</p>
         <dl>
           <div><dt><span class="de">Mechanik</span><span class="en">Mechanics</span></dt><dd><span class="de">Belagerungsmodus, schwere Panzer, Derylum-Resonator, Aerial Complex mit Fallschirmspringern, Aufklärung und Nachschub</span><span class="en">Siege mode, heavy tanks, Derylum Resonator, Aerial Complex with paratroopers, reconnaissance and supply drops</span></dd></div>
-          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit da">Panther A1</span><span class="unit da"><span class="de">Sammler DR-7C</span><span class="en">DR-7C harvester</span></span><span class="unit da">SP-3 Zephyr</span><span class="unit da">Basilisk</span><span class="unit"><span class="de">Artillerie</span><span class="en">Artillery</span></span><span class="unit da"><span class="de">Pionier PB-1</span><span class="en">PB-1 pioneer vehicle</span></span><span class="unit">Igel</span><span class="unit">Otter</span></dd></div>
-          <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit"><span class="de">Sturmtrupp</span><span class="en">Assault squad</span></span><span class="unit"><span class="de">MG-Trupp</span><span class="en">MG squad</span></span><span class="unit"><span class="de">Grenadiere</span><span class="en">Grenadiers</span></span><span class="unit"><span class="de">Raketentrupp</span><span class="en">Rocket squad</span></span><span class="unit"><span class="de">Sanitäter</span><span class="en">Medics</span></span><span class="unit"><span class="de">Ingenieure</span><span class="en">Engineers</span></span></dd></div>
+          <div><dt><span class="de">Fahrzeuge</span><span class="en">Vehicles</span></dt><dd><span class="unit da">Panther A1</span><span class="unit da"><span class="de">Sammler DR-7C</span><span class="en">DR-7C harvester</span></span><span class="unit da">SP-3 Zephyr</span><span class="unit da">Basilisk</span><span class="unit"><span class="de">Artillerie</span><span class="en">Artillery</span></span><span class="unit da">Zenit</span><span class="unit da"><span class="de">Pionier PB-1</span><span class="en">PB-1 pioneer vehicle</span></span><span class="unit">Igel</span><span class="unit">Otter</span></dd></div>
+          <div><dt><span class="de">Infanterie</span><span class="en">Infantry</span></dt><dd><span class="unit da"><span class="de">Sturmtrupp</span><span class="en">Assault squad</span></span><span class="unit da"><span class="de">MG-Trupp</span><span class="en">MG squad</span></span><span class="unit da"><span class="de">Grenadiere</span><span class="en">Grenadiers</span></span><span class="unit da"><span class="de">Raketentrupp</span><span class="en">Rocket squad</span></span><span class="unit da"><span class="de">Mörsertrupp</span><span class="en">Mortar squad</span></span><span class="unit da"><span class="de">Sanitäter</span><span class="en">Medics</span></span><span class="unit da"><span class="de">Ingenieur</span><span class="en">Engineer</span></span><span class="unit da">Whiteout Squad</span></dd></div>
           <div><dt><span class="de">Luft</span><span class="en">Air</span></dt><dd><span class="de">Hangar mit Kampfhubschrauber, TH-2 Boreas (Transporter) und SK-6 Atlas (Kranhubschrauber); Aerial Complex mit Fallschirmspringern, Aufklärungsflug und Nachschubabwurf</span><span class="en">Hangar with attack helicopter, TH-2 Boreas (transport) and SK-6 Atlas (heavy-lift crane); Aerial Complex with paratroopers, recon flights and supply drops</span></dd></div>
           <div><dt><span class="de">Abwehr</span><span class="en">Defense</span></dt><dd><span class="de">Panzerabwehrturm und MG-Stand an der Mauer, Sandsäcke, Beton-T-Wände und Flutlichter – schon im Spiel; dazu Hydra, eine mehrköpfige Raketenabwehr, deren Köpfe nachwachsen, solange Strom da ist, Infanteriebunker und Derylum-Resonator</span><span class="en">Anti-tank turret and machine-gun post on the wall, sandbags, concrete T-walls and floodlights – already in the game; plus the Hydra, a multi-headed missile defense whose heads grow back while it has power, an infantry bunker and the Derylum Resonator</span></dd></div>
           <div><dt><span class="de">Strom</span><span class="en">Power</span></dt><dd><span class="de">Wind, mit Sturmabschaltung</span><span class="en">Wind, with storm shutdown</span></dd></div>
@@ -1248,14 +1309,14 @@ dialog.gross button.zu {
   <div class="label">
     <div class="eyebrow"><span class="de">Infanterie</span><span class="en">Infantry</span></div>
     <h2><span class="de">Trupps mit eigenem Kopf</span><span class="en">Squads with a mind of their own</span></h2>
-    <p class="de">Infanterie kommt mit Rigging und Animationen nach Version 1. Das Konzept steht.</p>
-    <p class="en">Infantry arrives with rigging and animations after version 1. The concept is ready.</p>
-    <div class="tag"><span class="chip ausbau"><span class="de">Ausbau</span><span class="en">Expansion</span></span></div>
+    <p class="de">Die Infanterie der FOIG ist im Spiel: Trupps, Deckung, Häuser, Gräben, Verwundete und Sanitäter. Noch offen sind Hacker, das Verschanzen und das Verhalten nach dem Wetter – die Trupps von SCORIA und AEGIS folgen mit ihren Fraktionen.</p>
+    <p class="en">FOIG infantry is in the game: squads, cover, houses, trenches, the wounded and medics. Hackers, entrenching and weather-dependent behaviour are still to come – SCORIA and AEGIS squads follow with their factions.</p>
+    <div class="tag"><span class="chip spiel"><span class="de">Teils im Spiel</span><span class="en">Partly in the game</span></span></div>
   </div>
   <div class="content">
     <ul class="liste">
       <li><div><span class="t"><span class="de">Trupps statt Einzelsoldaten</span><span class="en">Squads instead of single soldiers</span></span><span class="d"><span class="de">Ein Klick wählt den ganzen Trupp. Bei Schaden fällt Soldat für Soldat, die Feuerkraft sinkt mit.</span><span class="en">One click selects the whole squad. As it takes damage, soldiers fall one by one and its firepower drops with them.</span></span></div></li>
-      <li><div><span class="t"><span class="de">Rollen</span><span class="en">Roles</span></span><span class="d"><span class="de">Sturmtrupp, MG-Trupp, Grenadiere, Raketentrupp, Ingenieure, Sanitäter und der getarnte Whiteout Squad.</span><span class="en">Assault squad, machine-gun squad, grenadiers, rocket squad, engineers, medics and the camouflaged Whiteout Squad.</span></span></div></li>
+      <li><div><span class="t"><span class="de">Rollen</span><span class="en">Roles</span></span><span class="d"><span class="de">Sturmtrupp, MG-Trupp, Grenadiere, Raketen- und Mörsertrupp, Ingenieure, Sanitäter und der getarnte Whiteout Squad.</span><span class="en">Assault squad, machine-gun squad, grenadiers, rocket and mortar squads, engineers, medics and the camouflaged Whiteout Squad.</span></span></div></li>
       <li><div><span class="t"><span class="de">Gemischte Trupps</span><span class="en">Mixed squads</span></span><span class="d"><span class="de">Soldatinnen und Soldaten in allen Rollen, zufällig gemischt. Die Stimme kommt vom Truppführer oder der Truppführerin.</span><span class="en">Women and men in every role, randomly mixed. The voice belongs to the squad leader.</span></span></div></li>
       <li><div><span class="t"><span class="de">Hacker je Fraktion</span><span class="en">Hackers for each faction</span></span><span class="d"><span class="de">Die FOIG stört das Radar, AEGIS legt das Stromnetz lahm, SCORIA-Funkpiraten kapern Geschütztürme.</span><span class="en">The FOIG jams radar, AEGIS shuts down the power grid, SCORIA radio pirates take over gun turrets.</span></span></div></li>
       <li><div><span class="t"><span class="de">Niederhalten</span><span class="en">Suppression</span></span><span class="d"><span class="de">Der MG-Trupp drückt gegnerische Infanterie mit Dauerfeuer zu Boden: Sie zielt schlechter und kommt kaum voran. Der Sturmtrupp flankiert, Grenadiere holen den Gegner aus der Deckung.</span><span class="en">The machine-gun squad pins enemy infantry down with sustained fire: it aims worse and barely moves. The assault squad flanks, grenadiers flush the enemy out of cover.</span></span></div></li>
@@ -1380,7 +1441,7 @@ dialog.gross button.zu {
 
 <footer>
   <span><span class="de">© 2026 KeGu Studios · ASHFRONT ist ein Arbeitstitel · in Entwicklung (Pre-Alpha)</span><span class="en">© 2026 KeGu Studios · ASHFRONT is a working title · in development (pre-alpha)</span></span>
-  <span><span class="de">Stand 18.10.2026 · aus Agenda und Ideen-Sammlung · <a href="#impressum">Impressum und Datenschutz</a></span><span class="en">As of Oct 18, 2026 · from our plan and idea collection · <a href="#impressum">Legal notice and privacy</a></span></span>
+  <span><span class="de">Stand 03.11.2026 · aus Agenda und Ideen-Sammlung · <a href="#impressum">Impressum und Datenschutz</a></span><span class="en">As of Nov 3, 2026 · from our plan and idea collection · <a href="#impressum">Legal notice and privacy</a></span></span>
 </footer>
 
 <section class="impressum" id="impressum" aria-label="Impressum / Legal notice">
